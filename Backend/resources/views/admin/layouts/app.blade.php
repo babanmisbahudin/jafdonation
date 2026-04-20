@@ -154,7 +154,7 @@
     </div>
 
     <!-- Nav -->
-    <ul class="nav flex-column py-3" style="padding-bottom:80px!important;">
+    <ul class="nav flex-column py-3" style="padding-bottom:120px!important;">
       <li class="nav-label">Utama</li>
       <li class="nav-item">
         <a href="{{ route('admin.dashboard') }}" title="Dashboard"
