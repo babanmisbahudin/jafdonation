@@ -32,9 +32,14 @@
       position: fixed; top: 0; left: 0;
       width: var(--sidebar-width); height: 100vh;
       background: var(--sidebar-bg);
-      overflow-y: auto; overflow-x: hidden;
+      overflow: hidden;
       z-index: 1040;
       transition: width .25s ease, transform .25s ease;
+      display: flex; flex-direction: column;
+    }
+    #sidebar-nav {
+      flex: 1 1 auto;
+      overflow-y: auto; overflow-x: hidden;
     }
     #sidebar .sidebar-brand {
       padding: 1.25rem 1rem 1rem;
@@ -154,7 +159,8 @@
     </div>
 
     <!-- Nav -->
-    <ul class="nav flex-column py-3" style="padding-bottom:120px!important;">
+    <div id="sidebar-nav">
+    <ul class="nav flex-column py-3">
       <li class="nav-label">Utama</li>
       <li class="nav-item">
         <a href="{{ route('admin.dashboard') }}" title="Dashboard"
@@ -269,9 +275,10 @@
         </a>
       </li>
     </ul>
+    </div>{{-- /sidebar-nav --}}
 
     <!-- User info bottom -->
-    <div class="p-3 border-top" style="position:absolute;bottom:0;left:0;right:0;background:var(--sidebar-bg);border-color:rgba(255,255,255,.08)!important;">
+    <div class="p-3 border-top flex-shrink-0" style="background:var(--sidebar-bg);border-color:rgba(255,255,255,.08)!important;">
       <div class="d-flex align-items-center gap-2 user-bottom">
         <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0"
              style="width:34px;height:34px;">
