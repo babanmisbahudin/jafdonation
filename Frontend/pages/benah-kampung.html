@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benah Kampung - Jaf Donation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { prefix: 'tw-', corePlugins: { preflight: false },
+      theme: { extend: { colors: { primary: '#1A5276', secondary: '#2980B9', accent: '#E8F4FD', gold: '#C8A44A' } } } }
+  </script>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="tw-font-sans">
+<nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="../index.html">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="../index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="berita.html">Berita</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="galeri.html">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="donasi.html">Donasi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="relawan.html">Relawan</a></li>
+        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="benah-kampung.html">Benah Kampung</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 py-2">
+
+        <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+          <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+          <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+            <i class="bi bi-search" style="font-size:.75rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Benah Kampung -->
+  <div class="tw-bg-gradient-to-r tw-from-primary tw-to-secondary tw-py-20 tw-text-white">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="tw-mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html" class="tw-text-white/70 tw-no-underline">Beranda</a></li>
+          <li class="breadcrumb-item tw-text-white/90 active">Benah Kampung</li>
+        </ol>
+      </nav>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <span class="tw-bg-gold tw-text-white tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full d-inline-block tw-mb-4">Program Unggulan 2025</span>
+          <h1 class="tw-font-serif tw-font-bold tw-text-5xl tw-mb-4">Benah Kampung</h1>
+          <p class="tw-text-white/85 tw-text-lg tw-leading-relaxed tw-mb-6">Program renovasi rumah tidak layak huni secara masif dan terstruktur. Bersama-sama kita perbaiki satu kampung, satu per satu, dari Sabang sampai Merauke.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="donasi.html" class="btn tw-bg-white tw-text-primary tw-font-bold tw-px-7 tw-py-3 tw-rounded-full hover:tw-bg-accent tw-transition-all">
+              <i class="bi bi-heart-fill me-2 tw-text-red-500"></i>Donasi Sekarang
+            </a>
+            <a href="#dampak" class="btn tw-border-2 tw-border-white tw-text-white tw-font-bold tw-px-7 tw-py-3 tw-rounded-full hover:tw-bg-white hover:tw-text-primary tw-transition-all">
+              Lihat Dampak
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">1.000+</div>
+                <div class="tw-text-white/80 tw-text-sm">Rumah Ditargetkan</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">34</div>
+                <div class="tw-text-white/80 tw-text-sm">Provinsi</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">5.000+</div>
+                <div class="tw-text-white/80 tw-text-sm">Jiwa Terbantu</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">100%</div>
+                <div class="tw-text-white/80 tw-text-sm">Transparan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dampak -->
+  <section id="dampak" class="tw-py-16 tw-bg-white">
+    <div class="container">
+      <div class="text-center tw-mb-12">
+        <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif">Dampak Program</h2>
+        <div class="section-divider"></div>
+        <p class="tw-text-gray-500 tw-mt-4 tw-max-w-xl tw-mx-auto">Program Benah Kampung telah mengubah kehidupan ribuan keluarga kurang mampu di seluruh Indonesia</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 tw-text-center hover:tw-shadow-lg tw-transition-all">
+            <div class="tw-w-16 tw-h-16 tw-bg-primary/10 tw-rounded-full d-flex align-items-center justify-content-center tw-mx-auto tw-mb-4">
+              <i class="bi bi-house-check-fill tw-text-primary tw-text-2xl"></i>
+            </div>
+            <h5 class="tw-text-primary tw-font-bold tw-mb-2">Renovasi Rumah</h5>
+            <p class="tw-text-gray-500 tw-text-sm">Atap bocor, dinding retak, lantai tanah — kami renovasi menyeluruh agar layak huni dan aman bagi penghuninya.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 tw-text-center hover:tw-shadow-lg tw-transition-all">
+            <div class="tw-w-16 tw-h-16 tw-bg-blue-100 tw-rounded-full d-flex align-items-center justify-content-center tw-mx-auto tw-mb-4">
+              <i class="bi bi-droplet-fill tw-text-secondary tw-text-2xl"></i>
+            </div>
+            <h5 class="tw-text-primary tw-font-bold tw-mb-2">Sanitasi & Air Bersih</h5>
+            <p class="tw-text-gray-500 tw-text-sm">Pembangunan MCK layak dan akses air bersih untuk menjaga kesehatan dan martabat warga.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 tw-text-center hover:tw-shadow-lg tw-transition-all">
+            <div class="tw-w-16 tw-h-16 tw-bg-yellow-50 tw-rounded-full d-flex align-items-center justify-content-center tw-mx-auto tw-mb-4">
+              <i class="bi bi-lightning-charge-fill tw-text-yellow-500 tw-text-2xl"></i>
+            </div>
+            <h5 class="tw-text-primary tw-font-bold tw-mb-2">Instalasi Listrik</h5>
+            <p class="tw-text-gray-500 tw-text-sm">Perbaikan instalasi listrik yang aman untuk mendukung aktivitas belajar dan produktivitas keluarga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="tw-py-16 tw-bg-accent">
+    <div class="container text-center">
+      <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif tw-mb-4">Ikut Berkontribusi</h2>
+      <p class="tw-text-gray-600 tw-text-lg tw-mb-6 tw-max-w-xl tw-mx-auto">Rp 5.000.000 dapat memperbaiki satu kamar. Rp 15.000.000 merenovasi satu rumah penuh. Setiap rupiah Anda sangat berarti.</p>
+      <a href="donasi.html" class="btn tw-bg-primary tw-text-white tw-font-bold tw-px-10 tw-py-4 tw-rounded-full hover:tw-bg-blue-900 tw-transition-all tw-shadow-xl tw-text-lg">
+        <i class="bi bi-heart-fill me-2 tw-text-red-400"></i>Donasi untuk Benah Kampung
+      </a>
+    </div>
+  </section>
+
+  <footer class="tw-bg-gray-900 tw-text-white tw-py-10">
+    <div class="container text-center">
+      <i class="bi bi-heart-fill tw-text-gold tw-text-3xl tw-mb-2 d-block"></i>
+      <p class="tw-text-white tw-font-bold tw-mb-1">Jaf Donation</p>
+      <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Jaf Donation. Hak cipta dilindungi.</p>
+    </div>
+  </footer>
+  <script src="../assets/js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  // Load social links from API settings
+  (async()=>{
+    try{
+      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
+      const map={
+        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
+        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
+      };
+      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
+    }catch(e){}
+  })();
+  </script>
+
+  <script>
+  function navSearch(e) {
+    e.preventDefault();
+    const q = e.target.querySelector('.nav-q').value.trim();
+    if (q) window.location.href = 'berita.html?search=' + encodeURIComponent(q);
+    return false;
+  }
+  </script>
+</body>
+</html>

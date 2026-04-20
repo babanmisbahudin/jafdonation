@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Artikel - Jaf Donation</title>
+  <meta id="metaDesc"     name="description" content="" />
+  <meta id="metaKeywords" name="keywords"    content="" />
+  <!-- Open Graph (share preview) -->
+  <meta id="ogTitle"     property="og:title"       content="" />
+  <meta id="ogDesc"      property="og:description" content="" />
+  <meta id="ogImage"     property="og:image"       content="" />
+  <meta id="ogUrl"       property="og:url"         content="" />
+  <meta property="og:type" content="article" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="../assets/css/style.css" rel="stylesheet" />
+
+  <style>
+    body { background: #f8fafc; }
+
+    /* Article content */
+    .article-body { font-family: 'Noto Serif', serif; font-size: 1.05rem; line-height: 1.9; color: #1a1a2e; }
+    .article-body h1,.article-body h2,.article-body h3 { font-weight: 700; margin: 1.5rem 0 .75rem; color: #1A5276; }
+    .article-body p  { margin-bottom: 1.25rem; }
+    .article-body img { max-width: 100%; border-radius: 10px; margin: 1rem 0; }
+    .article-body blockquote { border-left: 4px solid #2980B9; padding-left: 1rem; color: #555; font-style: italic; margin: 1.5rem 0; }
+    .article-body ul, .article-body ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+
+    /* Share bar */
+    .share-bar { position: sticky; bottom: 0; z-index: 100; background: #fff; border-top: 1px solid #e2e8f0; padding: 10px 0; box-shadow: 0 -4px 20px rgba(0,0,0,.07); }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 50px; font-size: .8rem; font-weight: 600; border: none; cursor: pointer; transition: .15s; text-decoration: none; white-space: nowrap; }
+    .share-btn:hover { filter: brightness(.9); }
+    .share-wa   { background: #25D366; color: #fff; }
+    .share-fb   { background: #1877F2; color: #fff; }
+    .share-tiktok { background: #000; color: #fff; }
+    .share-ig   { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .share-copy { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+    .share-copy.copied { background: #dcfce7; color: #16a34a; border-color: #86efac; }
+
+    /* Tag pills */
+    .tag-pill { display: inline-block; background: #EBF5FB; color: #1A5276; font-size: .72rem; font-weight: 600; padding: 3px 12px; border-radius: 50px; text-decoration: none; transition: .15s; }
+    .tag-pill:hover { background: #1A5276; color: #fff; }
+
+    /* Comment box */
+    .comment-card { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #e2e8f0; }
+    .comment-card .comment-name { font-weight: 600; font-size: .875rem; }
+    .comment-card .comment-date { font-size: .72rem; color: #94a3b8; }
+    .comment-card .comment-body { font-size: .875rem; color: #475569; line-height: 1.65; margin-top: 6px; }
+
+    /* Skeleton */
+    .skel { background: linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size: 200% 100%; animation: skel-anim 1.4s infinite; border-radius: 6px; }
+    @keyframes skel-anim { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    @media (max-width: 575px) {
+      .share-btn span { display: none; }
+      .share-btn { padding: 8px 13px; }
+      .share-bar .container { gap: 6px !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="../index.html">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="../index.html">Beranda</a></li>
+        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="berita.html">Berita</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="galeri.html">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="donasi.html">Donasi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="relawan.html">Relawan</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="benah-kampung.html">Benah Kampung</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 py-2">
+
+        <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+          <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+          <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+            <i class="bi bi-search" style="font-size:.75rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header" id="articleHeader">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Beranda</a></li>
+        <li class="breadcrumb-item"><a href="berita.html">Berita</a></li>
+        <li class="breadcrumb-item active" id="breadTitle">Memuat...</li>
+      </ol>
+    </nav>
+    <div id="headerSkeleton">
+      <div class="skel mb-3" style="height:14px;width:120px;"></div>
+      <div class="skel mb-2" style="height:36px;max-width:680px;"></div>
+      <div class="skel mb-3" style="height:36px;max-width:500px;"></div>
+      <div class="skel" style="height:14px;width:200px;"></div>
+    </div>
+    <div id="headerContent" style="display:none;">
+      <div class="d-flex gap-2 flex-wrap mb-3">
+        <span id="artCategory" class="badge" style="background:rgba(255,255,255,.2);font-size:.75rem;"></span>
+        <span id="artRegion"   class="badge" style="background:rgba(255,255,255,.15);font-size:.75rem;"></span>
+      </div>
+      <h1 class="fw-bold mb-3" style="font-family:'Noto Serif',serif;font-size:clamp(1.4rem,4vw,2.2rem);line-height:1.3;" id="artTitle"></h1>
+      <div class="d-flex align-items-center gap-3 flex-wrap" style="font-size:.82rem;color:rgba(255,255,255,.75);">
+        <span><i class="bi bi-person-fill me-1"></i><span id="artAuthor"></span></span>
+        <span><i class="bi bi-calendar3 me-1"></i><span id="artDate"></span></span>
+        <span><i class="bi bi-eye me-1"></i><span id="artViews"></span> dibaca</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-4">
+  <div class="row g-4">
+
+    <!-- Article Body -->
+    <div class="col-lg-8">
+      <div class="bg-white rounded-3 shadow-sm overflow-hidden mb-4">
+
+        <!-- Thumbnail -->
+        <div id="thumbWrap" style="display:none;">
+          <img id="artThumb" src="" alt="" class="w-100" style="max-height:420px;object-fit:cover;" />
+        </div>
+
+        <!-- Tags -->
+        <div class="px-4 pt-4 pb-2" id="tagsWrap" style="display:none;">
+          <div id="artTags" class="d-flex flex-wrap gap-1"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-4">
+          <div id="contentSkel">
+            @foreach(range(1,6) as $i)
+            <div class="skel mb-3" style="height:14px;width:{{ rand(60,100) }}%;"></div>
+            @endforeach
+            <div class="skel mb-4" style="height:14px;width:85%;"></div>
+            <div class="skel mb-3" style="height:14px;width:92%;"></div>
+            <div class="skel mb-3" style="height:14px;width:78%;"></div>
+          </div>
+          <div id="artContent" class="article-body" style="display:none;"></div>
+        </div>
+
+        <!-- Share inline (desktop) -->
+        <div class="px-4 pb-4">
+          <div class="border-top pt-3 d-flex align-items-center gap-2 flex-wrap">
+            <span class="text-muted fw-semibold me-1" style="font-size:.8rem;">Bagikan:</span>
+            <button class="share-btn share-wa"     onclick="shareWA()">    <i class="bi bi-whatsapp"></i>    <span>WhatsApp</span></button>
+            <button class="share-btn share-fb"     onclick="shareFB()">    <i class="bi bi-facebook"></i>   <span>Facebook</span></button>
+            <button class="share-btn share-tiktok" onclick="shareTikTok()"><i class="bi bi-tiktok"></i>     <span>TikTok</span></button>
+            <button class="share-btn share-ig"     onclick="shareIG()">    <i class="bi bi-instagram"></i>  <span>Instagram</span></button>
+            <button class="share-btn share-copy" id="copyBtn" onclick="copyLink()">
+              <i class="bi bi-link-45deg"></i> <span>Salin Link</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Comments Section -->
+      <div class="bg-white rounded-3 shadow-sm p-4">
+        <h5 class="fw-bold mb-4" style="font-size:1rem;">
+          <i class="bi bi-chat-left-text me-2 text-primary"></i>Komentar
+          <span id="comCount" class="badge bg-primary-subtle text-primary ms-2" style="font-size:.72rem;"></span>
+        </h5>
+
+        <!-- Comment list -->
+        <div id="commentList" class="d-flex flex-column gap-3 mb-4"></div>
+
+        <!-- Comment form -->
+        <div class="border-top pt-4">
+          <h6 class="fw-semibold mb-3" style="font-size:.9rem;">Tulis Komentar</h6>
+          <div id="commentSuccess" class="alert alert-success d-none" style="border-radius:10px;font-size:.875rem;">
+            <i class="bi bi-check-circle-fill me-2"></i>Komentar dikirim dan menunggu moderasi. Terima kasih!
+          </div>
+          <form id="commentForm" novalidate>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <input type="text" id="comName" class="form-control" placeholder="Nama kamu *" required
+                       style="border-radius:8px;" />
+              </div>
+              <div class="col-md-6">
+                <input type="email" id="comEmail" class="form-control" placeholder="Email (opsional)"
+                       style="border-radius:8px;" />
+              </div>
+            </div>
+            <textarea id="comContent" class="form-control mb-3" rows="4"
+                      placeholder="Tulis komentar kamu di sini..." required
+                      style="border-radius:8px;"></textarea>
+            <div id="commentError" class="text-danger mb-2" style="font-size:.825rem;display:none;"></div>
+            <button type="submit" class="btn btn-primary" id="comSubmitBtn" style="border-radius:8px;">
+              <i class="bi bi-send me-1"></i>Kirim Komentar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+
+      <!-- Share card -->
+      <div class="bg-white rounded-3 shadow-sm p-4 mb-4">
+        <h6 class="fw-bold mb-3" style="font-size:.875rem;">
+          <i class="bi bi-share-fill me-2 text-primary"></i>Bagikan Artikel
+        </h6>
+        <div class="d-grid gap-2">
+          <button class="share-btn share-wa w-100 justify-content-center" onclick="shareWA()">
+            <i class="bi bi-whatsapp"></i> Bagikan ke WhatsApp
+          </button>
+          <button class="share-btn share-fb w-100 justify-content-center" onclick="shareFB()">
+            <i class="bi bi-facebook"></i> Bagikan ke Facebook
+          </button>
+          <button class="share-btn share-tiktok w-100 justify-content-center" onclick="shareTikTok()">
+            <i class="bi bi-tiktok"></i> Salin untuk TikTok
+          </button>
+          <button class="share-btn share-ig w-100 justify-content-center" onclick="shareIG()">
+            <i class="bi bi-instagram"></i> Salin untuk Instagram
+          </button>
+          <button class="share-btn share-copy w-100 justify-content-center" id="copyBtn2" onclick="copyLink('copyBtn2')">
+            <i class="bi bi-link-45deg"></i> Salin Link Artikel
+          </button>
+        </div>
+      </div>
+
+      <!-- Related articles -->
+      <div class="bg-white rounded-3 shadow-sm p-4">
+        <h6 class="fw-bold mb-3" style="font-size:.875rem;">
+          <i class="bi bi-newspaper me-2 text-primary"></i>Artikel Terkait
+        </h6>
+        <div id="relatedList">
+          <div class="skel mb-3" style="height:70px;border-radius:8px;"></div>
+          <div class="skel mb-3" style="height:70px;border-radius:8px;"></div>
+          <div class="skel" style="height:70px;border-radius:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Share Bar (sticky bottom, mobile & desktop) -->
+<div class="share-bar">
+  <div class="container d-flex align-items-center justify-content-center gap-2">
+    <span class="text-muted d-none d-sm-inline" style="font-size:.78rem;font-weight:600;white-space:nowrap;">Bagikan:</span>
+    <button class="share-btn share-wa"     onclick="shareWA()">    <i class="bi bi-whatsapp"></i>   <span>WhatsApp</span></button>
+    <button class="share-btn share-fb"     onclick="shareFB()">    <i class="bi bi-facebook"></i>  <span>Facebook</span></button>
+    <button class="share-btn share-tiktok" onclick="shareTikTok()"><i class="bi bi-tiktok"></i>    <span>TikTok</span></button>
+    <button class="share-btn share-ig"     onclick="shareIG()">    <i class="bi bi-instagram"></i> <span>Instagram</span></button>
+    <button class="share-btn share-copy"   onclick="copyLink()">   <i class="bi bi-link-45deg"></i><span>Salin</span></button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer style="background:#1a1a1a;padding:24px 0;margin-top:60px;">
+  <div class="container text-center">
+    <div class="text-white fw-bold mb-1" style="font-size:.9rem;">Jaf Donation</div>
+    <div style="color:#888;font-size:.75rem;">&copy; 2025 Yayasan Daun Salambar — Jatiwangi Art Factory</div>
+    <div class="d-flex justify-content-center gap-3 mt-2">
+      <a href="#" style="color:#888;font-size:1rem;"><i class="bi bi-facebook"></i></a>
+      <a href="#" style="color:#888;font-size:1rem;"><i class="bi bi-instagram"></i></a>
+      <a href="#" style="color:#888;font-size:1rem;"><i class="bi bi-youtube"></i></a>
+      <a href="#" style="color:#888;font-size:1rem;"><i class="bi bi-tiktok"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+
+let currentSlug  = '';
+let articleData  = null;
+
+/* ─── Load article from ?slug=xxx ─── */
+async function loadArticle() {
+  const params = new URLSearchParams(location.search);
+  currentSlug  = params.get('slug') || '';
+
+  if (!currentSlug) {
+    showError('Slug artikel tidak ditemukan di URL.');
+    return;
+  }
+
+  try {
+    const res  = await fetch(`${window.window.API_BASE}/articles/${currentSlug}`);
+    if (!res.ok) throw new Error('Artikel tidak ditemukan.');
+    const data = await res.json();
+    articleData = data.article;
+    renderArticle(articleData);
+    renderRelated(data.related || []);
+    loadComments(articleData.id);
+  } catch (e) {
+    showError(e.message);
+  }
+}
+
+function renderArticle(a) {
+  // Meta tags
+  document.getElementById('pageTitle').textContent        = a.meta?.title || a.title;
+  document.getElementById('metaDesc').content             = a.meta?.description || '';
+  document.getElementById('metaKeywords').content         = a.meta?.keywords || '';
+  document.getElementById('ogTitle').content              = a.title;
+  document.getElementById('ogDesc').content               = a.meta?.description || '';
+  document.getElementById('ogImage').content              = a.thumbnail_url || '';
+  document.getElementById('ogUrl').content                = location.href;
+
+  // Breadcrumb
+  const shortTitle = a.title.length > 40 ? a.title.slice(0, 40) + '…' : a.title;
+  document.getElementById('breadTitle').textContent = shortTitle;
+
+  // Header
+  document.getElementById('headerSkeleton').style.display = 'none';
+  document.getElementById('headerContent').style.display  = '';
+  document.getElementById('artTitle').textContent   = a.title;
+  document.getElementById('artAuthor').textContent  = a.author || 'Redaksi JAF';
+  document.getElementById('artDate').textContent    = a.published_at || '';
+  document.getElementById('artViews').textContent   = (a.views || 0).toLocaleString('id');
+  if (a.category) document.getElementById('artCategory').textContent = a.category.name;
+  if (a.region_label) document.getElementById('artRegion').textContent = a.region_label;
+
+  // Thumbnail
+  if (a.thumbnail_url && !a.thumbnail_url.includes('placeholder')) {
+    document.getElementById('artThumb').src       = a.thumbnail_url;
+    document.getElementById('artThumb').alt       = a.title;
+    document.getElementById('thumbWrap').style.display = '';
+  }
+
+  // Tags
+  if (a.tags && a.tags.length) {
+    const wrap = document.getElementById('artTags');
+    wrap.innerHTML = a.tags.map(t =>
+      `<a href="berita.html?tag=${t.slug}" class="tag-pill">#${t.name}</a>`
+    ).join('');
+    document.getElementById('tagsWrap').style.display = '';
+  }
+
+  // Content
+  document.getElementById('contentSkel').style.display = 'none';
+  document.getElementById('artContent').style.display  = '';
+  document.getElementById('artContent').innerHTML = a.content || '<p class="text-muted">Konten tidak tersedia.</p>';
+}
+
+function renderRelated(related) {
+  const el = document.getElementById('relatedList');
+  if (!related.length) {
+    el.innerHTML = '<div class="text-muted" style="font-size:.825rem;">Tidak ada artikel terkait.</div>';
+    return;
+  }
+  el.innerHTML = related.map(a => `
+    <a href="artikel.html?slug=${a.slug}" class="text-decoration-none d-flex gap-3 mb-3 align-items-start">
+      <div class="rounded-2 overflow-hidden flex-shrink-0"
+           style="width:64px;height:48px;background:#EBF5FB;display:flex;align-items:center;justify-content:center;">
+        ${a.thumbnail_url && !a.thumbnail_url.includes('placeholder')
+          ? `<img src="${a.thumbnail_url}" style="width:64px;height:48px;object-fit:cover;" />`
+          : `<i class="bi bi-newspaper text-primary" style="font-size:1.25rem;"></i>`}
+      </div>
+      <div>
+        <div class="fw-semibold text-dark" style="font-size:.8rem;line-height:1.45;">${a.title}</div>
+        <div class="text-muted mt-1" style="font-size:.72rem;">${a.published_at || ''}</div>
+      </div>
+    </a>`).join('');
+}
+
+/* ─── Comments ─── */
+async function loadComments(articleId) {
+  try {
+    const res  = await fetch(`${window.window.API_BASE}/articles/${articleId}/comments`);
+    const data = await res.json();
+    const list = data.data || data || [];
+    renderComments(list);
+  } catch (e) {
+    document.getElementById('commentList').innerHTML =
+      '<div class="text-muted" style="font-size:.825rem;">Gagal memuat komentar.</div>';
+  }
+}
+
+function renderComments(comments) {
+  const count = document.getElementById('comCount');
+  count.textContent = comments.length + ' komentar';
+
+  if (!comments.length) {
+    document.getElementById('commentList').innerHTML =
+      '<div class="text-muted text-center py-3" style="font-size:.875rem;">Belum ada komentar. Jadilah yang pertama!</div>';
+    return;
+  }
+  document.getElementById('commentList').innerHTML = comments.map(c => `
+    <div class="comment-card">
+      <div class="d-flex justify-content-between align-items-start">
+        <div class="d-flex gap-2 align-items-center">
+          <div class="rounded-circle d-flex align-items-center justify-content-center bg-primary text-white fw-bold flex-shrink-0"
+               style="width:34px;height:34px;font-size:.8rem;">${c.guest_name?.[0]?.toUpperCase() || '?'}</div>
+          <div>
+            <div class="comment-name">${escHtml(c.guest_name)}</div>
+            <div class="comment-date">${c.created_at || ''}</div>
+          </div>
+        </div>
+      </div>
+      <div class="comment-body">${escHtml(c.content)}</div>
+    </div>`).join('');
+}
+
+document.getElementById('commentForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!articleData) return;
+
+  const name    = document.getElementById('comName').value.trim();
+  const email   = document.getElementById('comEmail').value.trim();
+  const content = document.getElementById('comContent').value.trim();
+  const errEl   = document.getElementById('commentError');
+
+  if (!name || !content) {
+    errEl.textContent = 'Nama dan isi komentar wajib diisi.';
+    errEl.style.display = '';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const btn = document.getElementById('comSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Mengirim...';
+
+  try {
+    const res = await fetch(`${window.window.API_BASE}/articles/${articleData.id}/comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ guest_name: name, guest_email: email, content }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Gagal mengirim komentar.');
+    document.getElementById('commentSuccess').classList.remove('d-none');
+    document.getElementById('commentForm').reset();
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = '';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-send me-1"></i>Kirim Komentar';
+  }
+});
+
+/* ─── Share functions ─── */
+function getShareUrl()   { return encodeURIComponent(location.href); }
+function getShareTitle() { return encodeURIComponent((articleData?.title || document.title) + ' — Jaf Donation'); }
+
+function shareWA() {
+  window.open(`https://wa.me/?text=${getShareTitle()}%20${getShareUrl()}`, '_blank');
+}
+function shareFB() {
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${getShareUrl()}`, '_blank');
+}
+function shareTikTok() {
+  copyLink();
+  alert('Link artikel disalin! Buka TikTok → buat video → tempel link di deskripsi.');
+}
+function shareIG() {
+  copyLink();
+  alert('Link artikel disalin! Buka Instagram → buat Story/Postingan → tempel link di bio atau caption.');
+}
+function copyLink(btnId) {
+  navigator.clipboard.writeText(location.href).then(() => {
+    const ids = btnId ? [btnId] : ['copyBtn', 'copyBtn2'];
+    ids.forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      const orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '<i class="bi bi-check-lg"></i> <span>Tersalin!</span>';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+    });
+  }).catch(() => {
+    prompt('Salin link ini:', location.href);
+  });
+}
+
+/* ─── Native share (mobile) ─── */
+if (navigator.share) {
+  const nativeBtn = document.createElement('button');
+  nativeBtn.className = 'share-btn share-copy';
+  nativeBtn.innerHTML = '<i class="bi bi-share-fill"></i> <span>Bagikan</span>';
+  nativeBtn.onclick = () => navigator.share({
+    title: articleData?.title || document.title,
+    url:   location.href,
+  });
+  document.querySelector('.share-bar .container').prepend(nativeBtn);
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showError(msg) {
+  document.getElementById('headerSkeleton').innerHTML =
+    `<div class="alert alert-danger" style="border-radius:8px;">${msg}</div>`;
+}
+
+loadArticle();
+</script>
+
+  <script>
+  // Load social links from API settings
+  (async()=>{
+    try{
+      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
+      const map={
+        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
+        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
+      };
+      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
+    }catch(e){}
+  })();
+  </script>
+
+  <script>
+  function navSearch(e) {
+    e.preventDefault();
+    const q = e.target.querySelector('.nav-q').value.trim();
+    if (q) window.location.href = 'berita.html?search=' + encodeURIComponent(q);
+    return false;
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donasi - Jatiwangi Art Factory</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    :root { --blue:#005BAA; --orange:#E55A00; }
+    body { font-family:'Noto Sans',sans-serif; }
+    .page-header { background:linear-gradient(135deg,var(--blue) 0%,#003d7a 100%); color:#fff; padding:60px 0 50px; }
+    .campaign-card { border:none; border-radius:16px; overflow:hidden; transition:transform .2s,box-shadow .2s; cursor:pointer; }
+    .campaign-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.12) !important; }
+    .campaign-thumb { height:200px; object-fit:cover; width:100%; }
+    .campaign-thumb-placeholder { height:200px; background:linear-gradient(135deg,#e8f2ff,#d0e7ff); display:flex; align-items:center; justify-content:center; }
+    .progress { height:8px; border-radius:4px; }
+    .progress-bar { border-radius:4px; }
+    .badge-type { font-size:.68rem; border-radius:6px; padding:4px 8px; }
+    .btn-donate { background:var(--blue); color:#fff; border:none; border-radius:10px; padding:10px 0; font-weight:700; font-size:.9rem; width:100%; transition:background .2s; }
+    .btn-donate:hover { background:#003d7a; color:#fff; }
+    #skeleton .skel-card { border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+    .skel-pulse { background:linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%); background-size:200% 100%; animation:pulse 1.5s infinite; border-radius:6px; }
+    @keyframes pulse { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div style="background:var(--blue);color:#fff;font-size:.78rem;padding:6px 0;">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="tel:+6281573213592" style="color:#fff;text-decoration:none;"><i class="bi bi-telephone-fill me-1"></i>+62 815-7321-3592</a>
+      <div class="d-flex gap-3">
+        <a href="#" style="color:#fff;"><i class="bi bi-facebook"></i></a>
+        <a href="#" style="color:#fff;"><i class="bi bi-instagram"></i></a>
+        <a href="#" style="color:#fff;"><i class="bi bi-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="../index.html">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto gap-0">
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="../index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="berita.html">Berita</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="galeri.html">Galeri</a></li>
+        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="donasi.html">Donasi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="relawan.html">Relawan</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="benah-kampung.html">Benah Kampung</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 py-2">
+
+        <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+          <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+          <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+            <i class="bi bi-search" style="font-size:.75rem;"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb" style="--bs-breadcrumb-divider-color:rgba(255,255,255,.5);">
+          <li class="breadcrumb-item"><a href="../index.html" style="color:rgba(255,255,255,.7);text-decoration:none;">Beranda</a></li>
+          <li class="breadcrumb-item active" style="color:#fff;">Donasi</li>
+        </ol>
+      </nav>
+      <h1 style="font-family:'Noto Serif',serif;font-size:2.2rem;font-weight:700;">Kampanye Donasi</h1>
+      <p style="color:rgba(255,255,255,.8);margin-top:.5rem;">Pilih kampanye yang ingin Anda dukung. Setiap kontribusi berarti.</p>
+    </div>
+  </div>
+
+  <!-- Campaigns -->
+  <section style="padding:64px 0;background:#f8fafc;min-height:60vh;">
+    <div class="container">
+
+      <!-- Skeleton loader -->
+      <div id="skeleton" class="row g-4">
+        @for($i=0;$i<6;$i++)
+        <div class="col-md-6 col-lg-4">
+          <div class="skel-card shadow-sm">
+            <div class="skel-pulse" style="height:200px;"></div>
+            <div class="p-4">
+              <div class="skel-pulse mb-2" style="height:12px;width:30%;"></div>
+              <div class="skel-pulse mb-3" style="height:20px;"></div>
+              <div class="skel-pulse mb-1" style="height:10px;"></div>
+              <div class="skel-pulse mb-3" style="height:8px;border-radius:4px;"></div>
+              <div class="skel-pulse" style="height:40px;border-radius:10px;"></div>
+            </div>
+          </div>
+        </div>
+        @endfor
+        <!-- plain static version for static preview -->
+      </div>
+
+      <!-- Campaigns grid -->
+      <div id="campaignGrid" class="row g-4 d-none"></div>
+
+      <!-- Empty state -->
+      <div id="emptyState" class="text-center py-5 d-none">
+        <i class="bi bi-heart fs-1 d-block mb-3" style="color:#cbd5e1;"></i>
+        <h5 class="text-muted">Belum ada kampanye aktif saat ini</h5>
+        <p class="text-muted" style="font-size:.875rem;">Silakan kembali lagi nanti.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Bank Account Info -->
+  <section style="background:var(--blue);padding:48px 0;">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-5">
+          <h3 style="color:#fff;font-family:'Noto Serif',serif;font-weight:700;font-size:1.8rem;">Donasi via Transfer Bank</h3>
+          <p style="color:rgba(255,255,255,.8);">Jika ingin melakukan donasi manual melalui transfer bank:</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:20px;">
+                <div style="color:#C8A44A;font-weight:700;font-size:.85rem;margin-bottom:6px;">Bank BJB</div>
+                <div style="color:#fff;font-weight:700;font-size:1.2rem;letter-spacing:.05em;">0118751892100</div>
+                <div style="color:rgba(255,255,255,.7);font-size:.8rem;">a.n. Jatiwangi Art Factory</div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:20px;">
+                <div style="color:#C8A44A;font-weight:700;font-size:.85rem;margin-bottom:6px;">Konfirmasi Transfer</div>
+                <div style="color:#fff;font-size:.875rem;line-height:1.6;">
+                  <i class="bi bi-whatsapp me-1"></i>+62 815-7321-3592<br>
+                  <i class="bi bi-envelope me-1"></i>jatiwangiartfactory@gmail.com
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#0f172a;color:#fff;padding:40px 0;">
+    <div class="container text-center">
+      <i class="bi bi-heart-fill mb-2 d-block" style="color:#C8A44A;font-size:1.8rem;"></i>
+      <p style="font-weight:700;margin-bottom:4px;">Jatiwangi Art Factory</p>
+      <p style="color:#64748b;font-size:.8rem;">&copy; 2025 Jaf Donation. Hak cipta dilindungi.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+
+    function formatRp(n) {
+      return 'Rp ' + Number(n).toLocaleString('id-ID');
+    }
+
+    function daysLeftLabel(endDate) {
+      if (!endDate) return '';
+      const days = Math.ceil((new Date(endDate) - new Date()) / 86400000);
+      if (days < 0) return '<span style="color:#ef4444;font-size:.72rem;">Kampanye berakhir</span>';
+      if (days === 0) return '<span style="color:#ef4444;font-size:.72rem;">Berakhir hari ini</span>';
+      return `<span style="color:#64748b;font-size:.72rem;">${days} hari lagi</span>`;
+    }
+
+    function renderCard(c) {
+      const progressBar = c.has_target ? `
+        <div class="mb-1 d-flex justify-content-between" style="font-size:.78rem;">
+          <span class="fw-semibold" style="color:#16a34a;">${formatRp(c.collected_amount)}</span>
+          <span style="color:var(--blue);font-weight:700;">${c.progress_percentage}%</span>
+        </div>
+        <div class="progress mb-1"><div class="progress-bar" style="width:${c.progress_percentage}%;background:var(--blue);"></div></div>
+        <div class="d-flex justify-content-between" style="font-size:.72rem;color:#94a3b8;">
+          <span>dari ${formatRp(c.target_amount)}</span>
+          ${daysLeftLabel(c.end_date)}
+        </div>` : `
+        <div class="mb-3 d-flex align-items-center gap-2">
+          <span class="fw-semibold" style="color:#16a34a;font-size:.9rem;">${formatRp(c.collected_amount)}</span>
+          <span style="font-size:.75rem;color:#94a3b8;">terkumpul</span>
+          ${c.end_date ? daysLeftLabel(c.end_date) : ''}
+        </div>`;
+
+      const thumb = c.thumbnail_url
+        ? `<img src="${c.thumbnail_url}" class="campaign-thumb" />`
+        : `<div class="campaign-thumb-placeholder"><i class="bi bi-heart-fill" style="font-size:3rem;color:var(--blue);opacity:.2;"></i></div>`;
+
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="card campaign-card shadow-sm h-100" onclick="location.href='donasi-detail.html?slug=${c.slug}'">
+            ${thumb}
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="d-flex gap-1 mb-2">
+                ${c.is_featured ? '<span class="badge bg-warning text-dark badge-type">⭐ Unggulan</span>' : ''}
+                ${c.has_target
+                  ? '<span class="badge bg-info-subtle text-info badge-type">Ada Target</span>'
+                  : '<span class="badge bg-secondary-subtle text-secondary badge-type">Donasi Terbuka</span>'}
+              </div>
+              <h6 class="fw-bold mb-2" style="line-height:1.45;flex-grow:0;">${c.name}</h6>
+              ${c.description ? `<p class="text-muted mb-3" style="font-size:.8rem;line-height:1.6;flex-grow:1;">${c.description.substring(0,100)}${c.description.length > 100 ? '…' : ''}</p>` : '<div class="flex-grow-1"></div>'}
+              <div class="mb-3">${progressBar}</div>
+              <div class="d-flex justify-content-between align-items-center mb-3" style="font-size:.75rem;color:#64748b;">
+                <span><i class="bi bi-people-fill me-1"></i>${c.donor_count} donatur</span>
+              </div>
+              <button class="btn-donate">
+                <i class="bi bi-heart-fill me-2"></i>Donasi Sekarang
+              </button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    async function loadCampaigns() {
+      try {
+        const res  = await fetch(`${window.window.API_BASE}/campaigns`);
+        const json = await res.json();
+        const list = json.data || [];
+
+        document.getElementById('skeleton').classList.add('d-none');
+
+        if (list.length === 0) {
+          document.getElementById('emptyState').classList.remove('d-none');
+          return;
+        }
+
+        const grid = document.getElementById('campaignGrid');
+        grid.innerHTML = list.map(renderCard).join('');
+        grid.classList.remove('d-none');
+      } catch (e) {
+        document.getElementById('skeleton').classList.add('d-none');
+        document.getElementById('emptyState').classList.remove('d-none');
+      }
+    }
+
+    loadCampaigns();
+  </script>
+
+  <script>
+  // Load social links from API settings
+  (async()=>{
+    try{
+      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
+      const map={
+        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
+        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
+      };
+      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
+    }catch(e){}
+  })();
+  </script>
+
+  <script>
+  function navSearch(e) {
+    e.preventDefault();
+    const q = e.target.querySelector('.nav-q').value.trim();
+    if (q) window.location.href = 'berita.html?search=' + encodeURIComponent(q);
+    return false;
+  }
+  </script>
+</body>
+</html>

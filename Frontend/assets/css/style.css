@@ -1,0 +1,351 @@
+/* =============================
+   \Jaf Donation - Custom CSS
+   ============================= */
+
+/* Root Variables */
+:root {
+  --primary:   #1A5276;
+  --secondary: #2980B9;
+  --accent:    #E8F4FD;
+  --gold:      #C8A44A;
+  --danger:    #C0392B;
+  --text-dark: #1a1a2e;
+  --text-gray: #6c757d;
+}
+
+/* ---- Base ---- */
+body {
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--text-dark);
+  scroll-behavior: smooth;
+}
+
+/* ---- Top Bar ---- */
+.topbar { background: var(--primary); }
+
+/* ---- Navbar ---- */
+.navbar {
+  padding: 0.75rem 0;
+  transition: box-shadow 0.3s ease;
+}
+.navbar-scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important; }
+
+.nav-link {
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem !important;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after { width: 60%; }
+
+.dropdown-menu {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  padding: 0.5rem;
+  margin-top: 0.5rem !important;
+  animation: fadeDown 0.2s ease;
+}
+.dropdown-item {
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+.dropdown-item:hover { background: var(--accent); color: var(--primary); }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Hero Carousel ---- */
+.carousel-item { height: 580px; }
+
+.hero-slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slide-1 {
+  background: linear-gradient(135deg, #1A5276 0%, #2980B9 50%, #1A5276 100%);
+}
+.hero-slide-2 {
+  background: linear-gradient(135deg, #1a5e1a 0%, #27ae60 50%, #1a5e1a 100%);
+}
+.hero-slide-3 {
+  background: linear-gradient(135deg, #4a235a 0%, #8e44ad 50%, #4a235a 100%);
+}
+.hero-slide-4 {
+  background: linear-gradient(135deg, #7b241c 0%, #e74c3c 50%, #7b241c 100%);
+}
+
+.carousel-caption {
+  position: static !important;
+  padding: 2rem 0;
+  text-align: left;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: none;
+}
+.carousel-indicators .active {
+  background: white;
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* ---- Stats Bar ---- */
+.stats-bar { background: var(--primary); }
+
+/* ---- Misi Cards ---- */
+.misi-card {
+  cursor: default;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.misi-card:hover { transform: translateY(-6px); }
+
+/* ---- News Cards ---- */
+.news-card {
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.news-card:hover { transform: translateY(-4px); }
+
+/* ---- Video Cards ---- */
+.video-card { cursor: pointer; }
+.video-thumb .play-btn {
+  transition: transform 0.2s ease;
+}
+.video-thumb:hover .play-btn { transform: scale(1.1); }
+
+/* ---- Nav Pills (berita tabs) ---- */
+.nav-pills .nav-link {
+  color: var(--text-gray);
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 0.4rem 1rem !important;
+  font-size: 0.8125rem;
+}
+.nav-pills .nav-link.active {
+  background: var(--primary) !important;
+  border-color: var(--primary);
+  color: white;
+}
+.nav-pills .nav-link::after { display: none; }
+
+/* ---- Buttons ---- */
+.btn { border-radius: 50px; font-weight: 500; }
+.btn:focus { box-shadow: none; }
+
+/* ---- Footer ---- */
+footer a { text-decoration: none; }
+footer li { margin-bottom: 0.5rem; }
+
+/* ---- Back to Top ---- */
+#backToTop.visible {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+/* ---- Page Header (inner pages) ---- */
+.page-header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  padding: 80px 0 60px;
+  color: white;
+}
+.page-header h1 { font-family: 'Noto Serif', serif; font-weight: 700; }
+.breadcrumb-item a { color: rgba(255,255,255,0.7); text-decoration: none; }
+.breadcrumb-item.active { color: rgba(255,255,255,0.9); }
+.breadcrumb-item + .breadcrumb-item::before { color: rgba(255,255,255,0.5); }
+
+/* ---- Section Divider ---- */
+.section-divider {
+  width: 60px; height: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+/* ---- Scroll Animations ---- */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+
+/* Tablet landscape & smaller desktop (≤992px) */
+@media (max-width: 991.98px) {
+  .carousel-item { height: 450px; }
+  .navbar-collapse { padding: 1rem 0; border-top: 1px solid #eee; margin-top: 0.5rem; }
+  .nav-link::after { display: none; }
+  .topbar .d-flex { flex-wrap: wrap; gap: 0.25rem; }
+  .topbar small { font-size: .7rem; }
+
+  /* About section: stack photo grid */
+  .about-photos { margin-bottom: 2rem; }
+
+  /* Stats bar: wrap items */
+  .stats-bar .col { min-width: 45%; margin-bottom: 1rem; }
+
+  /* Program circles: 3 per row */
+  .program-grid .col { flex: 0 0 33.333%; max-width: 33.333%; }
+
+  /* News tabs: scrollable */
+  .nav-pills { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .nav-pills::-webkit-scrollbar { height: 3px; }
+  .nav-pills .nav-link { white-space: nowrap; flex-shrink: 0; }
+
+  /* Page header */
+  .page-header { padding: 60px 0 40px; }
+  .page-header h1 { font-size: 2rem; }
+
+  /* Donation page: 2 columns */
+  .campaign-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Donasi detail: stack columns */
+  .donation-detail-layout { flex-direction: column; }
+
+  /* Relawan form: full width labels */
+  .relawan-why-cards .col { flex: 0 0 50%; max-width: 50%; }
+}
+
+/* Tablet portrait (≤768px) */
+@media (max-width: 767.98px) {
+  .carousel-item { height: 380px; }
+  .carousel-caption h1 { font-size: 1.75rem !important; }
+  .carousel-caption p  { font-size: 0.95rem !important; }
+  .carousel-caption .btn { font-size: 0.875rem; padding: 0.5rem 1.25rem; }
+  .carousel-indicators { bottom: 8px; }
+
+  /* Topbar: hide on very small, or wrap */
+  .topbar .col-auto:last-child { display: none; }
+
+  /* Section headings */
+  section h2, .section-title { font-size: 1.6rem !important; }
+
+  /* Stats bar: 2 per row */
+  .stats-bar .row > div { flex: 0 0 50%; max-width: 50%; text-align: center; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,.15); padding: 1rem 0; }
+
+  /* Program circles: 2 per row */
+  .program-grid .col { flex: 0 0 50%; max-width: 50%; }
+
+  /* Footer: stack columns */
+  footer .col-lg-3, footer .col-lg-4 { margin-bottom: 2rem; }
+
+  /* Page header */
+  .page-header { padding: 50px 0 35px; }
+  .page-header h1 { font-size: 1.75rem; }
+  .page-header .lead { font-size: 0.95rem; }
+
+  /* Donation campaigns: 1 column */
+  .campaign-grid { grid-template-columns: 1fr !important; }
+
+  /* Bank info cards: stack */
+  .bank-info-cards .col { flex: 0 0 100%; max-width: 100%; margin-bottom: 1rem; }
+
+  /* Donasi detail: nominal grid 2 per row */
+  .nominal-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* Relawan why-cards: 1 col */
+  .relawan-why-cards .col { flex: 0 0 100%; max-width: 100%; }
+
+  /* Relawan form: full-width selects */
+  .skills-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Mobile (≤575px) */
+@media (max-width: 575.98px) {
+  .carousel-item { height: 300px; }
+  .carousel-caption h1 { font-size: 1.4rem !important; }
+  .carousel-caption p  { font-size: 0.85rem !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .carousel-caption .d-flex { flex-direction: column; gap: 0.5rem !important; align-items: flex-start; }
+
+  /* Topbar: hide entirely on phone */
+  .topbar { display: none !important; }
+
+  /* Navbar: tighter */
+  .navbar-brand img { height: 36px !important; }
+  .navbar-brand span { font-size: 1rem !important; }
+  .navbar { padding: 0.5rem 0; }
+
+  /* Hero text container */
+  .carousel-caption { padding: 1rem 0; }
+
+  /* Stats bar: 1 per row */
+  .stats-bar .row > div { flex: 0 0 100%; max-width: 100%; border-bottom: 1px solid rgba(255,255,255,.15); }
+
+  /* Section padding */
+  section { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  section h2 { font-size: 1.4rem !important; }
+
+  /* Program circles: 2 per row compact */
+  .program-grid .col { flex: 0 0 50%; max-width: 50%; }
+  .program-grid .rounded-circle { width: 70px !important; height: 70px !important; font-size: 1.5rem !important; }
+
+  /* Misi/info cards: full width */
+  .misi-card { margin-bottom: 1rem; }
+
+  /* News tabs: smaller */
+  .nav-pills .nav-link { padding: 0.35rem 0.75rem !important; font-size: 0.75rem; }
+
+  /* Footer: tighter */
+  footer { font-size: 0.875rem; }
+  footer .row > div { margin-bottom: 1.5rem; }
+
+  /* Back to top: smaller */
+  #backToTop { width: 38px !important; height: 38px !important; right: 1rem !important; bottom: 1rem !important; font-size: 0.875rem !important; }
+
+  /* Page header */
+  .page-header { padding: 40px 0 28px; }
+  .page-header h1 { font-size: 1.4rem; }
+  .page-header .lead { font-size: 0.875rem; }
+
+  /* Donation page cards */
+  .campaign-grid { gap: 1rem !important; }
+  .campaign-card .card-img-top { height: 160px !important; object-fit: cover; }
+
+  /* Donasi detail: nominal grid 2 per row, tighter */
+  .nominal-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.5rem !important; }
+  .nominal-btn { padding: 0.5rem !important; font-size: 0.8rem !important; }
+
+  /* Donasi detail: payment form full-width */
+  .payment-form-card { margin: 0 !important; border-radius: 12px !important; }
+
+  /* Relawan form */
+  .skills-grid { grid-template-columns: 1fr !important; }
+
+  /* General form: full-width submit buttons */
+  .form-submit-btn { width: 100%; }
+
+  /* Tables: horizontal scroll */
+  .table-responsive-force { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-responsive-force table { min-width: 540px; }
+}
