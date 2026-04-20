@@ -46,7 +46,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Program
     Route::resource('programs', ProgramController::class);
-    Route::get('programs/{program}/show', [ProgramController::class, 'show'])->name('programs.show');
 
     // Galeri
     Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
