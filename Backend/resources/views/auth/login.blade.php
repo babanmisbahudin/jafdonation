@@ -94,6 +94,9 @@
     <p class="text-center mt-4 mb-0 text-muted" style="font-size:.75rem;">
       &copy; {{ date('Y') }} Jaf Donation. Panel CMS v1.0
     </p>
+    <p class="text-center mt-1 mb-0" style="font-size:.7rem; color:#b0b8c1;">
+      CMS build by <span style="font-weight:600; color:#1A5276;">himisbah</span>
+    </p>
   </div>
 
   <script>
