@@ -425,13 +425,6 @@
     }
     .footer-bottom a { color: #666; transition: .15s; }
     .footer-bottom a:hover { color: #fff; }
-    .footer-social { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
-    .footer-social a {
-      width: 32px; height: 32px; border-radius: 50%; background: #2a2a2a;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; color: #888; transition: .15s;
-    }
-    .footer-social a:hover { background: var(--blue); color: #fff; }
 
     /* ── BACK TO TOP ── */
     #btt {
@@ -636,7 +629,8 @@
 
       /* Footer */
       footer .footer-bottom { padding: 14px 0; font-size: 11px; }
-      .footer-social a { width: 28px; height: 28px; font-size: 11px; }
+      .footer-bottom .container { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 10px; }
+      .footer-bottom .container > div:first-child { text-align: center !important; }
 
       /* Back to top */
       #btt { bottom: 12px; right: 12px; width: 34px; height: 34px; font-size: 14px; }
@@ -1188,13 +1182,6 @@
         Copyright &copy; 2025 Yayasan Daun Salambar — Jatiwangi Art Factory<br>
         Jatiwangi, Kabupaten Majalengka, Jawa Barat &nbsp;|&nbsp; +62 815-7321-3592 &nbsp;|&nbsp; jatiwangiartfactory@gmail.com
       </div>
-      <div class="footer-social">
-        <a href="#"><i class="bi bi-facebook"></i></a>
-        <a href="#"><i class="bi bi-instagram"></i></a>
-        <a href="#"><i class="bi bi-youtube"></i></a>
-        <a href="#"><i class="bi bi-tiktok"></i></a>
-        <a href="#"><i class="bi bi-whatsapp"></i></a>
-      </div>
     </div>
   </div>
 </footer>
@@ -1376,10 +1363,6 @@ function renderSettings(s) {
   // Footer
   const ftCopy = document.querySelector('.footer-bottom .container div');
   if (ftCopy && s.footer_copyright) ftCopy.innerHTML = s.footer_copyright + `<br>${s.footer_address || ''}&nbsp;|&nbsp;${s.footer_phone || ''}&nbsp;|&nbsp;${s.footer_email || ''}`;
-  const ftSocials = document.querySelectorAll('.footer-social a');
-  if (ftSocials[0] && s.footer_facebook)  ftSocials[0].href = s.footer_facebook;
-  if (ftSocials[1] && s.footer_instagram) ftSocials[1].href = s.footer_instagram;
-  if (ftSocials[2] && s.footer_youtube)   ftSocials[2].href = s.footer_youtube;
 
   // Video YouTube dari settings
   renderVideoSettings(s);
