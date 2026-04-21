@@ -95,7 +95,7 @@
       &copy; {{ date('Y') }} Jaf Donation. Panel CMS v1.0
     </p>
     <p class="text-center mt-1 mb-0" style="font-size:.7rem; color:#b0b8c1;">
-      CMS build by <span style="font-weight:600; color:#1A5276;">himisbah</span>
+      CMS build by <a href="https://github.com/himisbah" target="_blank" style="font-weight:600; color:#1A5276; text-decoration:none;">himisbah</a>
     </p>
   </div>
 
