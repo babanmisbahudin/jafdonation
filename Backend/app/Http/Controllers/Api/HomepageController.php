@@ -50,6 +50,8 @@ class HomepageController extends Controller
                     'collected_amount'   => $p->collected_amount,
                     'target_amount'      => $p->target_amount,
                     'category'           => $p->category?->name,
+                    'cta_text'           => $p->cta_text ?: 'Dukung',
+                    'cta_url'            => $p->cta_url ?: 'pages/donasi.html',
                 ]),
 
             'latest_articles' => Article::with(['category', 'tags'])
@@ -77,6 +79,17 @@ class HomepageController extends Controller
                     'title'      => $g->title,
                     'file_path'  => $g->file_path,
                     'created_at' => $g->created_at->translatedFormat('Y-m-d H:i:s'),
+                ]),
+
+            'latest_photos' => Gallery::where('file_type', 'image')
+                ->orderByDesc('created_at')
+                ->take(3)
+                ->get()
+                ->map(fn($g) => [
+                    'id'         => $g->id,
+                    'title'      => $g->title,
+                    'file_url'   => asset('uploads/gallery/' . $g->file_path),
+                    'created_at' => $g->created_at->translatedFormat('d F Y'),
                 ]),
         ]);
     }

@@ -1094,21 +1094,13 @@
 
       <!-- Berita Foto -->
       <div class="tab-pane fade" id="tab-foto">
-        <div class="row g-3 mb-3">
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-1"><i class="bi bi-camera-fill"></i></div><div class="news-body"><div class="news-date">15 April 2025</div><h6>Foto: Kegiatan Bakti Sosial di Jawa Tengah</h6><p>Dokumentasi kegiatan bakti sosial tim relawan Jaf Donation...</p></div></div></div>
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-2"><i class="bi bi-camera-fill"></i></div><div class="news-body"><div class="news-date">14 April 2025</div><h6>Foto: Distribusi Bantuan Pangan Ramadan</h6><p>Ribuan paket sembako terdistribusi ke pelosok desa selama bulan Ramadan...</p></div></div></div>
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-3"><i class="bi bi-camera-fill"></i></div><div class="news-body"><div class="news-date">13 April 2025</div><h6>Foto: Pelatihan Relawan Baru 2025</h6><p>Ratusan relawan baru mengikuti pelatihan intensif di kantor pusat...</p></div></div></div>
-        </div>
+        <div class="row g-3 mb-3"></div>
         <div class="text-end"><a href="pages/galeri.html" class="news-more">Selengkapnya <i class="bi bi-chevron-right"></i></a></div>
       </div>
 
       <!-- Video -->
       <div class="tab-pane fade" id="tab-video">
-        <div class="row g-3 mb-3">
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-1"><i class="bi bi-play-circle-fill" style="font-size:52px;color:rgba(255,255,255,.6);"></i></div><div class="news-body"><div class="news-date">12 April 2025</div><h6>Video: Kisah Nyata Penerima Bantuan Bedah Rumah</h6><p>Sebuah keluarga berbagi kisah haru setelah rumahnya direnovasi...</p></div></div></div>
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-2"><i class="bi bi-play-circle-fill" style="font-size:52px;color:rgba(255,255,255,.6);"></i></div><div class="news-body"><div class="news-date">10 April 2025</div><h6>Video: Perjalanan Relawan ke Pelosok Papua</h6><p>Tim medis Jaf Donation menembus hutan menuju desa terpencil...</p></div></div></div>
-          <div class="col-md-4"><div class="news-card"><div class="news-thumb nt-3"><i class="bi bi-play-circle-fill" style="font-size:52px;color:rgba(255,255,255,.6);"></i></div><div class="news-body"><div class="news-date">08 April 2025</div><h6>Video: HUT Jaf Donation ke-15 Tahun</h6><p>Merayakan 15 tahun pengabdian kepada masyarakat...</p></div></div></div>
-        </div>
+        <div class="row g-3 mb-3"></div>
         <div class="text-end"><a href="pages/galeri.html" class="news-more">Selengkapnya <i class="bi bi-chevron-right"></i></a></div>
       </div>
 
@@ -1232,6 +1224,8 @@ async function loadHomepage() {
     renderSettings(data.settings || {});
     renderPrograms(data.programs || []);
     renderArticles(data.latest_articles || []);
+    renderPhotos(data.latest_photos || []);
+    renderNewsVideos(data.settings || {});
     renderVideos(data.latest_videos || []);
   } catch (e) {
     // API belum aktif — gunakan konten statis yang sudah ada di HTML
@@ -1385,6 +1379,9 @@ function renderSettings(s) {
   if (ftSocials[0] && s.footer_facebook)  ftSocials[0].href = s.footer_facebook;
   if (ftSocials[1] && s.footer_instagram) ftSocials[1].href = s.footer_instagram;
   if (ftSocials[2] && s.footer_youtube)   ftSocials[2].href = s.footer_youtube;
+
+  // Video YouTube dari settings
+  renderVideoSettings(s);
 }
 
 /* ── PROGRAMS ── */
@@ -1402,7 +1399,7 @@ function renderPrograms(programs) {
         </div>
         <h5>${p.name}</h5>
         <p>${p.description || ''}</p>
-        <a href="pages/donasi.html" class="btn-orange-sm">Dukung</a>
+        <a href="${p.cta_url || 'pages/donasi.html'}" class="btn-orange-sm">${p.cta_text || 'Dukung'}</a>
       </div>
     </div>`).join('');
 }
@@ -1428,12 +1425,59 @@ function renderArticles(articles) {
     </div>`).join('');
 }
 
+/* ── PHOTOS (tab berita foto) ── */
+function renderPhotos(photos) {
+  if (!photos.length) return;
+  const tabPane = document.querySelector('#tab-foto .row');
+  if (!tabPane) return;
+  const colors = ['nt-1','nt-2','nt-3'];
+  tabPane.innerHTML = photos.map((p, i) => `
+    <div class="col-md-4">
+      <div class="news-card">
+        <div class="news-thumb ${colors[i]}">
+          <img src="${p.file_url}" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="news-body">
+          <div class="news-date">${p.created_at}</div>
+          <h6>${p.title}</h6>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── NEWS VIDEOS (tab video di section berita) ── */
+function renderNewsVideos(s) {
+  const tabPane = document.querySelector('#tab-video .row');
+  if (!tabPane) return;
+  const videos = [
+    { url: s.video_1_url, title: s.video_1_title },
+    { url: s.video_2_url, title: s.video_2_title },
+    { url: s.video_3_url, title: s.video_3_title },
+  ].filter(v => v.url && v.title);
+  if (!videos.length) return;
+  const colors = ['nt-1','nt-2','nt-3'];
+  tabPane.innerHTML = videos.map((v, i) => `
+    <div class="col-md-4">
+      <a href="${v.url}" target="_blank" style="text-decoration:none;">
+        <div class="news-card">
+          <div class="news-thumb ${colors[i]}">
+            <i class="bi bi-play-circle-fill" style="font-size:52px;color:rgba(255,255,255,.6);"></i>
+          </div>
+          <div class="news-body">
+            <div class="news-date"><i class="bi bi-youtube me-1 text-danger"></i>YouTube</div>
+            <h6>${v.title}</h6>
+          </div>
+        </div>
+      </a>
+    </div>`).join('');
+}
+
 /* ── VIDEOS ── */
 function renderVideos(videos) {
-  if (!videos.length) return;
   const sec = document.querySelector('.video-section .row');
   if (!sec) return;
   const colors = ['vt-1','vt-2','vt-3'];
+  if (!videos.length) return;
   sec.innerHTML = videos.map((v, i) => `
     <div class="col-md-4">
       <a href="${v.file_path}" target="_blank">
@@ -1444,6 +1488,30 @@ function renderVideos(videos) {
       </a>
       <div class="video-info">
         <div class="video-date">${v.created_at}</div>
+        <div class="video-title">${v.title}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderVideoSettings(s) {
+  const sec = document.querySelector('.video-section .row');
+  if (!sec) return;
+  const videos = [
+    { url: s.video_1_url, title: s.video_1_title },
+    { url: s.video_2_url, title: s.video_2_title },
+    { url: s.video_3_url, title: s.video_3_title },
+  ].filter(v => v.url && v.title);
+  if (!videos.length) return;
+  const colors = ['vt-1','vt-2','vt-3'];
+  sec.innerHTML = videos.map((v, i) => `
+    <div class="col-md-4">
+      <a href="${v.url}" target="_blank">
+        <div class="video-thumb ${colors[i]}">
+          <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+          <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+        </div>
+      </a>
+      <div class="video-info">
         <div class="video-title">${v.title}</div>
       </div>
     </div>`).join('');
