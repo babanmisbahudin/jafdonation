@@ -14,6 +14,10 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    # Redirect /pages/nama.html → /nama (permanen)
+    RewriteCond %{THE_REQUEST} /pages/([^.]+)\.html [NC]
+    RewriteRule ^ /%1 [R=301,L]
+
     # Clean URL: /nama → /pages/nama.html
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
