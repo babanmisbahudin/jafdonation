@@ -22,6 +22,8 @@ class Program extends Model
         'region',
         'status',
         'is_featured',
+        'cta_text',
+        'cta_url',
         'start_date',
         'end_date',
     ];

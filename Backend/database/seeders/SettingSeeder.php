@@ -66,6 +66,14 @@ class SettingSeeder extends Seeder
             ['key' => 'footer_youtube',   'label' => 'YouTube URL',             'type' => 'text',     'group' => 'footer',  'value' => 'https://youtube.com/jatiwangiartfactory'],
             ['key' => 'footer_tiktok',    'label' => 'TikTok URL',              'type' => 'text',     'group' => 'footer',  'value' => 'https://tiktok.com/@jatiwangiartfactory'],
             ['key' => 'homepage_quote',   'label' => 'Kutipan di Bawah Video', 'type' => 'textarea', 'group' => 'footer',  'value' => '"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."'],
+
+            // Video YouTube
+            ['key' => 'video_1_url',   'label' => 'URL YouTube Video 1', 'type' => 'text', 'group' => 'video', 'value' => ''],
+            ['key' => 'video_1_title', 'label' => 'Judul Video 1',       'type' => 'text', 'group' => 'video', 'value' => ''],
+            ['key' => 'video_2_url',   'label' => 'URL YouTube Video 2', 'type' => 'text', 'group' => 'video', 'value' => ''],
+            ['key' => 'video_2_title', 'label' => 'Judul Video 2',       'type' => 'text', 'group' => 'video', 'value' => ''],
+            ['key' => 'video_3_url',   'label' => 'URL YouTube Video 3', 'type' => 'text', 'group' => 'video', 'value' => ''],
+            ['key' => 'video_3_title', 'label' => 'Judul Video 3',       'type' => 'text', 'group' => 'video', 'value' => ''],
         ];
 
         foreach ($settings as $data) {

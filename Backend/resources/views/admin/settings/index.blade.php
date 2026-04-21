@@ -25,6 +25,8 @@
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-campaign">Kampanye</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-donate">Donasi</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-footer">Footer</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-video">Video YouTube</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-program">Program</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-hero">Hero Slider</a></li>
 </ul>
 
@@ -117,6 +119,83 @@
           @endforeach
         </div>
       </div>
+    </div>
+  </div>
+
+  {{-- VIDEO YOUTUBE --}}
+  <div class="tab-pane fade" id="tab-video">
+    <div class="card shadow-sm" style="border:none;border-radius:14px;">
+      <div class="card-body p-4">
+        <p class="text-muted mb-3" style="font-size:.85rem;">Masukkan URL YouTube lengkap, contoh: <code>https://www.youtube.com/watch?v=xxxxx</code></p>
+        <div class="row g-3">
+          @foreach($settings['video'] ?? [] as $key => $setting)
+            <div class="col-md-6">
+              @include('admin.settings._field', ['setting' => $setting])
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- PROGRAM --}}
+  <div class="tab-pane fade" id="tab-program">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="text-muted mb-0" style="font-size:.85rem;">Program yang dicentang <strong>Unggulan</strong> akan tampil di homepage (maks. 4)</p>
+      <a href="{{ route('admin.programs.create') }}" class="btn btn-primary btn-sm d-flex align-items-center gap-2" style="border-radius:8px;">
+        <i class="bi bi-plus-lg"></i> Tambah Program
+      </a>
+    </div>
+    <div class="d-flex flex-column gap-3">
+      @forelse($programs as $program)
+      <div class="card shadow-sm" style="border:none;border-radius:14px;border-left:4px solid {{ $program->is_featured ? '#22c55e' : '#94a3b8' }} !important;">
+        <div class="card-body p-3">
+          <div class="row align-items-center g-3">
+            <div class="col-auto">
+              <div style="width:60px;height:60px;border-radius:8px;background:#f1f5f9;overflow:hidden;flex-shrink:0;">
+                @if($program->thumbnail)
+                  <img src="{{ asset('uploads/'.$program->thumbnail) }}" style="width:100%;height:100%;object-fit:cover;" />
+                @else
+                  <div class="d-flex align-items-center justify-content-center h-100">
+                    <i class="bi bi-image text-muted"></i>
+                  </div>
+                @endif
+              </div>
+            </div>
+            <div class="col">
+              <div class="fw-bold" style="font-size:.9rem;">{{ $program->name }}</div>
+              <div class="text-muted" style="font-size:.75rem;">{{ Str::limit($program->description, 60) }}</div>
+              <div class="mt-1">
+                <span class="badge" style="font-size:.65rem;background:{{ $program->status === 'active' ? '#22c55e' : '#94a3b8' }};">{{ $program->status }}</span>
+                @if($program->is_featured)
+                  <span class="badge bg-warning text-dark ms-1" style="font-size:.65rem;">Unggulan</span>
+                @endif
+              </div>
+            </div>
+            <div class="col-auto text-muted" style="font-size:.75rem;">
+              <div>Tombol: <strong>{{ $program->cta_text ?: 'Dukung' }}</strong></div>
+              <div class="text-truncate" style="max-width:120px;">{{ $program->cta_url ?: 'pages/donasi.html' }}</div>
+            </div>
+            <div class="col-auto d-flex gap-2">
+              <a href="{{ route('admin.programs.edit', $program) }}" class="btn btn-sm btn-outline-primary" style="border-radius:8px;">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <form action="{{ route('admin.programs.destroy', $program) }}" method="POST" onsubmit="return confirm('Hapus program ini?')">
+                @csrf @method('DELETE')
+                <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;"><i class="bi bi-trash"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      @empty
+      <div class="card shadow-sm" style="border:none;border-radius:14px;">
+        <div class="card-body text-center py-5 text-muted">
+          <i class="bi bi-grid fs-1 d-block mb-2 opacity-25"></i>
+          Belum ada program. Klik <strong>Tambah Program</strong> untuk mulai.
+        </div>
+      </div>
+      @endforelse
     </div>
   </div>
 

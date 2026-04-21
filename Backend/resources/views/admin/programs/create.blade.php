@@ -158,6 +158,17 @@
           </label>
         </div>
         <div class="form-text mb-4">Kampanye unggulan ditampilkan paling atas di halaman donasi</div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold" style="font-size:.875rem;">Teks Tombol CTA</label>
+          <input type="text" name="cta_text" class="form-control" value="{{ old('cta_text', 'Dukung') }}" placeholder="Dukung" style="border-radius:8px;" />
+        </div>
+        <div class="mb-4">
+          <label class="form-label fw-semibold" style="font-size:.875rem;">URL Tombol CTA</label>
+          <input type="text" name="cta_url" class="form-control" value="{{ old('cta_url') }}" placeholder="pages/donasi.html" style="border-radius:8px;" />
+          <div class="form-text">Kosongkan untuk default ke halaman donasi</div>
+        </div>
+
         <button type="submit" class="btn btn-primary w-100" style="border-radius:10px;">
           <i class="bi bi-floppy me-2"></i>Simpan & Publikasikan
         </button>

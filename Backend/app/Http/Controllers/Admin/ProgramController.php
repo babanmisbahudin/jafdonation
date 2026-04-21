@@ -47,12 +47,15 @@ class ProgramController extends Controller
             'region'        => 'nullable|string',
             'status'        => 'required|in:active,completed,paused',
             'is_featured'   => 'boolean',
+            'cta_text'      => 'nullable|string|max:50',
+            'cta_url'       => 'nullable|string|max:255',
             'start_date'    => 'nullable|date',
             'end_date'      => 'nullable|date|after_or_equal:start_date',
             'thumbnail'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if (!$hasTarget) $validated['target_amount'] = 0;
+        if (empty($validated['cta_text'])) $validated['cta_text'] = 'Dukung';
         $validated['slug'] = Str::slug($validated['name']);
 
         if ($request->hasFile('thumbnail')) {
@@ -98,12 +101,15 @@ class ProgramController extends Controller
             'region'        => 'nullable|string',
             'status'        => 'required|in:active,completed,paused',
             'is_featured'   => 'boolean',
+            'cta_text'      => 'nullable|string|max:50',
+            'cta_url'       => 'nullable|string|max:255',
             'start_date'    => 'nullable|date',
             'end_date'      => 'nullable|date|after_or_equal:start_date',
             'thumbnail'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         if (!$hasTarget) $validated['target_amount'] = 0;
+        if (empty($validated['cta_text'])) $validated['cta_text'] = 'Dukung';
 
         if ($request->hasFile('thumbnail')) {
             if ($program->thumbnail && file_exists(public_path('uploads/' . $program->thumbnail))) {

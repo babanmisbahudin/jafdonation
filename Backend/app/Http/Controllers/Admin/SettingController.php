@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\HeroSlide;
+use App\Models\Program;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -15,7 +16,8 @@ class SettingController extends Controller
     {
         $settings   = Setting::all()->groupBy('group')->map(fn($g) => $g->keyBy('key'));
         $heroSlides = HeroSlide::orderBy('sort_order')->get();
-        return view('admin.settings.index', compact('settings', 'heroSlides'));
+        $programs   = Program::orderByDesc('is_featured')->orderBy('name')->get();
+        return view('admin.settings.index', compact('settings', 'heroSlides', 'programs'));
     }
 
     public function update(Request $request)
