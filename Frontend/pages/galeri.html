@@ -28,7 +28,7 @@
 <body class="tw-font-sans">
 <nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="../index.html">
+    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
       <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
     </a>
     <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -36,13 +36,13 @@
     </button>
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav mx-auto gap-0">
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="../index.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="berita.html">Berita</a></li>
-        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="galeri.html">Galeri</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="donasi.html">Donasi</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="relawan.html">Relawan</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="benah-kampung.html">Benah Kampung</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/berita">Berita</a></li>
+        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="/galeri">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/donasi">Donasi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/relawan">Relawan</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/benah-kampung">Benah Kampung</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/kontak">Kontak</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2 py-2">
         <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
@@ -60,7 +60,7 @@
     <div class="container">
       <nav aria-label="breadcrumb" class="tw-mb-3">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="/">Beranda</a></li>
           <li class="breadcrumb-item active">Galeri Foto & Video</li>
         </ol>
       </nav>
@@ -280,7 +280,7 @@
   function navSearch(e) {
     e.preventDefault();
     const q = e.target.querySelector('.nav-q').value.trim();
-    if (q) window.location.href = 'berita.html?search=' + encodeURIComponent(q);
+    if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
     return false;
   }
   </script>
