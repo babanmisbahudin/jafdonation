@@ -64,6 +64,17 @@
     .nav-search:hover { background: var(--blue); color: #fff; }
     .nav-toggle { display: none; border: none; background: none; font-size: 24px; color: var(--blue); cursor: pointer; padding: 8px; }
 
+    /* ── LANG SWITCHER ── */
+    .lang-switcher { display: flex; align-items: center; gap: 3px; margin-left: 6px; }
+    .lang-btn {
+      background: none; border: 1.5px solid transparent; border-radius: 5px;
+      padding: 2px 5px; cursor: pointer; line-height: 1; transition: .15s;
+      opacity: .45; display: flex; align-items: center;
+    }
+    .lang-btn img { width: 20px; height: 14px; display: block; border-radius: 2px; }
+    .lang-btn.active { border-color: var(--blue); opacity: 1; }
+    .lang-btn:hover { opacity: 1; }
+
     /* ── HERO ── */
     /* ── HERO SLIDER ── */
     .hero-slider { position: relative; }
@@ -647,21 +658,29 @@
     </a>
 
     <div class="nav-links" id="navLinks">
-      <a href="/berita">Berita</a>
-      <a href="/galeri">Galeri</a>
-      <a href="/donasi">Donasi</a>
-      <a href="/relawan">Relawan</a>
-      <a href="/benah-kampung">Benah Kampung</a>
-      <a href="/kontak">Kontak</a>
+      <a href="/berita" data-i18n="nav.berita">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi">Donasi</a>
+      <a href="/relawan" data-i18n="nav.relawan">Relawan</a>
+      <a href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
     </div>
 
     <div class="nav-actions">
       <form class="d-flex" onsubmit="return homeNavSearch(event)" style="margin:0;">
-        <input type="text" class="home-nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <input type="text" class="home-nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
         <button type="submit" style="background:var(--blue);color:#fff;border:1.5px solid var(--blue);border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
           <i class="bi bi-search" style="font-size:.75rem;"></i>
         </button>
       </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
     </div>
 
     <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
@@ -669,15 +688,23 @@
     </button>
   </div>
   <div class="mobile-nav" id="mobileNav">
-    <a href="/berita"><i class="bi bi-newspaper me-2"></i>Berita</a>
-    <a href="/galeri"><i class="bi bi-images me-2"></i>Galeri</a>
-    <a href="/donasi"><i class="bi bi-heart me-2"></i>Donasi</a>
-    <a href="/relawan"><i class="bi bi-people me-2"></i>Relawan</a>
-    <a href="/benah-kampung"><i class="bi bi-house me-2"></i>Benah Kampung</a>
-    <a href="/kontak"><i class="bi bi-envelope me-2"></i>Kontak</a>
+    <a href="/berita"><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri"><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi"><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/relawan"><i class="bi bi-people me-2"></i><span data-i18n="nav.relawan">Relawan</span></a>
+    <a href="/benah-kampung"><i class="bi bi-house me-2"></i><span data-i18n="nav.benah">Benah Kampung</span></a>
+    <a href="/kontak"><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+    <div style="padding:6px 16px;display:flex;align-items:center;gap:6px;">
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia" style="border:1.5px solid transparent;border-radius:5px;padding:4px 6px;background:none;cursor:pointer;opacity:.5;">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" style="width:20px;height:14px;border-radius:2px;" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English" style="border:1.5px solid transparent;border-radius:5px;padding:4px 6px;background:none;cursor:pointer;opacity:.5;">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" style="width:20px;height:14px;border-radius:2px;" />
+      </button>
+    </div>
     <div style="padding:10px 16px;">
       <form class="d-flex" onsubmit="return homeNavSearch(event)">
-        <input type="text" class="home-nav-q-mob form-control form-control-sm" placeholder="Cari artikel..." style="border-radius:20px 0 0 20px;border:1.5px solid #cbd5e1;border-right:none;" />
+        <input type="text" class="home-nav-q-mob form-control form-control-sm" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border-radius:20px 0 0 20px;border:1.5px solid #cbd5e1;border-right:none;" />
         <button type="submit" class="btn btn-sm" style="background:var(--blue);color:#fff;border-radius:0 20px 20px 0;border:1.5px solid var(--blue);padding:6px 14px;">
           <i class="bi bi-search"></i>
         </button>
@@ -695,9 +722,9 @@
       <div class="container">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
-            <div class="hero-campaign-tag">Tahun Tanah — Triennale Seni &amp; Budaya 2025</div>
-            <div class="hero-title-1">SENI UNTUK</div>
-            <div class="hero-title-2">KEHIDUPAN</div>
+            <div class="hero-campaign-tag" data-i18n="hero.slide1.tag">Tahun Tanah — Triennale Seni &amp; Budaya 2025</div>
+            <div class="hero-title-1" data-i18n="hero.slide1.t1">SENI UNTUK</div>
+            <div class="hero-title-2" data-i18n="hero.slide1.t2">KEHIDUPAN</div>
             <p class="hero-desc">Jatiwangi Art Factory (JAF) adalah komunitas seni berbasis di Jatiwangi, Majalengka, yang berkomitmen mengubah daerah melalui praktik seni kontemporer berbasis bumi.</p>
             <p class="hero-quote">"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."</p>
             <p class="hero-author">— Jatiwangi Art Factory</p>
@@ -712,7 +739,7 @@
                 <span class="pay-logo-item">Bank BJB</span>
                 <span class="pay-logo-item">SWIFT: PDJBIDJA</span>
               </div>
-              <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i>Donasi Sekarang</a>
+              <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i><span data-i18n="hero.donate">Donasi Sekarang</span></a>
             </div>
           </div>
         </div>
@@ -738,9 +765,9 @@
       <div class="container">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
-            <div class="hero-campaign-tag" style="background:#fff;color:var(--green);">Rampak Genteng — Ritual Musik Komunal</div>
-            <div class="hero-title-1">TANAH UNTUK</div>
-            <div class="hero-title-2">SEMUA ORANG</div>
+            <div class="hero-campaign-tag" style="background:#fff;color:var(--green);" data-i18n="hero.slide2.tag">Rampak Genteng — Ritual Musik Komunal</div>
+            <div class="hero-title-1" data-i18n="hero.slide2.t1">TANAH UNTUK</div>
+            <div class="hero-title-2" data-i18n="hero.slide2.t2">SEMUA ORANG</div>
             <p class="hero-desc">Rampak Genteng adalah ritual kolektif memainkan genteng atap sebagai instrumen musik, merayakan warisan budaya tanah liat Jatiwangi bersama warga.</p>
             <p class="hero-quote">"Tanah adalah ingatan, dan seni adalah cara kita berbicara dengannya."</p>
             <p class="hero-author">— Komunitas JAF</p>
@@ -778,9 +805,9 @@
       <div class="container">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
-            <div class="hero-campaign-tag" style="background:#FFD700;color:#333;">Terracotta Triennale — Pameran Seni Dunia</div>
-            <div class="hero-title-1">BERKARYA DARI</div>
-            <div class="hero-title-2">BUMI KITA</div>
+            <div class="hero-campaign-tag" style="background:#FFD700;color:#333;" data-i18n="hero.slide3.tag">Terracotta Triennale — Pameran Seni Dunia</div>
+            <div class="hero-title-1" data-i18n="hero.slide3.t1">BERKARYA DARI</div>
+            <div class="hero-title-2" data-i18n="hero.slide3.t2">BUMI KITA</div>
             <p class="hero-desc">Terracotta Triennale menghadirkan seniman lokal dan internasional yang berkolaborasi mengeksplorasi material tanah liat sebagai medium seni kontemporer.</p>
             <p class="hero-quote">"Dari tanah kita lahir, dari tanah kita berkarya, untuk tanah kita kembali."</p>
             <p class="hero-author">— Jatiwangi Art Factory, sejak 2005</p>
@@ -818,9 +845,9 @@
       <div class="container">
         <div class="row align-items-center g-4">
           <div class="col-lg-7">
-            <div class="hero-campaign-tag">Magister Reka Budaya — Program Akademik</div>
-            <div class="hero-title-1">BANGUN</div>
-            <div class="hero-title-2">BUDAYA LOKAL</div>
+            <div class="hero-campaign-tag" data-i18n="hero.slide4.tag">Magister Reka Budaya — Program Akademik</div>
+            <div class="hero-title-1" data-i18n="hero.slide4.t1">BANGUN</div>
+            <div class="hero-title-2" data-i18n="hero.slide4.t2">BUDAYA LOKAL</div>
             <p class="hero-desc">Program Magister Reka Budaya bersama Universitas Padjadjaran mengajak generasi muda merencanakan dan membangun ekosistem budaya daerah yang berkelanjutan.</p>
             <p class="hero-quote">"Komunitas yang kuat tumbuh dari akar budayanya sendiri."</p>
             <p class="hero-author">— Program Reka Budaya, JAF</p>
@@ -866,7 +893,7 @@
 <!-- ===== BERSAMA KITA (ABOUT) ===== -->
 <section class="about-section">
   <div class="container">
-    <h2 class="about-title">Bersama Kita Bangun Ekosistem Seni &amp; Budaya</h2>
+    <h2 class="about-title" data-i18n="about.title">Bersama Kita Bangun Ekosistem Seni &amp; Budaya</h2>
     <p class="about-desc">
       Sejak 2005, <strong>Jatiwangi Art Factory (JAF)</strong> hadir sebagai ruang komunitas seni
       di Jatiwangi, Majalengka, Jawa Barat — merayakan tradisi lokal, mengeksplorasi material tanah,
@@ -938,7 +965,7 @@
 <!-- ===== BANTUAN AMAL ===== -->
 <section class="bantuan-section">
   <div class="container">
-    <h2 class="sec-title">Program JAF</h2>
+    <h2 class="sec-title" data-i18n="programs.title">Program JAF</h2>
     <div class="sec-divider"></div>
     <div class="row g-4 justify-content-center">
 
@@ -1030,20 +1057,20 @@
 <!-- ===== BERITA & KISAH ===== -->
 <section class="news-section">
   <div class="container">
-    <h2 class="news-section-title">Berita dan Kisah Inspiratif</h2>
+    <h2 class="news-section-title" data-i18n="news.title">Berita dan Kisah Inspiratif</h2>
     <div class="sec-divider" style="margin:6px 0 0;"></div>
 
     <div class="news-tabs-wrap mt-3">
       <ul class="nav" id="newsTabs">
-        <li class="nav-item"><a class="nav-link active" href="#tab-berita" data-bs-toggle="tab">Berita</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-foto" data-bs-toggle="tab">Berita Foto</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-video" data-bs-toggle="tab">Video</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-pub" data-bs-toggle="tab">Publikasi</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-buletin" data-bs-toggle="tab">Buletin</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-relawan" data-bs-toggle="tab">Profil Relawan</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-humanis" data-bs-toggle="tab">Kisah Humanis</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-sehat" data-bs-toggle="tab">Info Sehat</a></li>
-        <li class="nav-item"><a class="nav-link" href="#tab-resep" data-bs-toggle="tab">Resep Vegetarian</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#tab-berita" data-bs-toggle="tab" data-i18n="tab.berita">Berita</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-foto" data-bs-toggle="tab" data-i18n="tab.foto">Berita Foto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-video" data-bs-toggle="tab" data-i18n="tab.video">Video</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-pub" data-bs-toggle="tab" data-i18n="tab.pub">Publikasi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-buletin" data-bs-toggle="tab" data-i18n="tab.buletin">Buletin</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-relawan" data-bs-toggle="tab" data-i18n="tab.relawan_profile">Profil Relawan</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-humanis" data-bs-toggle="tab" data-i18n="tab.humanis">Kisah Humanis</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-sehat" data-bs-toggle="tab" data-i18n="tab.sehat">Info Sehat</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-resep" data-bs-toggle="tab" data-i18n="tab.resep">Resep Vegetarian</a></li>
       </ul>
     </div>
 
@@ -1113,7 +1140,7 @@
 <!-- ===== VIDEO ===== -->
 <section class="video-section">
   <div class="container">
-    <h2 class="sec-title">Video</h2>
+    <h2 class="sec-title" data-i18n="video.title">Video</h2>
     <div class="sec-divider"></div>
     <div class="row g-3">
 
@@ -1121,7 +1148,7 @@
         <a href="/galeri">
           <div class="video-thumb vt-1">
             <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
-            <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
           </div>
         </a>
         <div class="video-info">
@@ -1134,7 +1161,7 @@
         <a href="/galeri">
           <div class="video-thumb vt-2">
             <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
-            <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
           </div>
         </a>
         <div class="video-info">
@@ -1147,7 +1174,7 @@
         <a href="/galeri">
           <div class="video-thumb vt-3">
             <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
-            <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
           </div>
         </a>
         <div class="video-info">
@@ -1158,7 +1185,7 @@
 
     </div>
     <div class="text-end mt-3">
-      <a href="/galeri" class="news-more">Video Lainnya <i class="bi bi-chevron-right"></i></a>
+      <a href="/galeri" class="news-more"><span data-i18n="video.more">Video Lainnya</span> <i class="bi bi-chevron-right"></i></a>
     </div>
   </div>
 </section>
@@ -1167,8 +1194,7 @@
 <div class="quote-section">
   <div class="container">
     <blockquote>
-      "Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat,
-      dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."
+      <span data-i18n="quote.text">"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."</span>
       <br><small style="font-style:normal;color:#888;font-size:12px;">— Jatiwangi Art Factory</small>
     </blockquote>
   </div>
@@ -1191,6 +1217,7 @@
 </button>
 
 <script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 
@@ -1341,7 +1368,7 @@ function renderSettings(s) {
       <div class="amount">${s.donate_bank_name || 'Bank BJB'} — ${s.donate_account_number || ''}</div>
       <div class="amount-sub">a.n. ${s.donate_account_name || ''}</div>
       <div class="pay-logos"><span class="pay-logo-item">${s.donate_bank_name || 'Bank BJB'}</span>${s.donate_swift ? `<span class="pay-logo-item">SWIFT: ${s.donate_swift}</span>` : ''}</div>
-      <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i>Donasi Sekarang</a>
+      <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i><span data-i18n="hero.donate">Donasi Sekarang</span></a>
     </div>`;
   }
 
@@ -1467,7 +1494,7 @@ function renderVideos(videos) {
       <a href="${v.file_path}" target="_blank">
         <div class="video-thumb ${colors[i]}">
           <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
-          <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+          <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
         </div>
       </a>
       <div class="video-info">
@@ -1492,7 +1519,7 @@ function renderVideoSettings(s) {
       <a href="${v.url}" target="_blank">
         <div class="video-thumb ${colors[i]}">
           <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
-          <span class="yt-label"><i class="bi bi-youtube me-1"></i>Tonton di YouTube</span>
+          <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
         </div>
       </a>
       <div class="video-info">
@@ -1531,6 +1558,7 @@ window.addEventListener('scroll', () => {
 
 /* ── INIT ── */
 loadHomepage();
+initLang();
 </script>
 </body>
 </html>

@@ -26,13 +26,13 @@
     </button>
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav mx-auto gap-0">
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/berita">Berita</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/galeri">Galeri</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/donasi">Donasi</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/relawan">Relawan</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/benah-kampung">Benah Kampung</a></li>
-        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="/kontak">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/" data-i18n="nav.home">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/berita" data-i18n="nav.berita">Berita</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/galeri" data-i18n="nav.galeri">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/donasi" data-i18n="nav.donasi">Donasi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/relawan" data-i18n="nav.relawan">Relawan</a></li>
+        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a></li>
+        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="/kontak" data-i18n="nav.kontak">Kontak</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2 py-2">
 
@@ -42,6 +42,14 @@
             <i class="bi bi-search" style="font-size:.75rem;"></i>
           </button>
         </form>
+      <div class="d-flex align-items-center gap-2 ms-2">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia" style="background:none;border:1.5px solid transparent;border-radius:5px;padding:2px 5px;cursor:pointer;opacity:.5;display:flex;align-items:center;">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" style="width:20px;height:14px;border-radius:2px;" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English" style="background:none;border:1.5px solid transparent;border-radius:5px;padding:2px 5px;cursor:pointer;opacity:.5;display:flex;align-items:center;">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" style="width:20px;height:14px;border-radius:2px;" />
+        </button>
+      </div>
       </div>
     </div>
   </div>
@@ -51,7 +59,7 @@
     <div class="container">
       <nav aria-label="breadcrumb" class="tw-mb-3">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Beranda</a></li>
+          <li class="breadcrumb-item"><a href="/" data-i18n="nav.home">Beranda</a></li>
           <li class="breadcrumb-item active">Hubungi Kami</li>
         </ol>
       </nav>
@@ -195,6 +203,7 @@
     </div>
   </div>
 </footer>
+  <script src="../assets/js/i18n.js"></script>
   <script src="../assets/js/config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -261,6 +270,7 @@
     if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
     return false;
   }
-  </script>
+  initLang();
+</script>
 </body>
 </html>
