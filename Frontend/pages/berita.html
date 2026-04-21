@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berita & Kegiatan - Tzu Chi Indonesia</title>
+  <title>Berita & Kegiatan - Jaf Donation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -34,7 +34,6 @@
         <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2 py-2">
-
         <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
           <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
           <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
@@ -66,71 +65,47 @@
         <div class="flex-grow-1">
           <div class="input-group">
             <span class="input-group-text tw-bg-white tw-border-gray-200"><i class="bi bi-search tw-text-gray-400"></i></span>
-            <input type="text" class="form-control tw-border-gray-200" placeholder="Cari berita..." />
+            <input type="text" id="searchInput" class="form-control tw-border-gray-200" placeholder="Cari berita..." />
           </div>
         </div>
-        <select class="form-select tw-w-auto tw-border-gray-200">
-          <option>Semua Kategori</option>
-          <option>Amal</option>
-          <option>Kesehatan</option>
-          <option>Pendidikan</option>
-          <option>Budaya Humanis</option>
-          <option>Lingkungan</option>
+        <select id="categoryFilter" class="form-select tw-w-auto tw-border-gray-200">
+          <option value="">Semua Kategori</option>
+          <option value="amal">Amal</option>
+          <option value="kesehatan">Kesehatan</option>
+          <option value="pendidikan">Pendidikan</option>
+          <option value="budaya-humanis">Budaya Humanis</option>
+          <option value="lingkungan">Lingkungan</option>
         </select>
-        <select class="form-select tw-w-auto tw-border-gray-200">
-          <option>Semua Wilayah</option>
-          <option>Jakarta</option>
-          <option>Jawa-Bali</option>
-          <option>Sumatera</option>
-          <option>Kalimantan</option>
-          <option>Sulawesi</option>
-          <option>Papua</option>
-          <option>Internasional</option>
+        <select id="regionFilter" class="form-select tw-w-auto tw-border-gray-200">
+          <option value="">Semua Wilayah</option>
+          <option value="jakarta">Jakarta</option>
+          <option value="jawa-bali">Jawa-Bali</option>
+          <option value="sumatera">Sumatera</option>
+          <option value="kalimantan">Kalimantan</option>
+          <option value="sulawesi">Sulawesi</option>
+          <option value="papua">Papua</option>
+          <option value="internasional">Internasional</option>
         </select>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="text-center tw-py-16">
+        <div class="spinner-border tw-text-primary" role="status"></div>
+        <p class="tw-text-gray-400 tw-mt-3">Memuat berita...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center tw-py-16 d-none">
+        <i class="bi bi-newspaper tw-text-gray-300 tw-text-6xl d-block tw-mb-4"></i>
+        <p class="tw-text-gray-400 tw-text-lg">Belum ada berita yang tersedia.</p>
       </div>
 
       <!-- News Grid -->
-      <div class="row g-4">
-        <!-- Featured -->
-        <div class="col-12">
-          <article class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all d-md-flex tw-border tw-border-gray-100">
-            <div class="tw-bg-primary/20 tw-h-64 tw-min-w-sm d-flex align-items-center justify-content-center tw-flex-shrink-0 tw-w-80">
-              <i class="bi bi-house-fill tw-text-primary tw-text-7xl"></i>
-            </div>
-            <div class="tw-p-6 d-flex flex-column justify-content-center">
-              <div class="d-flex gap-2 tw-mb-3">
-                <span class="tw-bg-red-100 tw-text-red-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">FEATURED</span>
-                <span class="tw-bg-primary/10 tw-text-primary tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">Amal</span>
-              </div>
-              <h3 class="tw-text-primary tw-font-bold tw-text-2xl tw-mb-3 tw-font-serif">Program Benah Kampung 2025: 1.000 Rumah untuk 1.000 Keluarga</h3>
-              <p class="tw-text-gray-500 tw-leading-relaxed tw-mb-4">Program unggulan Tzu Chi Indonesia tahun ini menargetkan perbaikan 1.000 unit rumah tidak layak huni di seluruh Indonesia, menjangkau keluarga prasejahtera dari Sabang sampai Merauke...</p>
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="tw-text-gray-400 tw-text-sm"><i class="bi bi-calendar3 me-1"></i>18 April 2025</span>
-                <a href="artikel.html" class="btn tw-bg-primary tw-text-white tw-text-sm tw-px-5 tw-py-2 tw-rounded-full">Baca Selengkapnya</a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <!-- Cards -->
-        <div class="col-lg-4 col-md-6"><article class="news-card tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-xl tw-transition-all tw-border tw-border-gray-100 tw-h-full"><div class="tw-bg-green-50 tw-h-48 d-flex align-items-center justify-content-center"><i class="bi bi-hospital-fill tw-text-green-500 tw-text-5xl"></i></div><div class="tw-p-5"><div class="d-flex gap-2 tw-mb-3"><span class="tw-bg-green-100 tw-text-green-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">Kesehatan</span><span class="tw-text-gray-400 tw-text-xs">Jakarta</span></div><h5 class="tw-text-primary tw-font-bold tw-mb-2">Donor Darah Massal: 800 Kantong Darah Terkumpul</h5><p class="tw-text-gray-500 tw-text-sm tw-mb-4">Kegiatan donor darah di Tzu Chi Center berhasil mengumpulkan 800 kantong darah untuk PMI...</p><div class="d-flex justify-content-between"><span class="tw-text-gray-400 tw-text-xs"><i class="bi bi-calendar3 me-1"></i>16 April 2025</span><a href="artikel.html" class="tw-text-secondary tw-text-xs tw-font-semibold">Baca →</a></div></div></article></div>
-
-        <div class="col-lg-4 col-md-6"><article class="news-card tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-xl tw-transition-all tw-border tw-border-gray-100 tw-h-full"><div class="tw-bg-blue-50 tw-h-48 d-flex align-items-center justify-content-center"><i class="bi bi-mortarboard-fill tw-text-blue-500 tw-text-5xl"></i></div><div class="tw-p-5"><div class="d-flex gap-2 tw-mb-3"><span class="tw-bg-blue-100 tw-text-blue-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">Pendidikan</span><span class="tw-text-gray-400 tw-text-xs">Jawa-Bali</span></div><h5 class="tw-text-primary tw-font-bold tw-mb-2">Pembukaan Sekolah Tzu Chi Surabaya Angkatan Baru</h5><p class="tw-text-gray-500 tw-text-sm tw-mb-4">Sekolah Tzu Chi Surabaya menerima 300 siswa baru untuk tahun ajaran 2025/2026...</p><div class="d-flex justify-content-between"><span class="tw-text-gray-400 tw-text-xs"><i class="bi bi-calendar3 me-1"></i>14 April 2025</span><a href="artikel.html" class="tw-text-secondary tw-text-xs tw-font-semibold">Baca →</a></div></div></article></div>
-
-        <div class="col-lg-4 col-md-6"><article class="news-card tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-xl tw-transition-all tw-border tw-border-gray-100 tw-h-full"><div class="tw-bg-emerald-50 tw-h-48 d-flex align-items-center justify-content-center"><i class="bi bi-tree-fill tw-text-emerald-500 tw-text-5xl"></i></div><div class="tw-p-5"><div class="d-flex gap-2 tw-mb-3"><span class="tw-bg-emerald-100 tw-text-emerald-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">Lingkungan</span><span class="tw-text-gray-400 tw-text-xs">Sumatera</span></div><h5 class="tw-text-primary tw-font-bold tw-mb-2">Tanam 10.000 Pohon Mangrove di Pesisir Palembang</h5><p class="tw-text-gray-500 tw-text-sm tw-mb-4">Relawan Tzu Chi bersama warga menanam ribuan bibit mangrove untuk mencegah abrasi pantai...</p><div class="d-flex justify-content-between"><span class="tw-text-gray-400 tw-text-xs"><i class="bi bi-calendar3 me-1"></i>11 April 2025</span><a href="artikel.html" class="tw-text-secondary tw-text-xs tw-font-semibold">Baca →</a></div></div></article></div>
-      </div>
+      <div id="newsGrid" class="row g-4 d-none"></div>
 
       <!-- Pagination -->
-      <nav class="d-flex justify-content-center tw-mt-10">
-        <ul class="pagination">
-          <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
-          <li class="page-item active"><a class="page-link tw-bg-primary tw-border-primary" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">4</a></li>
-          <li class="page-item"><a class="page-link" href="#">5</a></li>
-          <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-        </ul>
+      <nav id="paginationWrapper" class="d-flex justify-content-center tw-mt-10 d-none">
+        <ul id="pagination" class="pagination"></ul>
       </nav>
     </div>
   </section>
@@ -142,27 +117,193 @@
       <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Jaf Donation. Hak cipta dilindungi.</p>
     </div>
   </footer>
-  <script src="../assets/js/config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-  // Load social links from API settings
-  (async()=>{
-    try{
-      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
-      const map={
-        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
-        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
-      };
-      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
-    }catch(e){}
-  })();
-  </script>
 
+  <script src="../assets/js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+  let currentPage = 1;
+  let debounceTimer;
+
+  const newsGrid = document.getElementById('newsGrid');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const paginationWrapper = document.getElementById('paginationWrapper');
+  const paginationEl = document.getElementById('pagination');
+
+  function getCategoryBadge(category) {
+    const colors = {
+      'amal': 'tw-bg-red-100 tw-text-red-600',
+      'kesehatan': 'tw-bg-green-100 tw-text-green-600',
+      'pendidikan': 'tw-bg-blue-100 tw-text-blue-600',
+      'lingkungan': 'tw-bg-emerald-100 tw-text-emerald-600',
+      'budaya-humanis': 'tw-bg-purple-100 tw-text-purple-600',
+    };
+    const slug = category?.slug || '';
+    const cls = colors[slug] || 'tw-bg-primary/10 tw-text-primary';
+    return `<span class="${cls} tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">${category?.name || 'Umum'}</span>`;
+  }
+
+  function getThumbnailHtml(article, featured = false) {
+    const h = featured ? 'tw-h-64' : 'tw-h-48';
+    if (article.thumbnail_url) {
+      return `<img src="${article.thumbnail_url}" alt="${article.title}" class="${h} tw-w-full tw-object-cover" />`;
+    }
+    const icons = { 'amal':'bi-house-fill tw-text-primary', 'kesehatan':'bi-hospital-fill tw-text-green-500',
+      'pendidikan':'bi-mortarboard-fill tw-text-blue-500', 'lingkungan':'bi-tree-fill tw-text-emerald-500',
+      'budaya-humanis':'bi-flower1 tw-text-purple-500' };
+    const slug = article.category?.slug || '';
+    const icon = icons[slug] || 'bi-newspaper tw-text-primary';
+    const bgs = { 'amal':'tw-bg-accent', 'kesehatan':'tw-bg-green-50', 'pendidikan':'tw-bg-blue-50',
+      'lingkungan':'tw-bg-emerald-50', 'budaya-humanis':'tw-bg-purple-50' };
+    const bg = bgs[slug] || 'tw-bg-primary/10';
+    return `<div class="${bg} ${h} d-flex align-items-center justify-content-center"><i class="bi ${icon} tw-text-5xl"></i></div>`;
+  }
+
+  function renderArticles(articles) {
+    if (!articles.length) {
+      newsGrid.classList.add('d-none');
+      emptyState.classList.remove('d-none');
+      return;
+    }
+    emptyState.classList.add('d-none');
+    newsGrid.classList.remove('d-none');
+
+    const [featured, ...rest] = articles;
+
+    let html = '';
+
+    // Featured article (first one)
+    html += `
+      <div class="col-12">
+        <article class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all d-md-flex tw-border tw-border-gray-100">
+          <div class="tw-flex-shrink-0" style="width:320px;min-height:256px;">
+            ${getThumbnailHtml(featured, true)}
+          </div>
+          <div class="tw-p-6 d-flex flex-column justify-content-center">
+            <div class="d-flex gap-2 tw-mb-3">
+              <span class="tw-bg-red-100 tw-text-red-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">TERBARU</span>
+              ${getCategoryBadge(featured.category)}
+            </div>
+            <h3 class="tw-text-primary tw-font-bold tw-text-2xl tw-mb-3 tw-font-serif">${featured.title}</h3>
+            <p class="tw-text-gray-500 tw-leading-relaxed tw-mb-4">${featured.excerpt || ''}</p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="tw-text-gray-400 tw-text-sm"><i class="bi bi-calendar3 me-1"></i>${featured.published_at || ''}</span>
+              <a href="artikel.html?slug=${featured.slug}" class="btn tw-bg-primary tw-text-white tw-text-sm tw-px-5 tw-py-2 tw-rounded-full">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </article>
+      </div>`;
+
+    // Remaining articles as cards
+    rest.forEach(article => {
+      html += `
+        <div class="col-lg-4 col-md-6">
+          <article class="news-card tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-xl tw-transition-all tw-border tw-border-gray-100 tw-h-full">
+            ${getThumbnailHtml(article)}
+            <div class="tw-p-5">
+              <div class="d-flex gap-2 tw-mb-3">
+                ${getCategoryBadge(article.category)}
+                ${article.region_label ? `<span class="tw-text-gray-400 tw-text-xs">${article.region_label}</span>` : ''}
+              </div>
+              <h5 class="tw-text-primary tw-font-bold tw-mb-2">${article.title}</h5>
+              <p class="tw-text-gray-500 tw-text-sm tw-mb-4">${article.excerpt || ''}</p>
+              <div class="d-flex justify-content-between">
+                <span class="tw-text-gray-400 tw-text-xs"><i class="bi bi-calendar3 me-1"></i>${article.published_at || ''}</span>
+                <a href="artikel.html?slug=${article.slug}" class="tw-text-secondary tw-text-xs tw-font-semibold">Baca →</a>
+              </div>
+            </div>
+          </article>
+        </div>`;
+    });
+
+    newsGrid.innerHTML = html;
+  }
+
+  function renderPagination(meta) {
+    if (meta.last_page <= 1) {
+      paginationWrapper.classList.add('d-none');
+      return;
+    }
+    paginationWrapper.classList.remove('d-none');
+
+    let html = `<li class="page-item ${meta.current_page === 1 ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page - 1}">&laquo;</a></li>`;
+
+    for (let i = 1; i <= meta.last_page; i++) {
+      html += `<li class="page-item ${i === meta.current_page ? 'active' : ''}">
+        <a class="page-link ${i === meta.current_page ? 'tw-bg-primary tw-border-primary' : ''}" href="#" data-page="${i}">${i}</a></li>`;
+    }
+
+    html += `<li class="page-item ${meta.current_page === meta.last_page ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page + 1}">&raquo;</a></li>`;
+
+    paginationEl.innerHTML = html;
+
+    paginationEl.querySelectorAll('a[data-page]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const p = parseInt(a.dataset.page);
+        if (p >= 1 && p <= meta.last_page) {
+          currentPage = p;
+          loadArticles();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  async function loadArticles() {
+    loadingState.classList.remove('d-none');
+    newsGrid.classList.add('d-none');
+    emptyState.classList.add('d-none');
+    paginationWrapper.classList.add('d-none');
+
+    const search = document.getElementById('searchInput').value.trim();
+    const category = document.getElementById('categoryFilter').value;
+    const region = document.getElementById('regionFilter').value;
+
+    const params = new URLSearchParams({ page: currentPage });
+    if (search) params.set('search', search);
+    if (category) params.set('category', category);
+    if (region) params.set('region', region);
+
+    try {
+      const res = await fetch(`${window.API_BASE}/articles?${params}`);
+      const json = await res.json();
+      loadingState.classList.add('d-none');
+      renderArticles(json.data || []);
+      renderPagination(json.meta || { current_page: 1, last_page: 1, total: 0 });
+    } catch (e) {
+      loadingState.classList.add('d-none');
+      emptyState.classList.remove('d-none');
+    }
+  }
+
+  // Filter listeners with debounce for search
+  document.getElementById('searchInput').addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => { currentPage = 1; loadArticles(); }, 400);
+  });
+  document.getElementById('categoryFilter').addEventListener('change', () => { currentPage = 1; loadArticles(); });
+  document.getElementById('regionFilter').addEventListener('change', () => { currentPage = 1; loadArticles(); });
+
+  // Handle ?search= from nav search bar
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('search');
+    if (q) document.getElementById('searchInput').value = q;
+  })();
+
+  loadArticles();
+
   function navSearch(e) {
     e.preventDefault();
     const q = e.target.querySelector('.nav-q').value.trim();
-    if (q) window.location.href = 'berita.html?search=' + encodeURIComponent(q);
+    if (q) {
+      document.getElementById('searchInput').value = q;
+      currentPage = 1;
+      loadArticles();
+    }
     return false;
   }
   </script>

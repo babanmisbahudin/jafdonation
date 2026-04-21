@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ArticleApiController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\CommentApiController;
 use App\Http\Controllers\Api\DonationApiController;
+use App\Http\Controllers\Api\GalleryApiController;
 use App\Http\Controllers\Api\HomepageController;
 use App\Http\Controllers\Api\VolunteerApiController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/config', [CampaignController::class, 'config']);
     Route::get('/campaigns', [CampaignController::class, 'index']);
     Route::get('/campaigns/{program:slug}', [CampaignController::class, 'show']);
+
+    // Gallery (public)
+    Route::get('/gallery', [GalleryApiController::class, 'index']);
 
     // Articles (public)
     Route::get('/articles', [ArticleApiController::class, 'index']);

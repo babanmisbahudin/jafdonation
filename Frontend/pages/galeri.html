@@ -13,6 +13,16 @@
       theme: { extend: { colors: { primary: '#1A5276', secondary: '#2980B9', accent: '#E8F4FD', gold: '#C8A44A' } } } }
   </script>
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      z-index: 9999; align-items: center; justify-content: center;
+    }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-overlay img { max-width: 90vw; max-height: 85vh; border-radius: 12px; object-fit: contain; }
+    .lightbox-overlay .lb-caption { color: #fff; text-align: center; margin-top: 12px; font-size: .9rem; }
+    .lightbox-overlay .lb-close { position: absolute; top: 20px; right: 24px; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
+  </style>
 </head>
 <body class="tw-font-sans">
 <nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
@@ -34,7 +44,6 @@
         <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="kontak.html">Kontak</a></li>
       </ul>
       <div class="d-flex align-items-center gap-2 py-2">
-
         <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
           <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
           <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
@@ -62,35 +71,45 @@
   <section class="tw-py-12 tw-bg-gray-50">
     <div class="container">
       <!-- Tabs -->
-      <ul class="nav nav-pills tw-mb-8 justify-content-center gap-2">
-        <li class="nav-item"><button class="nav-link active tw-rounded-full tw-px-6" data-bs-toggle="pill" data-bs-target="#foto">Foto</button></li>
-        <li class="nav-item"><button class="nav-link tw-rounded-full tw-px-6" data-bs-toggle="pill" data-bs-target="#video">Video</button></li>
+      <ul class="nav nav-pills tw-mb-8 justify-content-center gap-2" id="galleryTabs">
+        <li class="nav-item">
+          <button class="nav-link active tw-rounded-full tw-px-6" id="tabFoto" data-type="image">Foto</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link tw-rounded-full tw-px-6" id="tabVideo" data-type="video">Video</button>
+        </li>
       </ul>
 
-      <div class="tab-content">
-        <!-- Foto Grid -->
-        <div class="tab-pane fade show active" id="foto">
-          <div class="row g-3">
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-accent tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-house-fill tw-text-primary tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-primary/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Benah Rumah Jakarta</p></div>
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-green-50 tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-hospital-fill tw-text-green-500 tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-green-700/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Baksos Kesehatan Sumatera</p></div>
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-blue-50 tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-mortarboard-fill tw-text-blue-500 tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-blue-700/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Wisuda Sekolah Tzu Chi 2025</p></div>
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-emerald-50 tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-tree-fill tw-text-emerald-500 tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-emerald-700/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Daur Ulang Kalimantan</p></div>
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-purple-50 tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-flower1 tw-text-purple-500 tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-purple-700/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Isyarat Tangan Makassar</p></div>
-            <div class="col-lg-4 col-md-6 col-6"><div class="tw-bg-red-50 tw-rounded-2xl tw-h-56 d-flex align-items-center justify-content-center tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-overflow-hidden group"><i class="bi bi-people-fill tw-text-red-500 tw-text-5xl"></i><div class="tw-absolute tw-inset-0 tw-bg-red-700/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center"><i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i></div></div><p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">Relawan Tzu Chi Papua</p></div>
-          </div>
-        </div>
-
-        <!-- Video Grid -->
-        <div class="tab-pane fade" id="video">
-          <div class="row g-4">
-            <div class="col-lg-4 col-md-6"><div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all"><div class="tw-bg-primary/20 tw-h-48 d-flex align-items-center justify-content-center tw-relative tw-cursor-pointer"><div class="tw-w-14 tw-h-14 tw-bg-primary tw-rounded-full d-flex align-items-center justify-content-center hover:tw-scale-110 tw-transition-transform"><i class="bi bi-play-fill tw-text-white tw-text-2xl ms-1"></i></div><span class="tw-absolute tw-bottom-2 tw-right-2 tw-bg-black/60 tw-text-white tw-text-xs tw-px-2 tw-py-1 tw-rounded">5:32</span></div><div class="tw-p-4"><span class="tw-text-secondary tw-text-xs tw-font-semibold">Dokumenter</span><h6 class="tw-text-primary tw-font-bold tw-mt-1">Kisah Nyata: Rumah Baru, Harapan Baru</h6></div></div></div>
-            <div class="col-lg-4 col-md-6"><div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all"><div class="tw-bg-green-100 tw-h-48 d-flex align-items-center justify-content-center tw-relative tw-cursor-pointer"><div class="tw-w-14 tw-h-14 tw-bg-green-600 tw-rounded-full d-flex align-items-center justify-content-center hover:tw-scale-110 tw-transition-transform"><i class="bi bi-play-fill tw-text-white tw-text-2xl ms-1"></i></div><span class="tw-absolute tw-bottom-2 tw-right-2 tw-bg-black/60 tw-text-white tw-text-xs tw-px-2 tw-py-1 tw-rounded">3:15</span></div><div class="tw-p-4"><span class="tw-text-green-600 tw-text-xs tw-font-semibold">Kesehatan</span><h6 class="tw-text-primary tw-font-bold tw-mt-1">Baksos Kesehatan Pelosok Kalimantan</h6></div></div></div>
-            <div class="col-lg-4 col-md-6"><div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all"><div class="tw-bg-blue-100 tw-h-48 d-flex align-items-center justify-content-center tw-relative tw-cursor-pointer"><div class="tw-w-14 tw-h-14 tw-bg-blue-600 tw-rounded-full d-flex align-items-center justify-content-center hover:tw-scale-110 tw-transition-transform"><i class="bi bi-play-fill tw-text-white tw-text-2xl ms-1"></i></div><span class="tw-absolute tw-bottom-2 tw-right-2 tw-bg-black/60 tw-text-white tw-text-xs tw-px-2 tw-py-1 tw-rounded">7:48</span></div><div class="tw-p-4"><span class="tw-text-blue-600 tw-text-xs tw-font-semibold">Pendidikan</span><h6 class="tw-text-primary tw-font-bold tw-mt-1">Upacara Wisuda Sekolah 2025</h6></div></div></div>
-          </div>
-        </div>
+      <!-- Loading State -->
+      <div id="loadingState" class="text-center tw-py-16">
+        <div class="spinner-border tw-text-primary" role="status"></div>
+        <p class="tw-text-gray-400 tw-mt-3">Memuat galeri...</p>
       </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center tw-py-16 d-none">
+        <i class="bi bi-images tw-text-gray-300 tw-text-6xl d-block tw-mb-4"></i>
+        <p class="tw-text-gray-400 tw-text-lg">Belum ada item galeri yang tersedia.</p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div id="galleryGrid" class="row g-3 d-none"></div>
+
+      <!-- Pagination -->
+      <nav id="paginationWrapper" class="d-flex justify-content-center tw-mt-10 d-none">
+        <ul id="pagination" class="pagination"></ul>
+      </nav>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox">
+    <span class="lb-close" id="lbClose">&times;</span>
+    <div class="text-center">
+      <img id="lbImg" src="" alt="" />
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+  </div>
 
   <footer class="tw-bg-gray-900 tw-text-white tw-py-10">
     <div class="container text-center">
@@ -99,24 +118,164 @@
       <p class="tw-text-gray-400 tw-text-sm">&copy; 2025 Jaf Donation. Hak cipta dilindungi.</p>
     </div>
   </footer>
+
   <script src="../assets/js/config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  // Load social links from API settings
-  (async()=>{
-    try{
-      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
-      const map={
-        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
-        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
-      };
-      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
-    }catch(e){}
-  })();
-  </script>
+  let currentType = 'image';
+  let currentPage = 1;
 
-  <script>
+  const galleryGrid = document.getElementById('galleryGrid');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const paginationWrapper = document.getElementById('paginationWrapper');
+  const paginationEl = document.getElementById('pagination');
+  const lightbox = document.getElementById('lightbox');
+
+  // Tab switching
+  document.getElementById('galleryTabs').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-type]');
+    if (!btn) return;
+    document.querySelectorAll('#galleryTabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.type;
+    currentPage = 1;
+    loadGallery();
+  });
+
+  // Lightbox
+  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('active'));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('active'); });
+
+  function openLightbox(url, title) {
+    document.getElementById('lbImg').src = url;
+    document.getElementById('lbCaption').textContent = title || '';
+    lightbox.classList.add('active');
+  }
+
+  function renderPhotos(items) {
+    let html = '';
+    items.forEach(item => {
+      html += `
+        <div class="col-lg-4 col-md-6 col-6">
+          <div class="tw-bg-white tw-rounded-2xl tw-h-56 tw-overflow-hidden tw-cursor-pointer hover:tw-opacity-80 tw-transition-all tw-relative tw-shadow-sm group"
+               onclick="openLightbox('${item.file_url}', '${(item.title||'').replace(/'/g,"\\'")}')">
+            <img src="${item.file_url}" alt="${item.title || ''}" class="tw-w-full tw-h-full tw-object-cover" loading="lazy"
+                 onerror="this.parentElement.innerHTML='<div class=\'tw-h-full tw-bg-accent d-flex align-items-center justify-content-center\'><i class=\'bi bi-image tw-text-primary tw-text-5xl\'></i></div>'" />
+            <div class="tw-absolute tw-inset-0 tw-bg-primary/70 tw-opacity-0 group-hover:tw-opacity-100 tw-transition-all d-flex align-items-center justify-content-center">
+              <i class="bi bi-zoom-in tw-text-white tw-text-3xl"></i>
+            </div>
+          </div>
+          <p class="tw-text-gray-600 tw-text-sm tw-mt-2 tw-font-medium">${item.title || ''}</p>
+        </div>`;
+    });
+    return html;
+  }
+
+  function renderVideos(items) {
+    let html = '';
+    items.forEach(item => {
+      const isYoutube = item.file_url && (item.file_url.includes('youtube') || item.file_url.includes('youtu.be'));
+      let embedUrl = '';
+      if (isYoutube) {
+        const match = item.file_url.match(/(?:v=|youtu\.be\/)([^&?]+)/);
+        if (match) embedUrl = `https://www.youtube.com/embed/${match[1]}`;
+      }
+
+      if (embedUrl) {
+        html += `
+          <div class="col-lg-4 col-md-6">
+            <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all">
+              <div class="tw-h-48 tw-overflow-hidden">
+                <iframe src="${embedUrl}" class="tw-w-full tw-h-full" frameborder="0" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <div class="tw-p-4">
+                <h6 class="tw-text-primary tw-font-bold tw-mt-1">${item.title || ''}</h6>
+                <span class="tw-text-gray-400 tw-text-xs">${item.created_at || ''}</span>
+              </div>
+            </div>
+          </div>`;
+      } else {
+        html += `
+          <div class="col-lg-4 col-md-6">
+            <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all">
+              <a href="${item.file_url}" target="_blank" rel="noopener">
+                <div class="tw-bg-primary/20 tw-h-48 d-flex align-items-center justify-content-center tw-relative tw-cursor-pointer">
+                  <div class="tw-w-14 tw-h-14 tw-bg-primary tw-rounded-full d-flex align-items-center justify-content-center hover:tw-scale-110 tw-transition-transform">
+                    <i class="bi bi-play-fill tw-text-white tw-text-2xl ms-1"></i>
+                  </div>
+                </div>
+              </a>
+              <div class="tw-p-4">
+                <h6 class="tw-text-primary tw-font-bold tw-mt-1">${item.title || ''}</h6>
+                <span class="tw-text-gray-400 tw-text-xs">${item.created_at || ''}</span>
+              </div>
+            </div>
+          </div>`;
+      }
+    });
+    return html;
+  }
+
+  function renderPagination(meta) {
+    if (meta.last_page <= 1) {
+      paginationWrapper.classList.add('d-none');
+      return;
+    }
+    paginationWrapper.classList.remove('d-none');
+
+    let html = `<li class="page-item ${meta.current_page === 1 ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page - 1}">&laquo;</a></li>`;
+    for (let i = 1; i <= meta.last_page; i++) {
+      html += `<li class="page-item ${i === meta.current_page ? 'active' : ''}">
+        <a class="page-link ${i === meta.current_page ? 'tw-bg-primary tw-border-primary' : ''}" href="#" data-page="${i}">${i}</a></li>`;
+    }
+    html += `<li class="page-item ${meta.current_page === meta.last_page ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page + 1}">&raquo;</a></li>`;
+
+    paginationEl.innerHTML = html;
+    paginationEl.querySelectorAll('a[data-page]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const p = parseInt(a.dataset.page);
+        if (p >= 1 && p <= meta.last_page) {
+          currentPage = p;
+          loadGallery();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  async function loadGallery() {
+    loadingState.classList.remove('d-none');
+    galleryGrid.classList.add('d-none');
+    emptyState.classList.add('d-none');
+    paginationWrapper.classList.add('d-none');
+
+    try {
+      const res = await fetch(`${window.API_BASE}/gallery?type=${currentType}&page=${currentPage}`);
+      const json = await res.json();
+      const items = json.data || [];
+
+      loadingState.classList.add('d-none');
+
+      if (!items.length) {
+        emptyState.classList.remove('d-none');
+        return;
+      }
+
+      galleryGrid.classList.remove('d-none');
+      galleryGrid.innerHTML = currentType === 'image' ? renderPhotos(items) : renderVideos(items);
+      renderPagination(json.meta || { current_page: 1, last_page: 1, total: 0 });
+    } catch (e) {
+      loadingState.classList.add('d-none');
+      emptyState.classList.remove('d-none');
+    }
+  }
+
+  loadGallery();
+
   function navSearch(e) {
     e.preventDefault();
     const q = e.target.querySelector('.nav-q').value.trim();
