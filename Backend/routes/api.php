@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ArticleApiController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\CommentApiController;
+use App\Http\Controllers\Api\ContactApiController;
 use App\Http\Controllers\Api\DonationApiController;
 use App\Http\Controllers\Api\GalleryApiController;
 use App\Http\Controllers\Api\HomepageController;
@@ -20,6 +21,9 @@ Route::prefix('v1')->group(function () {
 
     // Volunteer registration
     Route::post('/volunteers', [VolunteerApiController::class, 'store']);
+
+    // Contact
+    Route::post('/contact', [ContactApiController::class, 'store']);
 
     // Comments
     Route::get('/articles/{article}/comments', [CommentApiController::class, 'index']);

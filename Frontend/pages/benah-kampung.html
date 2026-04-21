@@ -70,23 +70,23 @@
           </div>
         </div>
         <div class="col-lg-5">
-          <div class="row g-3">
+          <div class="row g-3" id="heroStats">
             <div class="col-6">
               <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
-                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">1.000+</div>
-                <div class="tw-text-white/80 tw-text-sm">Rumah Ditargetkan</div>
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif" id="statCampaigns">—</div>
+                <div class="tw-text-white/80 tw-text-sm">Kampanye Aktif</div>
               </div>
             </div>
             <div class="col-6">
               <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
-                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">34</div>
-                <div class="tw-text-white/80 tw-text-sm">Provinsi</div>
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif" id="statDonors">—</div>
+                <div class="tw-text-white/80 tw-text-sm">Donatur</div>
               </div>
             </div>
             <div class="col-6">
               <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
-                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">5.000+</div>
-                <div class="tw-text-white/80 tw-text-sm">Jiwa Terbantu</div>
+                <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif" id="statCollected">—</div>
+                <div class="tw-text-white/80 tw-text-sm">Dana Terkumpul</div>
               </div>
             </div>
             <div class="col-6">
@@ -141,6 +141,29 @@
     </div>
   </section>
 
+  <!-- Kampanye Aktif -->
+  <section class="tw-py-16 tw-bg-gray-50">
+    <div class="container">
+      <div class="text-center tw-mb-10">
+        <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif">Kampanye Aktif</h2>
+        <div class="section-divider"></div>
+        <p class="tw-text-gray-500 tw-mt-4">Pilih kampanye Benah Kampung yang ingin Anda dukung</p>
+      </div>
+
+      <div id="campaignLoading" class="text-center tw-py-10">
+        <div class="spinner-border tw-text-primary" role="status"></div>
+        <p class="tw-text-gray-400 tw-mt-3">Memuat kampanye...</p>
+      </div>
+
+      <div id="campaignEmpty" class="text-center tw-py-10 d-none">
+        <i class="bi bi-house-fill tw-text-gray-300 tw-text-5xl d-block tw-mb-3"></i>
+        <p class="tw-text-gray-400">Belum ada kampanye aktif saat ini.</p>
+      </div>
+
+      <div id="campaignGrid" class="row g-4 d-none"></div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="tw-py-16 tw-bg-accent">
     <div class="container text-center">
@@ -163,20 +186,85 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-  // Load social links from API settings
-  (async()=>{
-    try{
-      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
-      const map={
-        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
-        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
-      };
-      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
-    }catch(e){}
-  })();
-  </script>
+  function formatRupiah(amount) {
+    if (amount >= 1_000_000_000) return 'Rp ' + (amount / 1_000_000_000).toFixed(1) + 'M';
+    if (amount >= 1_000_000) return 'Rp ' + (amount / 1_000_000).toFixed(0) + 'jt';
+    return 'Rp ' + amount.toLocaleString('id-ID');
+  }
 
-  <script>
+  (async () => {
+    try {
+      const res = await fetch(`${window.API_BASE}/campaigns`);
+      const json = await res.json();
+      const all = json.data || [];
+
+      // Filter kampanye terkait benah kampung
+      const campaigns = all.filter(c =>
+        c.name.toLowerCase().includes('benah') ||
+        c.name.toLowerCase().includes('rumah') ||
+        c.name.toLowerCase().includes('renovasi')
+      );
+
+      // Hitung stats dari semua kampanye (jika filter kosong, gunakan semua)
+      const source = campaigns.length ? campaigns : all;
+      const totalDonors = source.reduce((s, c) => s + (c.donor_count || 0), 0);
+      const totalCollected = source.reduce((s, c) => s + (c.collected_amount || 0), 0);
+
+      document.getElementById('statCampaigns').textContent = source.length;
+      document.getElementById('statDonors').textContent = totalDonors.toLocaleString('id-ID');
+      document.getElementById('statCollected').textContent = formatRupiah(totalCollected);
+
+      // Render kampanye
+      const grid = document.getElementById('campaignGrid');
+      const loading = document.getElementById('campaignLoading');
+      const empty = document.getElementById('campaignEmpty');
+
+      loading.classList.add('d-none');
+
+      const list = campaigns.length ? campaigns : all;
+
+      if (!list.length) {
+        empty.classList.remove('d-none');
+        return;
+      }
+
+      grid.classList.remove('d-none');
+      grid.innerHTML = list.map(c => {
+        const pct = Math.min(100, c.progress_percentage || 0);
+        const thumb = c.thumbnail_url
+          ? `<img src="${c.thumbnail_url}" alt="${c.name}" class="tw-w-full tw-h-full tw-object-cover" />`
+          : `<div class="tw-h-full tw-bg-accent d-flex align-items-center justify-content-center"><i class="bi bi-house-fill tw-text-primary tw-text-5xl"></i></div>`;
+        return `
+          <div class="col-lg-4 col-md-6">
+            <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all tw-border tw-border-gray-100 tw-h-full d-flex flex-column">
+              <div class="tw-h-48 tw-overflow-hidden">${thumb}</div>
+              <div class="tw-p-5 d-flex flex-column flex-grow-1">
+                <h5 class="tw-text-primary tw-font-bold tw-mb-2">${c.name}</h5>
+                <p class="tw-text-gray-500 tw-text-sm tw-mb-4 flex-grow-1">${c.description || ''}</p>
+                ${c.has_target ? `
+                <div class="tw-mb-3">
+                  <div class="d-flex justify-content-between tw-text-xs tw-text-gray-500 tw-mb-1">
+                    <span>${formatRupiah(c.collected_amount)} terkumpul</span>
+                    <span>${pct}%</span>
+                  </div>
+                  <div class="progress" style="height:6px;border-radius:99px;">
+                    <div class="progress-bar tw-bg-primary" style="width:${pct}%"></div>
+                  </div>
+                  <div class="tw-text-xs tw-text-gray-400 tw-mt-1">Target: ${formatRupiah(c.target_amount)}</div>
+                </div>` : ''}
+                <a href="donasi-detail.html?slug=${c.slug}" class="btn tw-bg-primary tw-text-white tw-rounded-full tw-text-sm tw-py-2 tw-mt-auto">
+                  <i class="bi bi-heart-fill me-1 tw-text-red-300"></i>Donasi Sekarang
+                </a>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    } catch (e) {
+      document.getElementById('campaignLoading').classList.add('d-none');
+      document.getElementById('campaignEmpty').classList.remove('d-none');
+    }
+  })();
+
   function navSearch(e) {
     e.preventDefault();
     const q = e.target.querySelector('.nav-q').value.trim();
