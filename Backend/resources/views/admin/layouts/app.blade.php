@@ -243,7 +243,7 @@
         </a>
       </li>
 
-      <li class="nav-label mt-2">Donasi & Relawan</li>
+      <li class="nav-label mt-2">Donasi</li>
       <li class="nav-item">
         <a href="{{ route('admin.donations.index') }}" title="Data Donasi"
            class="nav-link {{ request()->routeIs('admin.donations*') ? 'active' : '' }}">
@@ -252,17 +252,6 @@
           @php $pendingDon = \App\Models\Donation::where('payment_status','pending')->count(); @endphp
           @if($pendingDon > 0)
             <span class="badge bg-danger link-text">{{ $pendingDon }}</span>
-          @endif
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ route('admin.volunteers.index') }}" title="Data Relawan"
-           class="nav-link {{ request()->routeIs('admin.volunteers*') ? 'active' : '' }}">
-          <i class="bi bi-people-fill"></i>
-          <span class="link-text">Data Relawan</span>
-          @php $pendingVol = \App\Models\Volunteer::where('status','pending')->count(); @endphp
-          @if($pendingVol > 0)
-            <span class="badge bg-warning text-dark link-text">{{ $pendingVol }}</span>
           @endif
         </a>
       </li>

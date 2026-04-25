@@ -7,7 +7,6 @@ use App\Http\Controllers\Api\ContactApiController;
 use App\Http\Controllers\Api\DonationApiController;
 use App\Http\Controllers\Api\GalleryApiController;
 use App\Http\Controllers\Api\HomepageController;
-use App\Http\Controllers\Api\VolunteerApiController;
 use Illuminate\Support\Facades\Route;
 
 // ===== HOMEPAGE DATA =====
@@ -19,8 +18,6 @@ Route::prefix('v1')->group(function () {
     Route::post('/donations/callback', [DonationApiController::class, 'callback']);
     Route::get('/donations/{orderId}/status', [DonationApiController::class, 'status']);
 
-    // Volunteer registration
-    Route::post('/volunteers', [VolunteerApiController::class, 'store']);
 
     // Contact
     Route::post('/contact', [ContactApiController::class, 'store']);

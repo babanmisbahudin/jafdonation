@@ -6,7 +6,6 @@
       'nav.berita'  : 'Berita',
       'nav.galeri'  : 'Galeri',
       'nav.donasi'  : 'Donasi',
-      'nav.relawan' : 'Relawan',
       'nav.benah'   : 'Benah Kampung',
       'nav.kontak'  : 'Kontak',
       'nav.search'  : 'Cari artikel...',
@@ -52,13 +51,11 @@
       'tab.video'            : 'Video',
       'tab.pub'              : 'Publikasi',
       'tab.buletin'          : 'Buletin',
-      'tab.relawan_profile'  : 'Profil Relawan',
       'tab.humanis'          : 'Kisah Humanis',
       'tab.sehat'            : 'Info Sehat',
       'tab.resep'            : 'Resep Vegetarian',
       'tab.empty.pub'        : 'Belum ada publikasi terbaru.',
       'tab.empty.buletin'    : 'Belum ada buletin terbaru.',
-      'tab.empty.relawan'    : 'Belum ada profil relawan.',
       'tab.empty.humanis'    : 'Belum ada kisah humanis.',
       'tab.empty.sehat'      : 'Belum ada info sehat.',
       'tab.empty.resep'      : 'Belum ada resep vegetarian.',
@@ -112,12 +109,6 @@
       'donasi.anon'     : 'Donasi Anonim',
       'donasi.loading'  : 'Memuat program donasi...',
 
-      /* Relawan page */
-      'relawan.heading' : 'Relawan',
-      'relawan.sub'     : 'Bergabung sebagai relawan Jatiwangi Art Factory',
-      'relawan.register': 'Daftar Relawan',
-      'relawan.loading' : 'Memuat data relawan...',
-
       /* Benah Kampung page */
       'benah.heading' : 'Benah Kampung',
       'benah.sub'     : 'Program pemberdayaan desa berbasis seni dan budaya',
@@ -145,7 +136,6 @@
       'nav.berita'  : 'News',
       'nav.galeri'  : 'Gallery',
       'nav.donasi'  : 'Donation',
-      'nav.relawan' : 'Volunteer',
       'nav.benah'   : 'Village Restoration',
       'nav.kontak'  : 'Contact',
       'nav.search'  : 'Search articles...',
@@ -191,13 +181,11 @@
       'tab.video'            : 'Video',
       'tab.pub'              : 'Publications',
       'tab.buletin'          : 'Bulletin',
-      'tab.relawan_profile'  : 'Volunteer Profiles',
       'tab.humanis'          : 'Human Stories',
       'tab.sehat'            : 'Health Info',
       'tab.resep'            : 'Vegetarian Recipes',
       'tab.empty.pub'        : 'No publications yet.',
       'tab.empty.buletin'    : 'No bulletins yet.',
-      'tab.empty.relawan'    : 'No volunteer profiles yet.',
       'tab.empty.humanis'    : 'No human stories yet.',
       'tab.empty.sehat'      : 'No health info yet.',
       'tab.empty.resep'      : 'No vegetarian recipes yet.',
@@ -250,12 +238,6 @@
       'donasi.pay'      : 'Pay Now',
       'donasi.anon'     : 'Anonymous Donation',
       'donasi.loading'  : 'Loading donation programs...',
-
-      /* Relawan page */
-      'relawan.heading' : 'Volunteer',
-      'relawan.sub'     : 'Join as a Jatiwangi Art Factory volunteer',
-      'relawan.register': 'Register as Volunteer',
-      'relawan.loading' : 'Loading volunteer data...',
 
       /* Benah Kampung page */
       'benah.heading' : 'Village Restoration',

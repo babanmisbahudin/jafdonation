@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,12 +64,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::match(['POST', 'PUT'], 'settings', [SettingController::class, 'update'])->name('settings.update');
 
-    // Relawan
-    Route::get('volunteers', [VolunteerController::class, 'index'])->name('volunteers.index');
-    Route::get('volunteers/export', [VolunteerController::class, 'export'])->name('volunteers.export');
-    Route::get('volunteers/{volunteer}', [VolunteerController::class, 'show'])->name('volunteers.show');
-    Route::match(['POST', 'PATCH'], 'volunteers/{volunteer}/status', [VolunteerController::class, 'updateStatus'])->name('volunteers.update-status');
-    Route::match(['POST', 'DELETE'], 'volunteers/{volunteer}', [VolunteerController::class, 'destroy'])->name('volunteers.destroy');
 
     // Komentar
     Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
