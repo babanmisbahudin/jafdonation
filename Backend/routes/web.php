@@ -62,7 +62,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Pengaturan Website
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::match(['POST', 'PUT'], 'settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
 
 
     // Komentar

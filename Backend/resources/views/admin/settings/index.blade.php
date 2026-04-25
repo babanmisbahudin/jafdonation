@@ -4,15 +4,13 @@
 
 @section('content')
 
-<form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
-@csrf @method('PUT')
-
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h5 class="fw-bold mb-1">Pengaturan Website</h5>
     <p class="text-muted mb-0" style="font-size:.85rem;">Kelola semua konten halaman beranda</p>
   </div>
-  <button type="submit" class="btn btn-primary d-flex align-items-center gap-2" style="border-radius:10px;">
+  {{-- form attribute links this button to #settingsForm which is below --}}
+  <button type="submit" form="settingsForm" class="btn btn-primary d-flex align-items-center gap-2" style="border-radius:10px;">
     <i class="bi bi-floppy"></i> Simpan Semua
   </button>
 </div>
@@ -31,6 +29,13 @@
 </ul>
 
 <div class="tab-content">
+
+  {{-- ================================================================
+       Settings form wraps ONLY the 7 content tabs (no nested forms).
+       Program & Hero tabs are outside this form to avoid _method clash.
+       ================================================================ --}}
+  <form id="settingsForm" action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
+  @csrf
 
   {{-- GENERAL --}}
   <div class="tab-pane fade show active" id="tab-general">
@@ -138,6 +143,8 @@
     </div>
   </div>
 
+  </form>{{-- /settingsForm — Program & Hero tabs are OUTSIDE this form --}}
+
   {{-- PROGRAM --}}
   <div class="tab-pane fade" id="tab-program">
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -238,7 +245,7 @@
             </div>
             <div class="col-auto">
               <form action="{{ route('admin.hero.toggle', $slide) }}" method="POST">
-                @csrf @method('PATCH')
+                @csrf
                 <button type="submit" class="btn btn-sm {{ $slide->is_active ? 'btn-success' : 'btn-outline-secondary' }}" style="border-radius:20px;font-size:.72rem;padding:3px 12px;">
                   {{ $slide->is_active ? 'Aktif' : 'Nonaktif' }}
                 </button>
@@ -269,7 +276,6 @@
   </div>
 
 </div>{{-- /tab-content --}}
-</form>
 
 {{-- Modal Tambah Slide --}}
 <div class="modal fade" id="modalAddSlide" tabindex="-1">
