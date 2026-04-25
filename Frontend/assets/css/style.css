@@ -170,6 +170,8 @@ footer li { margin-bottom: 0.5rem; }
 .footer-credit { font-size: 11px; color: #444; white-space: nowrap; }
 .footer-credit a { color: #555; text-decoration: none; transition: .15s; }
 .footer-credit a:hover { color: #fff; }
+.footer-github { color: #555; font-size: 18px; line-height: 1; transition: color .15s; text-decoration: none; flex-shrink: 0; }
+.footer-github:hover { color: #fff; }
 
 /* ---- Back to Top ---- */
 #backToTop.visible {
