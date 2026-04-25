@@ -29,7 +29,6 @@
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-mission">Misi</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-campaign">Kampanye</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-donate">Donasi</a></li>
-  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-footer">Footer</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-video">Video YouTube</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-program">Program</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-hero">Hero Slider</a></li>
@@ -97,20 +96,6 @@
     </div>
   </div>
 
-  {{-- FOOTER --}}
-  <div class="tab-pane fade" id="tab-footer">
-    <div class="card shadow-sm" style="border:none;border-radius:14px;">
-      <div class="card-body p-4">
-        <div class="row g-3">
-          @foreach($settings['footer'] ?? [] as $key => $setting)
-            <div class="{{ $setting->type === 'textarea' ? 'col-12' : 'col-md-6' }}">
-              @include('admin.settings._field', ['setting' => $setting])
-            </div>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
 
   {{-- VIDEO YOUTUBE --}}
   <div class="tab-pane fade" id="tab-video">

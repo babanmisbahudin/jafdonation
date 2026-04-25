@@ -45,17 +45,8 @@ class SettingSeeder extends Seeder
             ['key' => 'donate_min_amount',    'label' => 'Donasi Minimal',         'type' => 'text',     'group' => 'donate',   'value' => 'Rp 50.000'],
             ['key' => 'donate_qr_image',      'label' => 'Gambar QR Code',         'type' => 'image',    'group' => 'donate',   'value' => null],
 
-            // Footer
-            ['key' => 'footer_address',   'label' => 'Alamat',                 'type' => 'textarea', 'group' => 'footer',  'value' => 'Jatiwangi, Kabupaten Majalengka, Jawa Barat 45454'],
-            ['key' => 'footer_phone',     'label' => 'Nomor Telepon / WA',     'type' => 'text',     'group' => 'footer',  'value' => '+62 815-7321-3592'],
-            ['key' => 'footer_email',     'label' => 'Email',                  'type' => 'text',     'group' => 'footer',  'value' => 'jatiwangiartfactory@gmail.com'],
-            ['key' => 'footer_copyright', 'label' => 'Teks Copyright',         'type' => 'text',     'group' => 'footer',  'value' => 'Copyright © 2025 Yayasan Daun Salambar — Jatiwangi Art Factory'],
-            ['key' => 'footer_wa_number', 'label' => 'Nomor WhatsApp (intl)',   'type' => 'text',     'group' => 'footer',  'value' => '6281573213592'],
-            ['key' => 'footer_instagram', 'label' => 'Instagram URL',           'type' => 'text',     'group' => 'footer',  'value' => 'https://instagram.com/jatiwangiartfactory'],
-            ['key' => 'footer_facebook',  'label' => 'Facebook URL',            'type' => 'text',     'group' => 'footer',  'value' => 'https://facebook.com/jatiwangiartfactory'],
-            ['key' => 'footer_youtube',   'label' => 'YouTube URL',             'type' => 'text',     'group' => 'footer',  'value' => 'https://youtube.com/jatiwangiartfactory'],
-            ['key' => 'footer_tiktok',    'label' => 'TikTok URL',              'type' => 'text',     'group' => 'footer',  'value' => 'https://tiktok.com/@jatiwangiartfactory'],
-            ['key' => 'homepage_quote',   'label' => 'Kutipan di Bawah Video', 'type' => 'textarea', 'group' => 'footer',  'value' => '"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."'],
+            // General (Homepage Quote)
+            ['key' => 'homepage_quote', 'label' => 'Kutipan di Bawah Video', 'type' => 'textarea', 'group' => 'general', 'value' => '"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."'],
 
             // Video YouTube
             ['key' => 'video_1_url',   'label' => 'URL YouTube Video 1', 'type' => 'text', 'group' => 'video', 'value' => ''],
@@ -70,8 +61,9 @@ class SettingSeeder extends Seeder
             Setting::updateOrCreate(['key' => $data['key']], $data);
         }
 
-        // Remove deprecated about section (removed from frontend)
+        // Remove deprecated sections
         Setting::where('group', 'about')->delete();
+        Setting::where('group', 'footer')->delete();
 
         // ── HERO SLIDES ───────────────────────────────────────────
         if (HeroSlide::count() === 0) {
