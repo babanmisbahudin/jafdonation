@@ -29,10 +29,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Artikel
+    // Artikel — resource handles GET/POST/PUT/PATCH/DELETE
     Route::resource('articles', ArticleController::class);
     Route::post('upload-image', [ImageUploadController::class, 'store'])->name('upload-image');
-    Route::patch('articles/{article}/toggle-featured', [ArticleController::class, 'toggleFeatured'])
+    Route::match(['POST', 'PATCH'], 'articles/{article}/toggle-featured', [ArticleController::class, 'toggleFeatured'])
         ->name('articles.toggle-featured');
 
     // Kategori
@@ -42,7 +42,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('donations', [DonationController::class, 'index'])->name('donations.index');
     Route::get('donations/export', [DonationController::class, 'export'])->name('donations.export');
     Route::get('donations/{donation}', [DonationController::class, 'show'])->name('donations.show');
-    Route::patch('donations/{donation}/status', [DonationController::class, 'updateStatus'])->name('donations.update-status');
+    Route::match(['POST', 'PATCH'], 'donations/{donation}/status', [DonationController::class, 'updateStatus'])->name('donations.update-status');
 
     // Program
     Route::resource('programs', ProgramController::class);
@@ -50,39 +50,39 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Galeri
     Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
     Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
-    Route::delete('gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    Route::match(['POST', 'DELETE'], 'gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
     Route::post('gallery/order', [GalleryController::class, 'updateOrder'])->name('gallery.order');
 
-    // Hero Slider
+    // Hero Slider — use /delete suffix to avoid conflict with update on same URL
     Route::get('hero', [HeroSlideController::class, 'index'])->name('hero.index');
     Route::post('hero', [HeroSlideController::class, 'store'])->name('hero.store');
-    Route::put('hero/{heroSlide}', [HeroSlideController::class, 'update'])->name('hero.update');
-    Route::delete('hero/{heroSlide}', [HeroSlideController::class, 'destroy'])->name('hero.destroy');
-    Route::patch('hero/{heroSlide}/toggle', [HeroSlideController::class, 'toggleActive'])->name('hero.toggle');
+    Route::match(['POST', 'PUT'], 'hero/{heroSlide}', [HeroSlideController::class, 'update'])->name('hero.update');
+    Route::match(['POST', 'DELETE'], 'hero/{heroSlide}/delete', [HeroSlideController::class, 'destroy'])->name('hero.destroy');
+    Route::match(['POST', 'PATCH'], 'hero/{heroSlide}/toggle', [HeroSlideController::class, 'toggleActive'])->name('hero.toggle');
     Route::post('hero/reorder', [HeroSlideController::class, 'reorder'])->name('hero.reorder');
 
     // Pengaturan Website
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::match(['POST', 'PUT'], 'settings', [SettingController::class, 'update'])->name('settings.update');
 
     // Relawan
     Route::get('volunteers', [VolunteerController::class, 'index'])->name('volunteers.index');
     Route::get('volunteers/export', [VolunteerController::class, 'export'])->name('volunteers.export');
     Route::get('volunteers/{volunteer}', [VolunteerController::class, 'show'])->name('volunteers.show');
-    Route::patch('volunteers/{volunteer}/status', [VolunteerController::class, 'updateStatus'])->name('volunteers.update-status');
-    Route::delete('volunteers/{volunteer}', [VolunteerController::class, 'destroy'])->name('volunteers.destroy');
+    Route::match(['POST', 'PATCH'], 'volunteers/{volunteer}/status', [VolunteerController::class, 'updateStatus'])->name('volunteers.update-status');
+    Route::match(['POST', 'DELETE'], 'volunteers/{volunteer}', [VolunteerController::class, 'destroy'])->name('volunteers.destroy');
 
     // Komentar
     Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
-    Route::patch('comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
-    Route::patch('comments/{comment}/spam', [CommentController::class, 'markSpam'])->name('comments.spam');
-    Route::patch('comments/{comment}/unspam', [CommentController::class, 'unspam'])->name('comments.unspam');
-    Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
-    Route::delete('comments', [CommentController::class, 'destroySpam'])->name('comments.destroy-spam');
+    Route::match(['POST', 'PATCH'], 'comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
+    Route::match(['POST', 'PATCH'], 'comments/{comment}/spam', [CommentController::class, 'markSpam'])->name('comments.spam');
+    Route::match(['POST', 'PATCH'], 'comments/{comment}/unspam', [CommentController::class, 'unspam'])->name('comments.unspam');
+    Route::match(['POST', 'DELETE'], 'comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::match(['POST', 'DELETE'], 'comments', [CommentController::class, 'destroySpam'])->name('comments.destroy-spam');
 
-    // Pengguna
+    // Pengguna — use /delete suffix to avoid conflict with update on same URL
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::post('users', [UserController::class, 'store'])->name('users.store');
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::match(['POST', 'PUT'], 'users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::match(['POST', 'DELETE'], 'users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 });
