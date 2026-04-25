@@ -430,12 +430,6 @@
     .footer-col ul li { margin-bottom: 7px; }
     .footer-col ul li a { font-size: 12.5px; color: #888; transition: .15s; }
     .footer-col ul li a:hover { color: #fff; }
-    .footer-bottom {
-      padding: 16px 0; text-align: center;
-      font-size: 12px; color: #555;
-    }
-    .footer-bottom a { color: #666; transition: .15s; }
-    .footer-bottom a:hover { color: #fff; }
 
     /* ── BACK TO TOP ── */
     #btt {
@@ -638,10 +632,6 @@
       .quote-section { padding: 22px 0; }
       .quote-section blockquote { font-size: 12.5px; }
 
-      /* Footer */
-      footer .footer-bottom { padding: 14px 0; font-size: 11px; }
-      .footer-bottom .container { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 10px; }
-      .footer-bottom .container > div:first-child { text-align: center !important; }
 
       /* Back to top */
       #btt { bottom: 12px; right: 12px; width: 34px; height: 34px; font-size: 14px; }
@@ -1039,34 +1029,40 @@
       <div class="tab-pane fade show active" id="tab-berita">
         <div class="row g-3 mb-3">
           <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-thumb nt-1"><i class="bi bi-globe2"></i></div>
-              <div class="news-body">
-                <div class="news-date"><i class="bi bi-calendar3 me-1"></i>18 April 2025</div>
-                <h6>Tahun Tanah 2025: Merayakan Dua Dekade Seni Berbasis Bumi di Jatiwangi</h6>
-                <p>JAF kembali menggelar Tahun Tanah sebagai puncak triennale seni yang mengundang warga, seniman lokal, dan tamu internasional...</p>
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-1"><i class="bi bi-globe2"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>18 April 2025</div>
+                  <h6>Tahun Tanah 2025: Merayakan Dua Dekade Seni Berbasis Bumi di Jatiwangi</h6>
+                  <p>JAF kembali menggelar Tahun Tanah sebagai puncak triennale seni yang mengundang warga, seniman lokal, dan tamu internasional...</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-thumb nt-2"><i class="bi bi-music-note-beamed"></i></div>
-              <div class="news-body">
-                <div class="news-date"><i class="bi bi-calendar3 me-1"></i>12 April 2025</div>
-                <h6>Rampak Genteng Malam: 500 Warga Bergabung dalam Ritual Musik Genteng Massal</h6>
-                <p>Malam Rampak Genteng kembali digelar di halaman pabrik genteng Jatiwangi, menyatukan warga dalam irama kolektif...</p>
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-2"><i class="bi bi-music-note-beamed"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>12 April 2025</div>
+                  <h6>Rampak Genteng Malam: 500 Warga Bergabung dalam Ritual Musik Genteng Massal</h6>
+                  <p>Malam Rampak Genteng kembali digelar di halaman pabrik genteng Jatiwangi, menyatukan warga dalam irama kolektif...</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-md-4">
-            <div class="news-card">
-              <div class="news-thumb nt-3"><i class="bi bi-brush-fill"></i></div>
-              <div class="news-body">
-                <div class="news-date"><i class="bi bi-calendar3 me-1"></i>5 April 2025</div>
-                <h6>Seniman dari 12 Negara Ikuti Residensi Terracotta Jatiwangi 2025</h6>
-                <p>Program residensi tahunan JAF kembali menyambut seniman dari berbagai penjuru dunia untuk berkarya dengan tanah liat Jatiwangi...</p>
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-3"><i class="bi bi-brush-fill"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>5 April 2025</div>
+                  <h6>Seniman dari 12 Negara Ikuti Residensi Terracotta Jatiwangi 2025</h6>
+                  <p>Program residensi tahunan JAF kembali menyambut seniman dari berbagai penjuru dunia untuk berkarya dengan tanah liat Jatiwangi...</p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
         <div class="text-end">
@@ -1166,6 +1162,9 @@
       <div>
         Copyright &copy; 2025 Yayasan Daun Salambar — Jatiwangi Art Factory<br>
         Jatiwangi, Kabupaten Majalengka, Jawa Barat &nbsp;|&nbsp; +62 815-7321-3592 &nbsp;|&nbsp; jatiwangiartfactory@gmail.com
+      </div>
+      <div class="footer-credit">
+        Dibuat oleh <a href="https://github.com/himisbah" target="_blank" rel="noopener">Baban Misbahudin</a>
       </div>
     </div>
   </div>
@@ -1382,16 +1381,18 @@ function renderArticles(articles) {
   const colors = ['nt-1','nt-2','nt-3'];
   tabPane.innerHTML = articles.map((a, i) => `
     <div class="col-md-4">
-      <div class="news-card">
-        <div class="news-thumb ${colors[i]}">
-          ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" />` : '<i class="bi bi-newspaper"></i>'}
+      <a href="/artikel?slug=${a.slug}" style="text-decoration:none;color:inherit;display:block;height:100%;">
+        <div class="news-card" style="cursor:pointer;">
+          <div class="news-thumb ${colors[i]}">
+            ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" />` : '<i class="bi bi-newspaper"></i>'}
+          </div>
+          <div class="news-body">
+            <div class="news-date"><i class="bi bi-calendar3 me-1"></i>${a.published_at}</div>
+            <h6>${a.title}</h6>
+            <p>${a.excerpt}</p>
+          </div>
         </div>
-        <div class="news-body">
-          <div class="news-date"><i class="bi bi-calendar3 me-1"></i>${a.published_at}</div>
-          <h6>${a.title}</h6>
-          <p>${a.excerpt}</p>
-        </div>
-      </div>
+      </a>
     </div>`).join('');
 }
 
