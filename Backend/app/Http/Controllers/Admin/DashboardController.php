@@ -8,7 +8,6 @@ use App\Models\Comment;
 use App\Models\Donation;
 use App\Models\Program;
 use App\Models\User;
-use App\Models\Volunteer;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -25,9 +24,6 @@ class DashboardController extends Controller
             'pending_donations'  => Donation::where('payment_status', 'pending')->count(),
             'active_programs'    => Program::where('status', 'active')->count(),
             'total_users'        => User::count(),
-            'total_volunteers'   => Volunteer::count(),
-            'pending_volunteers' => Volunteer::where('status', 'pending')->count(),
-            'approved_volunteers'=> Volunteer::where('status', 'approved')->count(),
             'total_comments'     => Comment::count(),
             'spam_comments'      => Comment::where('is_spam', true)->count(),
             'pending_comments'   => Comment::where('is_spam', false)->where('is_approved', false)->count(),
@@ -41,22 +37,15 @@ class DashboardController extends Controller
             ->orderBy('date')
             ->get();
 
-        // Relawan per bulan (6 bulan)
-        $volunteerChart = Volunteer::where('created_at', '>=', now()->subMonths(6))
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
-            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, COUNT(*) as count")
-            ->orderBy('month')
-            ->get();
-
-        // Volunteer by status
-        $volunteerByStatus = [
-            'pending'  => $stats['pending_volunteers'],
-            'approved' => $stats['approved_volunteers'],
-            'rejected' => Volunteer::where('status', 'rejected')->count(),
+        // Artikel per status (untuk donut chart)
+        $articleByStatus = [
+            'published' => $stats['published_articles'],
+            'draft'     => $stats['draft_articles'],
+            'archived'  => Article::where('status', 'archived')->count(),
         ];
 
         // Top donating programs
-        $topPrograms = Program::withSum(['donations as total_raised' => fn($q) => $q->where('payment_status','paid')], 'amount')
+        $topPrograms = Program::withSum(['donations as total_raised' => fn($q) => $q->where('payment_status', 'paid')], 'amount')
             ->having('total_raised', '>', 0)
             ->orderByDesc('total_raised')
             ->take(5)
@@ -72,11 +61,9 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        $recentVolunteers = Volunteer::latest()->take(5)->get();
-
         return view('admin.dashboard', compact(
-            'stats', 'donationChart', 'volunteerChart', 'volunteerByStatus',
-            'topPrograms', 'recentDonations', 'recentArticles', 'recentVolunteers'
+            'stats', 'donationChart', 'articleByStatus',
+            'topPrograms', 'recentDonations', 'recentArticles'
         ));
     }
 }
