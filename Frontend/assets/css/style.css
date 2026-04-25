@@ -169,6 +169,11 @@ footer li { margin-bottom: 0.5rem; }
   pointer-events: all !important;
 }
 
+/* ---- Language Buttons (global) ---- */
+.lang-btn { opacity: .5; transition: opacity 0.2s; }
+.lang-btn.active { border-color: #1A5276 !important; opacity: 1 !important; }
+.lang-btn:hover  { opacity: .8 !important; }
+
 /* ---- Page Header (inner pages) ---- */
 .page-header {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -224,7 +229,7 @@ footer li { margin-bottom: 0.5rem; }
   .nav-pills .nav-link { white-space: nowrap; flex-shrink: 0; }
 
   /* Page header */
-  .page-header { padding: 60px 0 40px; }
+  .page-header { padding: 60px 0 40px !important; }
   .page-header h1 { font-size: 2rem; }
 
   /* Donation page: 2 columns */
@@ -235,6 +240,30 @@ footer li { margin-bottom: 0.5rem; }
 
   /* Relawan form: full width labels */
   .relawan-why-cards .col { flex: 0 0 50%; max-width: 50%; }
+
+  /* Collapsed navbar: search form stretches full width, lang buttons on right */
+  .navbar-collapse > div.d-flex {
+    width: 100%;
+    padding-top: 0.5rem;
+    gap: 0.5rem !important;
+  }
+  .navbar-collapse > div.d-flex > form.d-flex {
+    flex: 1;
+    min-width: 0;
+  }
+  .navbar-collapse > div.d-flex > form.d-flex input[type="text"] {
+    flex: 1;
+    min-width: 0 !important;
+    width: 1%;
+  }
+
+  /* Tailwind heading overrides for mobile */
+  .tw-text-5xl { font-size: 2.25rem !important; line-height: 1.2 !important; }
+  .tw-text-4xl { font-size: 2rem !important; line-height: 1.25 !important; }
+  .tw-text-3xl { font-size: 1.6rem !important; line-height: 1.3 !important; }
+
+  /* Benah kampung hero padding */
+  .tw-py-20 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 
 /* Tablet portrait (≤768px) */
@@ -261,7 +290,7 @@ footer li { margin-bottom: 0.5rem; }
   footer .col-lg-3, footer .col-lg-4 { margin-bottom: 2rem; }
 
   /* Page header */
-  .page-header { padding: 50px 0 35px; }
+  .page-header { padding: 50px 0 35px !important; }
   .page-header h1 { font-size: 1.75rem; }
   .page-header .lead { font-size: 0.95rem; }
 
@@ -279,6 +308,21 @@ footer li { margin-bottom: 0.5rem; }
 
   /* Relawan form: full-width selects */
   .skills-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Tailwind heading overrides */
+  .tw-text-5xl { font-size: 2rem !important; line-height: 1.2 !important; }
+  .tw-text-4xl { font-size: 1.75rem !important; line-height: 1.25 !important; }
+  .tw-text-3xl { font-size: 1.4rem !important; }
+  .tw-text-2xl { font-size: 1.2rem !important; }
+  .tw-text-lg  { font-size: 1rem !important; }
+
+  /* Filter row in berita/galeri: stack selects full width */
+  .d-flex.flex-wrap .form-select { width: 100% !important; flex: 1 1 100%; }
+  .d-flex.flex-wrap .input-group  { width: 100%; }
+
+  /* Benah kampung hero padding */
+  .tw-py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  .tw-py-16 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
 }
 
 /* Mobile (≤575px) */
@@ -324,7 +368,7 @@ footer li { margin-bottom: 0.5rem; }
   #backToTop { width: 38px !important; height: 38px !important; right: 1rem !important; bottom: 1rem !important; font-size: 0.875rem !important; }
 
   /* Page header */
-  .page-header { padding: 40px 0 28px; }
+  .page-header { padding: 40px 0 28px !important; }
   .page-header h1 { font-size: 1.4rem; }
   .page-header .lead { font-size: 0.875rem; }
 
@@ -348,4 +392,29 @@ footer li { margin-bottom: 0.5rem; }
   /* Tables: horizontal scroll */
   .table-responsive-force { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .table-responsive-force table { min-width: 540px; }
+
+  /* Tailwind heading overrides — phones */
+  .tw-text-5xl { font-size: 1.6rem !important; line-height: 1.2 !important; }
+  .tw-text-4xl { font-size: 1.4rem !important; line-height: 1.25 !important; }
+  .tw-text-3xl { font-size: 1.2rem !important; }
+  .tw-text-2xl { font-size: 1.1rem !important; }
+  .tw-text-xl  { font-size: 1rem !important; }
+  .tw-text-lg  { font-size: 0.925rem !important; }
+
+  /* Section padding */
+  .tw-py-20 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+  .tw-py-16 { padding-top: 1.75rem !important; padding-bottom: 1.75rem !important; }
+  .tw-py-12 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+
+  /* Kontak: info cards row → stack */
+  .tw-space-y-4 > * + * { margin-top: 0.75rem !important; }
+
+  /* Collapsed navbar: wrap search & lang on very small screens */
+  .navbar-collapse > div.d-flex {
+    flex-wrap: wrap;
+  }
+  .navbar-collapse > div.d-flex > div.d-flex {
+    margin-left: 0 !important;
+    margin-top: 0.25rem;
+  }
 }
