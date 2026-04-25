@@ -4,13 +4,21 @@
 
 @section('content')
 
+{{-- ================================================================
+     Main settings form. Program & Hero delete/toggle buttons use the
+     HTML `form` attribute to target standalone forms declared at the
+     bottom, so their _method=DELETE/PATCH fields never pollute this
+     form's submission.
+     ================================================================ --}}
+<form id="settingsForm" action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
+@csrf
+
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h5 class="fw-bold mb-1">Pengaturan Website</h5>
     <p class="text-muted mb-0" style="font-size:.85rem;">Kelola semua konten halaman beranda</p>
   </div>
-  {{-- form attribute links this button to #settingsForm which is below --}}
-  <button type="submit" form="settingsForm" class="btn btn-primary d-flex align-items-center gap-2" style="border-radius:10px;">
+  <button type="submit" class="btn btn-primary d-flex align-items-center gap-2" style="border-radius:10px;">
     <i class="bi bi-floppy"></i> Simpan Semua
   </button>
 </div>
@@ -29,13 +37,6 @@
 </ul>
 
 <div class="tab-content">
-
-  {{-- ================================================================
-       Settings form wraps ONLY the 7 content tabs (no nested forms).
-       Program & Hero tabs are outside this form to avoid _method clash.
-       ================================================================ --}}
-  <form id="settingsForm" action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
-  @csrf
 
   {{-- GENERAL --}}
   <div class="tab-pane fade show active" id="tab-general">
@@ -143,9 +144,7 @@
     </div>
   </div>
 
-  </form>{{-- /settingsForm — Program & Hero tabs are OUTSIDE this form --}}
-
-  {{-- PROGRAM --}}
+  {{-- PROGRAM — delete buttons reference standalone forms below via form="..." --}}
   <div class="tab-pane fade" id="tab-program">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <p class="text-muted mb-0" style="font-size:.85rem;">Program yang dicentang <strong>Unggulan</strong> akan tampil di homepage (maks. 4)</p>
@@ -187,10 +186,12 @@
               <a href="{{ route('admin.programs.edit', $program) }}" class="btn btn-sm btn-outline-primary" style="border-radius:8px;">
                 <i class="bi bi-pencil"></i>
               </a>
-              <form action="{{ route('admin.programs.destroy', $program) }}" method="POST" onsubmit="return confirm('Hapus program ini?')">
-                @csrf @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;"><i class="bi bi-trash"></i></button>
-              </form>
+              {{-- form="prog-del-..." submits the standalone form below, NOT settingsForm --}}
+              <button type="submit" form="prog-del-{{ $program->id }}"
+                      onclick="return confirm('Hapus program ini?')"
+                      class="btn btn-sm btn-outline-danger" style="border-radius:8px;">
+                <i class="bi bi-trash"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -206,16 +207,14 @@
     </div>
   </div>
 
-  {{-- HERO SLIDER --}}
+  {{-- HERO SLIDER — toggle/delete buttons reference standalone forms below --}}
   <div class="tab-pane fade" id="tab-hero">
-
     <div class="d-flex justify-content-between align-items-center mb-3">
       <p class="text-muted mb-0" style="font-size:.85rem;">Kelola slide banner utama halaman beranda</p>
-      <button class="btn btn-primary btn-sm d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalAddSlide" style="border-radius:8px;">
+      <button type="button" class="btn btn-primary btn-sm d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalAddSlide" style="border-radius:8px;">
         <i class="bi bi-plus-lg"></i> Tambah Slide
       </button>
     </div>
-
     <div class="d-flex flex-column gap-3">
       @forelse($heroSlides as $slide)
       <div class="card shadow-sm" style="border:none;border-radius:14px;border-left:4px solid {{ $slide->is_active ? '#22c55e' : '#94a3b8' }} !important;">
@@ -244,21 +243,23 @@
               <div class="fw-bold">{{ $slide->sort_order + 1 }}</div>
             </div>
             <div class="col-auto">
-              <form action="{{ route('admin.hero.toggle', $slide) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-sm {{ $slide->is_active ? 'btn-success' : 'btn-outline-secondary' }}" style="border-radius:20px;font-size:.72rem;padding:3px 12px;">
-                  {{ $slide->is_active ? 'Aktif' : 'Nonaktif' }}
-                </button>
-              </form>
+              {{-- form="hero-toggle-..." submits the standalone toggle form below --}}
+              <button type="submit" form="hero-toggle-{{ $slide->id }}"
+                      class="btn btn-sm {{ $slide->is_active ? 'btn-success' : 'btn-outline-secondary' }}"
+                      style="border-radius:20px;font-size:.72rem;padding:3px 12px;">
+                {{ $slide->is_active ? 'Aktif' : 'Nonaktif' }}
+              </button>
             </div>
             <div class="col-auto d-flex gap-2">
-              <button class="btn btn-sm btn-outline-primary" style="border-radius:8px;" onclick='openEditSlide({{ json_encode($slide) }})'>
+              <button type="button" class="btn btn-sm btn-outline-primary" style="border-radius:8px;" onclick='openEditSlide({{ json_encode($slide) }})'>
                 <i class="bi bi-pencil"></i>
               </button>
-              <form action="{{ route('admin.hero.destroy', $slide) }}" method="POST" onsubmit="return confirm('Hapus slide ini?')">
-                @csrf @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-outline-danger" style="border-radius:8px;"><i class="bi bi-trash"></i></button>
-              </form>
+              {{-- form="hero-del-..." submits the standalone delete form below --}}
+              <button type="submit" form="hero-del-{{ $slide->id }}"
+                      onclick="return confirm('Hapus slide ini?')"
+                      class="btn btn-sm btn-outline-danger" style="border-radius:8px;">
+                <i class="bi bi-trash"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -272,10 +273,39 @@
       </div>
       @endforelse
     </div>
-
   </div>
 
 </div>{{-- /tab-content --}}
+</form>{{-- /settingsForm --}}
+
+
+{{-- ================================================================
+     Standalone forms for program delete and hero toggle/delete.
+     Declared OUTSIDE #settingsForm so their _method inputs are never
+     submitted with the settings save action.
+     ================================================================ --}}
+
+@foreach($programs as $program)
+<form id="prog-del-{{ $program->id }}"
+      action="{{ route('admin.programs.destroy', $program) }}"
+      method="POST" style="display:none;">
+  @csrf @method('DELETE')
+</form>
+@endforeach
+
+@foreach($heroSlides as $slide)
+<form id="hero-toggle-{{ $slide->id }}"
+      action="{{ route('admin.hero.toggle', $slide) }}"
+      method="POST" style="display:none;">
+  @csrf
+</form>
+<form id="hero-del-{{ $slide->id }}"
+      action="{{ route('admin.hero.destroy', $slide) }}"
+      method="POST" style="display:none;">
+  @csrf @method('DELETE')
+</form>
+@endforeach
+
 
 {{-- Modal Tambah Slide --}}
 <div class="modal fade" id="modalAddSlide" tabindex="-1">
