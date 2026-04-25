@@ -18,16 +18,6 @@ class SettingSeeder extends Seeder
             ['key' => 'site_description', 'label' => 'Deskripsi Website',     'type' => 'textarea', 'group' => 'general', 'value' => 'Komunitas seni kontemporer berbasis bumi di Jatiwangi, Majalengka.'],
             ['key' => 'site_logo',        'label' => 'Logo Website',          'type' => 'image',    'group' => 'general', 'value' => null],
 
-            // About
-            ['key' => 'about_title',      'label' => 'Judul Section Tentang', 'type' => 'text',     'group' => 'about',   'value' => 'Bersama Kita Bangun Ekosistem Seni & Budaya'],
-            ['key' => 'about_desc',       'label' => 'Deskripsi Tentang',     'type' => 'textarea', 'group' => 'about',   'value' => 'Sejak 2005, Jatiwangi Art Factory (JAF) hadir sebagai ruang komunitas seni di Jatiwangi, Majalengka, Jawa Barat — merayakan tradisi lokal, mengeksplorasi material tanah, dan menghubungkan seniman daerah dengan panggung seni internasional.'],
-            ['key' => 'about_photo_1',    'label' => 'Foto Kiri',             'type' => 'image',    'group' => 'about',   'value' => null],
-            ['key' => 'about_photo_2',    'label' => 'Foto Kanan',            'type' => 'image',    'group' => 'about',   'value' => null],
-            ['key' => 'about_btn1_text',  'label' => 'Teks Tombol 1',         'type' => 'text',     'group' => 'about',   'value' => 'Donasi'],
-            ['key' => 'about_btn1_url',   'label' => 'URL Tombol 1',          'type' => 'text',     'group' => 'about',   'value' => 'pages/donasi.html'],
-            ['key' => 'about_btn2_text',  'label' => 'Teks Tombol 2',         'type' => 'text',     'group' => 'about',   'value' => 'Menjadi Relawan'],
-            ['key' => 'about_btn2_url',   'label' => 'URL Tombol 2',          'type' => 'text',     'group' => 'about',   'value' => 'pages/relawan.html'],
-
             // Mission
             ['key' => 'mission_title',    'label' => 'Judul Section Misi',    'type' => 'text',     'group' => 'mission', 'value' => 'Seni Memiliki Vitalitas untuk Mengubah Daerah'],
             ['key' => 'mission_text_1',   'label' => 'Paragraf 1',            'type' => 'textarea', 'group' => 'mission', 'value' => 'Jatiwangi Art Factory (JAF) adalah komunitas seni kontemporer yang berbasis di Jatiwangi, Kabupaten Majalengka, Jawa Barat — berdiri sejak tahun 2005 di bawah naungan Yayasan Daun Salambar.'],
@@ -79,6 +69,9 @@ class SettingSeeder extends Seeder
         foreach ($settings as $data) {
             Setting::updateOrCreate(['key' => $data['key']], $data);
         }
+
+        // Remove deprecated about section (removed from frontend)
+        Setting::where('group', 'about')->delete();
 
         // ── HERO SLIDES ───────────────────────────────────────────
         if (HeroSlide::count() === 0) {
