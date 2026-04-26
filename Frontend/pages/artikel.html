@@ -100,11 +100,14 @@
     </button>
   </div>
   <div class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-search">
-      <form onsubmit="return navSearch(event)">
-        <input type="text" class="nav-q-mob" placeholder="Cari artikel..." />
-        <button type="submit"><i class="bi bi-search"></i></button>
-      </form>
+    <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Bahasa:</span>
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
     </div>
     <a href="/berita" class="active"><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
     <a href="/galeri" class=""><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
