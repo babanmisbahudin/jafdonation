@@ -16,39 +16,59 @@
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="tw-font-sans">
-<nav class="navbar navbar-expand-lg bg-white sticky-top" style="border-bottom:3px solid #1A5276;box-shadow:0 2px 10px rgba(0,0,0,.07);">
+<nav class="site-nav">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2 py-2" href="/">
-      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:44px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    <a class="nav-logo" href="/">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:48px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
     </a>
-    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
+    <div class="nav-links" id="navLinks">
+      <a href="/berita" data-i18n="nav.berita" class="active">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi">Donasi</a>
+      <a href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
+    </div>
+    <div class="nav-actions">
+      <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+        <input type="text" class="nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <button type="submit" style="background:#005BAA;color:#fff;border:1.5px solid #005BAA;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+          <i class="bi bi-search" style="font-size:.75rem;"></i>
+        </button>
+      </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <i class="bi bi-list"></i>
     </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav mx-auto gap-0">
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/" data-i18n="nav.home">Beranda</a></li>
-        <li class="nav-item"><a style="color:#1A5276;background:#EBF5FB;border-radius:6px;font-size:.85rem" class="nav-link px-3 fw-semibold" href="/berita" data-i18n="nav.berita">Berita</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/galeri" data-i18n="nav.galeri">Galeri</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/donasi" data-i18n="nav.donasi">Donasi</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a></li>
-        <li class="nav-item"><a class="nav-link px-3 fw-semibold" style="font-size:.85rem;" href="/kontak" data-i18n="nav.kontak">Kontak</a></li>
-      </ul>
-      <div class="d-flex align-items-center gap-2 py-2">
-        <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
-          <input type="text" class="nav-q" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
-          <button type="submit" style="background:#1A5276;color:#fff;border:1.5px solid #1A5276;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
-            <i class="bi bi-search" style="font-size:.75rem;"></i>
-          </button>
-        </form>
-      <div class="d-flex align-items-center gap-2 ms-2">
-        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia" style="background:none;border:1.5px solid transparent;border-radius:5px;padding:2px 5px;cursor:pointer;opacity:.5;display:flex;align-items:center;">
-          <img src="https://flagcdn.com/20x15/id.png" alt="ID" style="width:20px;height:14px;border-radius:2px;" />
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="/berita" class="active"><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri" class=""><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi" class=""><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/benah-kampung" class=""><i class="bi bi-house me-2"></i><span data-i18n="nav.benah">Benah Kampung</span></a>
+    <a href="/kontak" class=""><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+    <div style="padding:6px 16px;display:flex;align-items:center;gap:6px;">
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
+    </div>
+    <div style="padding:10px 16px;">
+      <form class="d-flex" onsubmit="return navSearch(event)">
+        <input type="text" class="nav-q-mob form-control form-control-sm" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border-radius:20px 0 0 20px;border:1.5px solid #cbd5e1;border-right:none;" />
+        <button type="submit" class="btn btn-sm" style="background:#005BAA;color:#fff;border-radius:0 20px 20px 0;border:1.5px solid #005BAA;padding:6px 14px;">
+          <i class="bi bi-search"></i>
         </button>
-        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English" style="background:none;border:1.5px solid transparent;border-radius:5px;padding:2px 5px;cursor:pointer;opacity:.5;display:flex;align-items:center;">
-          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" style="width:20px;height:14px;border-radius:2px;" />
-        </button>
-      </div>
-      </div>
+      </form>
     </div>
   </div>
 </nav>
@@ -306,12 +326,11 @@
 
   function navSearch(e) {
     e.preventDefault();
-    const q = e.target.querySelector('.nav-q').value.trim();
-    if (q) {
-      document.getElementById('searchInput').value = q;
-      currentPage = 1;
-      loadArticles();
-    }
+    const input = e.target.querySelector('.nav-q, .nav-q-mob');
+    const q = input ? input.value.trim() : '';
+    if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
+    return false;
+  }
     return false;
   }
   initLang();
