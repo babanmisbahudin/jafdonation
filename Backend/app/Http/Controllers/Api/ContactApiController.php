@@ -23,7 +23,7 @@ class ContactApiController extends Controller
         $contact = ContactMessage::create($validated);
 
         try {
-            $to = env('CONTACT_NOTIFY_EMAIL', 'jatiwangiartfacktory@gmail.com');
+            $to = env('CONTACT_NOTIFY_EMAIL', 'jatiwangiartfactory@gmail.com');
             Mail::to($to)->send(new ContactNotificationMail($contact));
         } catch (\Exception $e) {
             // Mail failure doesn't affect the response
