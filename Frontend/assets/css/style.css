@@ -49,11 +49,16 @@ body {
 @media (max-width: 991px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; align-items: center; }
+  .nav-actions form { display: none; }
   .mobile-nav { background: #fff; border-top: 1px solid #e0e0e0; padding: 8px 0; }
   .mobile-nav.open { display: block; }
   .mobile-nav a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; color: #222; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
   .mobile-nav a:hover { color: #005BAA; background: #f8faff; }
   .mobile-nav a.active { color: #005BAA; }
+  .mobile-nav-search { padding: 10px 16px; border-bottom: 1px solid #f0f0f0; }
+  .mobile-nav-search form { display: flex; }
+  .mobile-nav-search input { flex: 1; border: 1.5px solid #cbd5e1; border-right: none; border-radius: 20px 0 0 20px; font-size: .82rem; padding: 7px 14px; outline: none; }
+  .mobile-nav-search button { background: #005BAA; color: #fff; border: 1.5px solid #005BAA; border-radius: 0 20px 20px 0; padding: 7px 14px; cursor: pointer; }
 }
 
 /* ---- Hero Carousel ---- */
