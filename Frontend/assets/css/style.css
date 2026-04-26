@@ -49,7 +49,7 @@ body {
 @media (max-width: 991px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; align-items: center; }
-  .nav-actions form { display: none; }
+  .site-nav .nav-actions form { display: none !important; }
   .mobile-nav { background: #fff; border-top: 1px solid #e0e0e0; padding: 8px 0; }
   .mobile-nav.open { display: block; }
   .mobile-nav a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; color: #222; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
