@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactNotificationMail;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactApiController extends Controller
 {
@@ -18,7 +20,14 @@ class ContactApiController extends Controller
             'message' => 'required|string|max:3000',
         ]);
 
-        ContactMessage::create($validated);
+        $contact = ContactMessage::create($validated);
+
+        try {
+            $to = env('CONTACT_NOTIFY_EMAIL', 'jatiwangiartfacktory@gmail.com');
+            Mail::to($to)->send(new ContactNotificationMail($contact));
+        } catch (\Exception $e) {
+            // Mail failure doesn't affect the response
+        }
 
         return response()->json([
             'message' => 'Pesan Anda berhasil dikirim. Kami akan segera menghubungi Anda.',
