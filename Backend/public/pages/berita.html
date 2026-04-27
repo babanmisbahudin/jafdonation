@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berita & Kegiatan - Jaf Donation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { prefix: 'tw-', corePlugins: { preflight: false },
+      theme: { extend: { colors: { primary: '#1A5276', secondary: '#2980B9', accent: '#E8F4FD', gold: '#C8A44A' } } } }
+  </script>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="tw-font-sans">
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="/">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:48px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/berita" data-i18n="nav.berita" class="active">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi">Donasi</a>
+      <a href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
+    </div>
+    <div class="nav-actions">
+      <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+        <input type="text" class="nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <button type="submit" style="background:#005BAA;color:#fff;border:1.5px solid #005BAA;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+          <i class="bi bi-search" style="font-size:.75rem;"></i>
+        </button>
+      </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Bahasa:</span>
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
+    </div>
+    <a href="/berita" class="active"><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri" class=""><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi" class=""><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/benah-kampung" class=""><i class="bi bi-house me-2"></i><span data-i18n="nav.benah">Benah Kampung</span></a>
+    <a href="/kontak" class=""><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+  </div>
+</nav>
+
+  <div class="page-header">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="tw-mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/" data-i18n="nav.home">Beranda</a></li>
+          <li class="breadcrumb-item active">Berita & Kegiatan</li>
+        </ol>
+      </nav>
+      <h1 class="tw-text-4xl tw-font-serif tw-font-bold">Berita & Kegiatan</h1>
+      <p class="tw-text-white/80 tw-mt-2" data-i18n="berita.sub">Kisah nyata kebaikan dari seluruh penjuru Indonesia</p>
+    </div>
+  </div>
+
+  <section class="tw-py-12 tw-bg-gray-50">
+    <div class="container">
+      <!-- Filter -->
+      <div class="d-flex align-items-center gap-3 tw-mb-8 flex-wrap">
+        <div class="flex-grow-1">
+          <div class="input-group">
+            <span class="input-group-text tw-bg-white tw-border-gray-200"><i class="bi bi-search tw-text-gray-400"></i></span>
+            <input type="text" id="searchInput" class="form-control tw-border-gray-200" placeholder="Cari berita..." data-i18n-ph="berita.search" />
+          </div>
+        </div>
+        <select id="categoryFilter" class="form-select tw-w-auto tw-border-gray-200">
+          <option value="">Semua Kategori</option>
+          <option value="amal">Amal</option>
+          <option value="kesehatan">Kesehatan</option>
+          <option value="pendidikan">Pendidikan</option>
+          <option value="budaya-humanis">Budaya Humanis</option>
+          <option value="lingkungan">Lingkungan</option>
+        </select>
+        <select id="regionFilter" class="form-select tw-w-auto tw-border-gray-200">
+          <option value="">Semua Wilayah</option>
+          <option value="jakarta">Jakarta</option>
+          <option value="jawa-bali">Jawa-Bali</option>
+          <option value="sumatera">Sumatera</option>
+          <option value="kalimantan">Kalimantan</option>
+          <option value="sulawesi">Sulawesi</option>
+          <option value="papua">Papua</option>
+          <option value="internasional">Internasional</option>
+        </select>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingState" class="text-center tw-py-16">
+        <div class="spinner-border tw-text-primary" role="status"></div>
+        <p class="tw-text-gray-400 tw-mt-3">Memuat berita...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="text-center tw-py-16 d-none">
+        <i class="bi bi-newspaper tw-text-gray-300 tw-text-6xl d-block tw-mb-4"></i>
+        <p class="tw-text-gray-400 tw-text-lg">Belum ada berita yang tersedia.</p>
+      </div>
+
+      <!-- News Grid -->
+      <div id="newsGrid" class="row g-4 d-none"></div>
+
+      <!-- Pagination -->
+      <nav id="paginationWrapper" class="d-flex justify-content-center tw-mt-10 d-none">
+        <ul id="pagination" class="pagination"></ul>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+<footer style="background:#1a1a1a;">
+  <div style="padding:16px 20px;text-align:center;">
+    <a href="https://github.com/babanmisbahudin" target="_blank" rel="noopener" style="font-size:clamp(9px,2.5vw,12px);color:#999;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Copyright &copy; 2025 Yayasan Daun Salambar &mdash; Jatiwangi Art Factory</a>
+  </div>
+</footer>
+
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  let currentPage = 1;
+  let debounceTimer;
+
+  const newsGrid = document.getElementById('newsGrid');
+  const loadingState = document.getElementById('loadingState');
+  const emptyState = document.getElementById('emptyState');
+  const paginationWrapper = document.getElementById('paginationWrapper');
+  const paginationEl = document.getElementById('pagination');
+
+  function getCategoryBadge(category) {
+    const colors = {
+      'amal': 'tw-bg-red-100 tw-text-red-600',
+      'kesehatan': 'tw-bg-green-100 tw-text-green-600',
+      'pendidikan': 'tw-bg-blue-100 tw-text-blue-600',
+      'lingkungan': 'tw-bg-emerald-100 tw-text-emerald-600',
+      'budaya-humanis': 'tw-bg-purple-100 tw-text-purple-600',
+    };
+    const slug = category?.slug || '';
+    const cls = colors[slug] || 'tw-bg-primary/10 tw-text-primary';
+    return `<span class="${cls} tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">${category?.name || 'Umum'}</span>`;
+  }
+
+  function getThumbnailHtml(article, featured = false) {
+    const h = featured ? 'tw-h-64' : 'tw-h-48';
+    if (article.thumbnail_url) {
+      return `<img src="${article.thumbnail_url}" alt="${article.title}" class="${h} tw-w-full tw-object-cover" />`;
+    }
+    const icons = { 'amal':'bi-house-fill tw-text-primary', 'kesehatan':'bi-hospital-fill tw-text-green-500',
+      'pendidikan':'bi-mortarboard-fill tw-text-blue-500', 'lingkungan':'bi-tree-fill tw-text-emerald-500',
+      'budaya-humanis':'bi-flower1 tw-text-purple-500' };
+    const slug = article.category?.slug || '';
+    const icon = icons[slug] || 'bi-newspaper tw-text-primary';
+    const bgs = { 'amal':'tw-bg-accent', 'kesehatan':'tw-bg-green-50', 'pendidikan':'tw-bg-blue-50',
+      'lingkungan':'tw-bg-emerald-50', 'budaya-humanis':'tw-bg-purple-50' };
+    const bg = bgs[slug] || 'tw-bg-primary/10';
+    return `<div class="${bg} ${h} d-flex align-items-center justify-content-center"><i class="bi ${icon} tw-text-5xl"></i></div>`;
+  }
+
+  function renderArticles(articles) {
+    if (!articles.length) {
+      newsGrid.classList.add('d-none');
+      emptyState.classList.remove('d-none');
+      return;
+    }
+    emptyState.classList.add('d-none');
+    newsGrid.classList.remove('d-none');
+
+    const [featured, ...rest] = articles;
+
+    let html = '';
+
+    // Featured article (first one)
+    html += `
+      <div class="col-12">
+        <article class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-lg tw-transition-all d-md-flex tw-border tw-border-gray-100">
+          <div class="tw-flex-shrink-0" style="width:320px;min-height:256px;">
+            ${getThumbnailHtml(featured, true)}
+          </div>
+          <div class="tw-p-6 d-flex flex-column justify-content-center">
+            <div class="d-flex gap-2 tw-mb-3">
+              <span class="tw-bg-red-100 tw-text-red-600 tw-text-xs tw-font-semibold tw-px-2 tw-py-1 tw-rounded-full">TERBARU</span>
+              ${getCategoryBadge(featured.category)}
+            </div>
+            <h3 class="tw-text-primary tw-font-bold tw-text-2xl tw-mb-3 tw-font-serif">${featured.title}</h3>
+            <p class="tw-text-gray-500 tw-leading-relaxed tw-mb-4">${featured.excerpt || ''}</p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="tw-text-gray-400 tw-text-sm"><i class="bi bi-calendar3 me-1"></i>${featured.published_at || ''}</span>
+              <a href="/artikel?slug=${featured.slug}" class="btn tw-bg-primary tw-text-white tw-text-sm tw-px-5 tw-py-2 tw-rounded-full">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </article>
+      </div>`;
+
+    // Remaining articles as cards
+    rest.forEach(article => {
+      html += `
+        <div class="col-lg-4 col-md-6">
+          <article class="news-card tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-sm hover:tw-shadow-xl tw-transition-all tw-border tw-border-gray-100 tw-h-full">
+            ${getThumbnailHtml(article)}
+            <div class="tw-p-5">
+              <div class="d-flex gap-2 tw-mb-3">
+                ${getCategoryBadge(article.category)}
+                ${article.region_label ? `<span class="tw-text-gray-400 tw-text-xs">${article.region_label}</span>` : ''}
+              </div>
+              <h5 class="tw-text-primary tw-font-bold tw-mb-2">${article.title}</h5>
+              <p class="tw-text-gray-500 tw-text-sm tw-mb-4">${article.excerpt || ''}</p>
+              <div class="d-flex justify-content-between">
+                <span class="tw-text-gray-400 tw-text-xs"><i class="bi bi-calendar3 me-1"></i>${article.published_at || ''}</span>
+                <a href="/artikel?slug=${article.slug}" class="tw-text-secondary tw-text-xs tw-font-semibold">Baca →</a>
+              </div>
+            </div>
+          </article>
+        </div>`;
+    });
+
+    newsGrid.innerHTML = html;
+  }
+
+  function renderPagination(meta) {
+    if (meta.last_page <= 1) {
+      paginationWrapper.classList.add('d-none');
+      return;
+    }
+    paginationWrapper.classList.remove('d-none');
+
+    let html = `<li class="page-item ${meta.current_page === 1 ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page - 1}">&laquo;</a></li>`;
+
+    for (let i = 1; i <= meta.last_page; i++) {
+      html += `<li class="page-item ${i === meta.current_page ? 'active' : ''}">
+        <a class="page-link ${i === meta.current_page ? 'tw-bg-primary tw-border-primary' : ''}" href="#" data-page="${i}">${i}</a></li>`;
+    }
+
+    html += `<li class="page-item ${meta.current_page === meta.last_page ? 'disabled' : ''}">
+      <a class="page-link" href="#" data-page="${meta.current_page + 1}">&raquo;</a></li>`;
+
+    paginationEl.innerHTML = html;
+
+    paginationEl.querySelectorAll('a[data-page]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const p = parseInt(a.dataset.page);
+        if (p >= 1 && p <= meta.last_page) {
+          currentPage = p;
+          loadArticles();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  async function loadArticles() {
+    loadingState.classList.remove('d-none');
+    newsGrid.classList.add('d-none');
+    emptyState.classList.add('d-none');
+    paginationWrapper.classList.add('d-none');
+
+    const search = document.getElementById('searchInput').value.trim();
+    const category = document.getElementById('categoryFilter').value;
+    const region = document.getElementById('regionFilter').value;
+
+    const params = new URLSearchParams({ page: currentPage });
+    if (search) params.set('search', search);
+    if (category) params.set('category', category);
+    if (region) params.set('region', region);
+
+    try {
+      const res = await fetch(`${window.API_BASE}/articles?${params}`);
+      const json = await res.json();
+      loadingState.classList.add('d-none');
+      renderArticles(json.data || []);
+      renderPagination(json.meta || { current_page: 1, last_page: 1, total: 0 });
+    } catch (e) {
+      loadingState.classList.add('d-none');
+      emptyState.classList.remove('d-none');
+    }
+  }
+
+  // Filter listeners with debounce for search
+  document.getElementById('searchInput').addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => { currentPage = 1; loadArticles(); }, 400);
+  });
+  document.getElementById('categoryFilter').addEventListener('change', () => { currentPage = 1; loadArticles(); });
+  document.getElementById('regionFilter').addEventListener('change', () => { currentPage = 1; loadArticles(); });
+
+  // Handle ?search= from nav search bar
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('search');
+    if (q) document.getElementById('searchInput').value = q;
+  })();
+
+  loadArticles();
+
+  function navSearch(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('.nav-q, .nav-q-mob');
+    const q = input ? input.value.trim() : '';
+    if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
+    return false;
+  }
+  initLang();
+</script>
+</body>
+</html>

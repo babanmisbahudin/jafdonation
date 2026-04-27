@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jatiwangi Art Factory - Seni untuk Kehidupan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:    #005BAA;
+      --blue-dk: #004080;
+      --orange:  #E55A00;
+      --green:   #2e7d32;
+      --navy:    #0a1f5e;
+      --gray-bg: #f5f5f5;
+      --border:  #e0e0e0;
+      --text:    #222222;
+      --muted:   #666666;
+    }
+    * { font-family: 'Noto Sans', sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+    body { color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAVBAR ── */
+    .site-nav {
+      background: #fff;
+      border-bottom: 3px solid var(--blue);
+      position: sticky; top: 0; z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .site-nav .container { display: flex; align-items: center; gap: 0; padding-top: 0; padding-bottom: 0; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; padding: 10px 0; flex-shrink: 0; }
+    .nav-logo-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon i { color: #fff; font-size: 22px; }
+    .nav-logo-text .main { font-size: 15px; font-weight: 800; color: var(--blue); line-height: 1.2; }
+    .nav-logo-text .sub  { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+    .nav-links { display: flex; align-items: stretch; margin-left: 20px; flex: 1; }
+    .nav-links a {
+      display: flex; align-items: center;
+      font-size: 12.5px; font-weight: 600; color: var(--text);
+      padding: 0 13px; height: 100%; border-bottom: 3px solid transparent;
+      transition: .15s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+    .nav-links a.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+    .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; padding: 10px 0; }
+    .btn-benah {
+      background: #1a1a1a; color: #fff; font-size: 11.5px; font-weight: 700;
+      padding: 7px 14px; border-radius: 3px; text-transform: uppercase; letter-spacing: .04em;
+      border: none; transition: .15s;
+    }
+    .btn-benah:hover { background: #333; color: #fff; }
+
+    .nav-search { width: 28px; height: 28px; border-radius: 50%; background: #f0f0f0; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #555; transition: .15s; }
+    .nav-search:hover { background: var(--blue); color: #fff; }
+    .nav-toggle { display: none; border: none; background: none; font-size: 24px; color: var(--blue); cursor: pointer; padding: 8px; }
+
+    /* ── LANG SWITCHER ── */
+    .lang-switcher { display: flex; align-items: center; gap: 3px; margin-left: 6px; }
+    .lang-btn {
+      background: none; border: 1.5px solid transparent; border-radius: 5px;
+      padding: 2px 5px; cursor: pointer; line-height: 1; transition: .15s;
+      opacity: .45; display: flex; align-items: center;
+    }
+    .lang-btn img { width: 20px; height: 14px; display: block; border-radius: 2px; }
+    .lang-btn.active { border-color: var(--blue) !important; opacity: 1 !important; }
+    .lang-btn:hover { opacity: .8 !important; }
+
+    /* ── HERO ── */
+    /* ── HERO SLIDER ── */
+    .hero-slider { position: relative; }
+    .hero-slide {
+      padding: 36px 0 0;
+      position: relative; overflow: hidden;
+      min-height: 420px;
+      display: flex; flex-direction: column;
+    }
+    .hero-slide-1 { background: linear-gradient(135deg, #1a4a8a 0%, #0066cc 45%, #004499 100%); }
+    .hero-slide-2 { background: linear-gradient(135deg, #005A2B 0%, #007a3b 45%, #004d1f 100%); }
+    .hero-slide-3 { background: linear-gradient(135deg, #6a0dad 0%, #9b30d9 45%, #4a007a 100%); }
+    .hero-slide-4 { background: linear-gradient(135deg, #7b1416 0%, #b22222 45%, #560e10 100%); }
+    .hero-slide::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-body { position: relative; z-index: 1; flex: 1; }
+    .hero-campaign-tag {
+      display: inline-block;
+      background: var(--orange); color: #fff;
+      font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 2px;
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 14px;
+    }
+    .hero-title-1 {
+      font-size: 52px; font-weight: 800; color: #fff;
+      line-height: 1.0; text-transform: uppercase; letter-spacing: .02em;
+    }
+    .hero-title-2 {
+      font-size: 52px; font-weight: 800; color: #FFD700;
+      line-height: 1.05; text-transform: uppercase; letter-spacing: .02em;
+      margin-bottom: 18px;
+    }
+    .hero-desc { color: rgba(255,255,255,.88); font-size: 13.5px; line-height: 1.7; margin-bottom: 14px; max-width: 480px; }
+    .hero-quote { color: rgba(255,255,255,.7); font-size: 12.5px; font-style: italic; line-height: 1.6; margin-bottom: 6px; }
+    .hero-author { color: rgba(255,255,255,.55); font-size: 11.5px; }
+    /* slider controls */
+    .hero-indicators {
+      position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px; z-index: 10;
+    }
+    .hero-indicators button {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.6); background: transparent;
+      padding: 0; cursor: pointer; transition: .2s;
+    }
+    .hero-indicators button.active { background: #fff; border-color: #fff; }
+    .hero-prev, .hero-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 10; background: rgba(0,0,0,.3); border: none; color: #fff;
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: .2s; backdrop-filter: blur(4px);
+    }
+    .hero-prev { left: 14px; }
+    .hero-next { right: 14px; }
+    .hero-prev:hover, .hero-next:hover { background: rgba(0,0,0,.55); }
+
+    /* donation card */
+    .donate-card {
+      background: #fff;
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+      max-width: 300px;
+      margin-left: auto;
+    }
+    .donate-card-header {
+      background: var(--blue); color: #fff;
+      text-align: center; padding: 10px;
+      border-radius: 4px; margin-bottom: 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .donate-card .qr-placeholder {
+      width: 120px; height: 120px; background: #f0f0f0; border: 1px solid #ddd;
+      margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px;
+    }
+    .donate-card .qr-placeholder i { font-size: 64px; color: #ccc; }
+    .donate-card .amount {
+      text-align: center; font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 4px;
+    }
+    .donate-card .amount-sub { text-align: center; font-size: 11px; color: #888; margin-bottom: 14px; }
+    .donate-card .pay-logos {
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .pay-logo-item {
+      background: #f5f5f5; border: 1px solid #e0e0e0;
+      padding: 3px 8px; border-radius: 3px;
+      font-size: 9px; font-weight: 700; color: #555;
+    }
+    .donate-card .btn-donate-now {
+      display: block; background: var(--orange); color: #fff;
+      text-align: center; padding: 10px; border-radius: 4px;
+      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+      transition: .15s;
+    }
+    .donate-card .btn-donate-now:hover { background: #c44d00; }
+
+    /* hero bottom bar */
+    .hero-bottom {
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(4px);
+      padding: 10px 0;
+      margin-top: 24px;
+    }
+    .hero-bottom .bank-logos { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .bank-logo-badge {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+      color: #fff; font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 3px;
+    }
+    .hero-bottom .wa-btn {
+      background: #25d366; color: #fff;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: .15s;
+    }
+    .hero-bottom .wa-btn:hover { background: #1da851; }
+
+    /* ── ABOUT / STATS ── */
+    .about-section { background: #fff; padding: 54px 0 40px; }
+    .about-title {
+      font-size: 22px; font-weight: 800; color: var(--text);
+      text-transform: uppercase; letter-spacing: .02em;
+      text-align: center; margin-bottom: 14px; line-height: 1.3;
+    }
+    .about-desc { text-align: center; font-size: 13.5px; color: var(--muted); line-height: 1.8; max-width: 680px; margin: 0 auto 32px; }
+    .about-photo-box {
+      width: 100%; padding-top: 62%; position: relative;
+      background: #dce8f5; border-radius: 2px;
+    }
+    .about-photo-box .ph-inner {
+      position: absolute; inset: 0; border-radius: 2px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #b8d4ee 0%, #8ab8de 100%);
+    }
+    .about-photo-box .ph-inner i { font-size: 56px; color: rgba(0,91,170,.3); }
+    .about-photo-btn {
+      display: flex; justify-content: center;
+      padding-top: 18px; flex-wrap: wrap; gap: 6px;
+    }
+    .about-photos { margin-bottom: 8px; }
+    .btn-green-outline {
+      border: 2px solid var(--green); color: var(--green); background: transparent;
+      padding: 10px 32px; border-radius: 3px; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em; transition: .15s; display: inline-block;
+    }
+    .btn-green-outline:hover { background: var(--green); color: #fff; }
+    .btn-dark-fill {
+      border: 2px solid #1a1a1a; color: #fff; background: #1a1a1a;
+      padding: 10px 32px; border-radius: 3px; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em; transition: .15s; display: inline-block;
+    }
+    .btn-dark-fill:hover { background: #333; border-color: #333; }
+
+    /* ── MISSION (VISI) ── */
+    .mission-section { background: #fff; padding: 0 0 54px; }
+    .mission-left {
+      position: relative; padding-top: 75%; overflow: hidden;
+      background: linear-gradient(135deg, #8ab8de 0%, #5594c4 100%);
+    }
+    .mission-left .ph-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mission-left .ph-inner i { font-size: 80px; color: rgba(255,255,255,.3); }
+    .mission-right { padding: 40px 48px 40px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .mission-right .mission-title {
+      font-size: 20px; font-weight: 800; color: var(--blue);
+      text-transform: uppercase; letter-spacing: .03em;
+      line-height: 1.35; margin-bottom: 20px;
+    }
+    .mission-right p { font-size: 13.5px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+
+    /* ── BANTUAN AMAL ── */
+    .bantuan-section { background: var(--gray-bg); padding: 54px 0; }
+    .sec-title {
+      font-size: 22px; font-weight: 800; color: var(--text);
+      text-transform: uppercase; letter-spacing: .03em;
+      text-align: center; margin-bottom: 6px;
+    }
+    .sec-divider {
+      width: 48px; height: 3px; background: var(--orange);
+      margin: 0 auto 36px;
+    }
+    .bantuan-item { text-align: center; }
+    .circle-photo {
+      width: 140px; height: 140px; border-radius: 50%;
+      margin: 0 auto 16px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      border: 3px solid #d0e4f7;
+    }
+    .circle-photo.cp-1 { background: linear-gradient(135deg, #b8d4ee, #5594c4); }
+    .circle-photo.cp-2 { background: linear-gradient(135deg, #c8e6c9, #66bb6a); }
+    .circle-photo.cp-3 { background: linear-gradient(135deg, #fff9c4, #ffca28); }
+    .circle-photo.cp-4 { background: linear-gradient(135deg, #ffcdd2, #e57373); }
+    .circle-photo i { font-size: 52px; color: rgba(255,255,255,.7); }
+    .bantuan-item h5 { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; color: var(--text); }
+    .bantuan-item p { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; min-height: 56px; }
+    .btn-orange-sm {
+      background: var(--orange); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 6px 20px;
+      border-radius: 2px; text-transform: uppercase; letter-spacing: .04em;
+      border: none; transition: .15s; display: inline-block;
+    }
+    .btn-orange-sm:hover { background: #c44d00; color: #fff; }
+
+    /* ── CAMPAIGN FEATURE (navy) ── */
+    .campaign-section {
+      background: var(--navy);
+      padding: 54px 0;
+    }
+    .campaign-label {
+      font-size: 10px; font-weight: 700; color: rgba(255,255,255,.5);
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px;
+    }
+    .campaign-title {
+      font-size: 20px; font-weight: 800; color: #fff;
+      text-transform: uppercase; line-height: 1.35; margin-bottom: 20px;
+    }
+    .campaign-quote {
+      border-left: 4px solid var(--orange); padding-left: 16px;
+      margin-bottom: 20px;
+    }
+    .campaign-quote p { font-size: 14px; color: rgba(255,255,255,.8); font-style: italic; line-height: 1.7; margin: 0; }
+    .campaign-text { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.8; }
+
+    .campaign-right {
+      background: rgba(255,255,255,.06); border-radius: 6px;
+      padding: 32px 28px; height: 100%;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; border: 1px solid rgba(255,255,255,.12);
+    }
+    .campaign-big-num {
+      font-size: 80px; font-weight: 800; color: #fff;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .campaign-right-title {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,.8);
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 20px; line-height: 1.4;
+    }
+    .campaign-thumb {
+      width: 100%; height: 140px;
+      background: rgba(255,255,255,.1); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .campaign-thumb i { font-size: 52px; color: rgba(255,255,255,.3); }
+    .btn-campaign {
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 700; padding: 12px 28px;
+      border-radius: 3px; text-transform: uppercase; letter-spacing: .05em;
+      border: none; transition: .15s; display: inline-block;
+    }
+    .btn-campaign:hover { background: #c44d00; color: #fff; }
+
+    /* ── NEWS SECTION ── */
+    .news-section { background: #fff; padding: 54px 0 36px; }
+    .news-section-title {
+      font-size: 20px; font-weight: 800; color: var(--text);
+      text-transform: uppercase; letter-spacing: .03em;
+      margin-bottom: 6px;
+    }
+    .news-tabs-wrap {
+      border-bottom: 2px solid var(--blue);
+      margin-bottom: 28px; overflow-x: auto; white-space: nowrap;
+    }
+    .news-tabs-wrap .nav { flex-wrap: nowrap; }
+    .news-tabs-wrap .nav-link {
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      padding: 9px 14px; border: none; background: none;
+      border-radius: 0; border-bottom: 2px solid transparent;
+      transition: .15s; margin-bottom: -2px; display: inline-block;
+    }
+    .news-tabs-wrap .nav-link:hover { color: var(--blue); }
+    .news-tabs-wrap .nav-link.active {
+      color: #fff; background: var(--blue);
+      border-radius: 3px 3px 0 0;
+    }
+    .news-card { background: #fff; border: 1px solid var(--border); height: 100%; transition: .2s; }
+    .news-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+    .news-thumb {
+      height: 170px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .news-thumb.nt-1 { background: linear-gradient(135deg, #b8d4ee, #5594c4); }
+    .news-thumb.nt-2 { background: linear-gradient(135deg, #c8e6c9, #66bb6a); }
+    .news-thumb.nt-3 { background: linear-gradient(135deg, #ffe082, #ffca28); }
+    .news-thumb i { font-size: 52px; color: rgba(255,255,255,.5); }
+    .news-body { padding: 14px; }
+    .news-date { font-size: 11px; color: #999; margin-bottom: 6px; }
+    .news-body h6 { font-size: 13.5px; font-weight: 700; line-height: 1.5; margin-bottom: 8px; color: var(--text); }
+    .news-body h6:hover { color: var(--blue); cursor: pointer; }
+    .news-body p { font-size: 12px; color: var(--muted); line-height: 1.65; margin-bottom: 0; }
+    .news-more { font-size: 12.5px; font-weight: 700; color: var(--blue); display: inline-flex; align-items: center; gap: 4px; transition: .15s; }
+    .news-more:hover { color: var(--orange); }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { background: var(--gray-bg); padding: 42px 0 54px; }
+    .video-section .sec-title { text-align: left; }
+    .video-section .sec-divider { margin: 0 0 28px; }
+    .video-thumb {
+      position: relative; height: 180px; overflow: hidden; cursor: pointer;
+      border-radius: 2px;
+    }
+    .video-thumb.vt-1 { background: linear-gradient(135deg, #263238, #455a64); }
+    .video-thumb.vt-2 { background: linear-gradient(135deg, #1a237e, #303f9f); }
+    .video-thumb.vt-3 { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
+    .video-thumb .yt-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .yt-play {
+      width: 52px; height: 36px; background: #ff0000; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; transition: .15s;
+    }
+    .yt-play i { color: #fff; font-size: 16px; margin-left: 3px; }
+    .video-thumb:hover .yt-play { background: #cc0000; transform: scale(1.1); }
+    .video-thumb .yt-label {
+      position: absolute; bottom: 8px; left: 10px;
+      background: #ff0000; color: #fff; font-size: 9px; font-weight: 700;
+      padding: 2px 8px; border-radius: 2px;
+    }
+    .video-info { padding: 8px 0 0; }
+    .video-date { font-size: 11px; color: #999; margin-bottom: 4px; }
+    .video-title { font-size: 13px; font-weight: 600; line-height: 1.45; color: var(--text); }
+
+    /* ── QUOTE ── */
+    .quote-section { background: var(--gray-bg); border-top: 1px solid #e0e0e0; padding: 32px 0; }
+    .quote-section blockquote { font-size: 14px; font-style: italic; color: #555; text-align: center; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+
+    /* ── FOOTER ── */
+    footer { background: #1a1a1a; color: #999; }
+    .footer-sitemap { border-bottom: 1px solid #2a2a2a; padding: 40px 0 32px; }
+    .footer-sitemap-title {
+      font-size: 11px; font-weight: 700; color: #bbb;
+      text-transform: uppercase; letter-spacing: .1em;
+      text-align: center; margin-bottom: 32px;
+    }
+    .footer-col h6 {
+      font-size: 11px; font-weight: 700; color: #bbb;
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col ul li { margin-bottom: 7px; }
+    .footer-col ul li a { font-size: 12.5px; color: #888; transition: .15s; }
+    .footer-col ul li a:hover { color: #fff; }
+
+    /* ── BACK TO TOP ── */
+    #btt {
+      position: fixed; bottom: 20px; right: 20px;
+      width: 38px; height: 38px; background: var(--blue); color: #fff;
+      border: none; border-radius: 3px; font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: .3s; z-index: 999;
+    }
+    #btt.show { opacity: 1; pointer-events: all; }
+
+    /* slide show/hide */
+    .hero-slide { display: none; }
+    .hero-slide.active-slide { display: flex; }
+
+    /* ── MOBILE ── */
+    .mobile-nav { display: none; }
+
+    /* ─── Tablet (≤991px) ─── */
+    @media (max-width: 991px) {
+      /* Navbar */
+      .nav-links  { display: none; }
+      .site-nav .nav-actions form { display: none !important; }
+      .site-nav .lang-switcher { display: none !important; }
+      .nav-search { display: none; }
+      .btn-benah  { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-actions { gap: 4px; }
+      .home-nav-q { min-width: 100px; }
+
+      /* Mobile nav drawer */
+      .mobile-nav { background: #fff; border-top: 1px solid var(--border); padding: 8px 0; }
+      .mobile-nav.open { display: block; }
+      .mobile-nav a { display: block; padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--text); border-bottom: 1px solid #f0f0f0; }
+      .mobile-nav a:hover { color: var(--blue); background: #f8faff; }
+      .mobile-nav .mob-btn-row { display: flex; gap: 8px; padding: 12px 16px; }
+      .mobile-nav .mob-btn-row a { flex: 1; text-align: center; border: none; padding: 9px 0; border-radius: 3px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+      .mobile-nav-search { padding: 10px 16px; border-bottom: 1px solid #f0f0f0; }
+      .mobile-nav-search form { display: flex; }
+      .mobile-nav-search input { flex: 1; border: 1.5px solid #cbd5e1; border-right: none; border-radius: 20px 0 0 20px; font-size: .82rem; padding: 7px 14px; outline: none; }
+      .mobile-nav-search button { background: var(--blue); color: #fff; border: 1.5px solid var(--blue); border-radius: 0 20px 20px 0; padding: 7px 14px; cursor: pointer; }
+
+      /* Hero */
+      .hero-slide { min-height: unset; padding: 28px 0 0; }
+      .hero-title-1, .hero-title-2 { font-size: 34px; }
+      .hero-desc  { font-size: 12.5px; }
+      .donate-card { max-width: 100%; margin-top: 20px; }
+      .hero-bottom { padding: 10px 0; }
+      .hero-bottom .d-flex { flex-direction: column; align-items: flex-start; gap: 8px !important; }
+      .bank-logos { flex-wrap: wrap; }
+      .hero-prev, .hero-next { width: 34px; height: 34px; font-size: 15px; }
+      .hero-indicators { bottom: 42px; }
+
+      /* About */
+      .btn-green-outline, .btn-dark-fill { padding: 9px 22px; font-size: 12px; }
+
+      /* Mission */
+      .mission-right { padding: 28px 24px; }
+      .mission-left  { padding-top: 50%; }
+
+      /* Campaign */
+      .campaign-right { margin-top: 24px; }
+      .campaign-big-num { font-size: 60px; }
+
+      /* News */
+      .news-tabs-wrap { scrollbar-width: none; }
+      .news-tabs-wrap::-webkit-scrollbar { display: none; }
+
+      /* Video */
+      .video-thumb { height: 160px; }
+    }
+
+    /* ─── Phone (≤767px) ─── */
+    @media (max-width: 767px) {
+      /* Navbar: even tighter */
+
+      /* Hero */
+      .hero-title-1, .hero-title-2 { font-size: 28px; }
+      .hero-desc  { font-size: 12px; max-width: 100%; }
+      .hero-quote { font-size: 11.5px; }
+      .hero-slide { padding: 22px 0 0; }
+      .hero-indicators { bottom: 36px; }
+
+      /* Donate card inside hero — collapse QR, show only CTA */
+      .donate-card .qr-placeholder { width: 90px; height: 90px; }
+      .donate-card .qr-placeholder i { font-size: 46px; }
+      .donate-card { padding: 14px; }
+      .donate-card-header { font-size: 10px; padding: 8px; }
+
+      /* About */
+      .about-section { padding: 36px 0 28px; }
+      .about-title { font-size: 18px; }
+      .about-desc  { font-size: 12.5px; }
+      .about-photo-btn { padding-top: 12px; }
+      .btn-green-outline, .btn-dark-fill { padding: 8px 16px; font-size: 11.5px; }
+
+      /* Mission */
+      .mission-section { padding-bottom: 36px; }
+      .mission-right { padding: 24px 20px; }
+      .mission-right .mission-title { font-size: 16px; margin-bottom: 14px; }
+      .mission-right p { font-size: 12.5px; }
+
+      /* Bantuan / Programs */
+      .bantuan-section { padding: 36px 0; }
+      .sec-title { font-size: 18px; }
+      .circle-photo { width: 110px; height: 110px; }
+      .circle-photo i { font-size: 40px; }
+      .bantuan-item h5 { font-size: 11.5px; }
+      .bantuan-item p  { font-size: 11.5px; min-height: auto; }
+
+      /* Campaign */
+      .campaign-section { padding: 36px 0; }
+      .campaign-title { font-size: 17px; }
+      .campaign-big-num { font-size: 52px; }
+      .campaign-thumb { height: 110px; }
+      .campaign-text { font-size: 12.5px; }
+
+      /* News */
+      .news-section { padding: 36px 0 24px; }
+      .news-section-title { font-size: 17px; }
+      .news-thumb { height: 145px; }
+      .news-body h6 { font-size: 12.5px; }
+      .news-body p  { font-size: 11.5px; }
+
+      /* Video */
+      .video-section { padding: 30px 0 40px; }
+      .sec-title { font-size: 17px; }
+      .video-thumb { height: 145px; }
+      .video-title { font-size: 12.5px; }
+
+      /* Hero bottom */
+      .bank-logo-badge { font-size: 9.5px; padding: 3px 8px; }
+      .hero-bottom .wa-btn { font-size: 11px; }
+    }
+
+    /* ─── Small phone (≤575px) ─── */
+    @media (max-width: 575px) {
+      /* Navbar: hide action buttons entirely — they're in mobile nav */
+      .nav-actions form { display: none; }
+      .nav-logo-text .main { font-size: 13px; }
+      .nav-logo-text .sub  { font-size: 9px; }
+      .nav-logo-icon { width: 40px; height: 40px; }
+      .nav-logo-icon i { font-size: 18px; }
+
+      /* Hero */
+      .hero-title-1, .hero-title-2 { font-size: 24px; letter-spacing: 0; }
+      .hero-campaign-tag { font-size: 10px; padding: 3px 10px; }
+      .hero-desc  { font-size: 11.5px; line-height: 1.6; }
+      .hero-quote { display: none; }
+      .hero-author{ display: none; }
+      .hero-slide { padding: 18px 0 0; }
+      .hero-prev  { left: 6px; }
+      .hero-next  { right: 6px; }
+      .hero-indicators { bottom: 28px; gap: 5px; }
+
+      /* Donate card: compact */
+      .donate-card { padding: 12px; box-shadow: none; border: 1px solid #e0e0e0; }
+      .donate-card .qr-placeholder { width: 72px; height: 72px; }
+      .donate-card .qr-placeholder i { font-size: 36px; }
+      .donate-card .amount { font-size: 11.5px; }
+      .donate-card .amount-sub { font-size: 10px; }
+      .donate-card .btn-donate-now { font-size: 11.5px; padding: 8px; }
+      .hero-bottom { padding: 8px 0; }
+      .hero-bottom .d-flex { gap: 6px !important; }
+      .bank-logos span[style] { display: none; }
+
+      /* About */
+      .about-section { padding: 28px 0 20px; }
+      .about-title { font-size: 16px; }
+      .about-desc  { font-size: 12px; margin-bottom: 20px; }
+      .btn-green-outline, .btn-dark-fill { padding: 7px 14px; font-size: 11px; }
+
+      /* Mission */
+      .mission-right { padding: 20px 16px; }
+      .mission-right .mission-title { font-size: 15px; }
+
+      /* Programs */
+      .bantuan-section { padding: 28px 0; }
+      .sec-title { font-size: 16px; }
+      .circle-photo { width: 90px; height: 90px; }
+      .circle-photo i { font-size: 32px; }
+      .bantuan-item { padding: 0 4px; }
+      .bantuan-item h5 { font-size: 11px; }
+      .bantuan-item p  { font-size: 11px; }
+      .btn-orange-sm { font-size: 10px; padding: 5px 14px; }
+
+      /* Campaign */
+      .campaign-section { padding: 28px 0; }
+      .campaign-title { font-size: 15px; }
+      .campaign-big-num { font-size: 46px; }
+      .campaign-right { padding: 20px 16px; }
+      .btn-campaign { font-size: 12px; padding: 10px 20px; }
+
+      /* News */
+      .news-section { padding: 28px 0 18px; }
+      .news-section-title { font-size: 15px; }
+      .news-tabs-wrap .nav-link { font-size: 11px; padding: 8px 10px; }
+      .news-thumb { height: 130px; }
+
+      /* Video */
+      .video-section { padding: 24px 0 32px; }
+      .video-thumb { height: 130px; }
+
+      /* Quote */
+      .quote-section { padding: 22px 0; }
+      .quote-section blockquote { font-size: 12.5px; }
+
+
+      /* Back to top */
+      #btt { bottom: 12px; right: 12px; width: 34px; height: 34px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="/">
+      <img src="assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:48px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="/berita" data-i18n="nav.berita">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi">Donasi</a>
+      <a href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
+    </div>
+
+    <div class="nav-actions">
+      <form class="d-flex" onsubmit="return homeNavSearch(event)" style="margin:0;">
+        <input type="text" class="home-nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <button type="submit" style="background:var(--blue);color:#fff;border:1.5px solid var(--blue);border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+          <i class="bi bi-search" style="font-size:.75rem;"></i>
+        </button>
+      </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
+    </div>
+
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Bahasa:</span>
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
+    </div>
+    <a href="/berita"><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri"><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi"><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/benah-kampung"><i class="bi bi-house me-2"></i><span data-i18n="nav.benah">Benah Kampung</span></a>
+    <a href="/kontak"><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+  </div>
+</nav>
+
+<!-- ===== HERO SLIDER ===== -->
+<div class="hero-slider" id="heroSlider">
+
+  <!-- Slide 1 -->
+  <div class="hero-slide hero-slide-1 active-slide">
+    <div class="hero-body">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="hero-campaign-tag" data-i18n="hero.slide1.tag">Tahun Tanah — Triennale Seni &amp; Budaya 2025</div>
+            <div class="hero-title-1" data-i18n="hero.slide1.t1">SENI UNTUK</div>
+            <div class="hero-title-2" data-i18n="hero.slide1.t2">KEHIDUPAN</div>
+            <p class="hero-desc">Jatiwangi Art Factory (JAF) adalah komunitas seni berbasis di Jatiwangi, Majalengka, yang berkomitmen mengubah daerah melalui praktik seni kontemporer berbasis bumi.</p>
+            <p class="hero-quote">"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."</p>
+            <p class="hero-author">— Jatiwangi Art Factory</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="donate-card">
+              <div class="donate-card-header"><i class="bi bi-palette-fill me-2"></i>Jatiwangi Art Factory — Donasi</div>
+              <div class="qr-placeholder"><i class="bi bi-qr-code"></i></div>
+              <div class="amount">Bank BJB — 0118751892100</div>
+              <div class="amount-sub">a.n. Jatiwangi art Factory</div>
+              <div class="pay-logos">
+                <span class="pay-logo-item">Bank BJB</span>
+                <span class="pay-logo-item">SWIFT: PDJBIDJA</span>
+              </div>
+              <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i><span data-i18n="hero.donate">Donasi Sekarang</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom mt-4">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="bank-logos">
+            <span style="color:rgba(255,255,255,.5);font-size:11px;margin-right:4px;">Rekening Donasi:</span>
+            <span class="bank-logo-badge">Bank BJB 0118751892100</span>
+            <span class="bank-logo-badge">a.n. Jatiwangi art Factory</span>
+          </div>
+          <a href="https://wa.me/6281573213592" class="wa-btn"><i class="bi bi-whatsapp"></i> +62 815-7321-3592</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="hero-slide hero-slide-2">
+    <div class="hero-body">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="hero-campaign-tag" style="background:#fff;color:var(--green);" data-i18n="hero.slide2.tag">Rampak Genteng — Ritual Musik Komunal</div>
+            <div class="hero-title-1" data-i18n="hero.slide2.t1">TANAH UNTUK</div>
+            <div class="hero-title-2" data-i18n="hero.slide2.t2">SEMUA ORANG</div>
+            <p class="hero-desc">Rampak Genteng adalah ritual kolektif memainkan genteng atap sebagai instrumen musik, merayakan warisan budaya tanah liat Jatiwangi bersama warga.</p>
+            <p class="hero-quote">"Tanah adalah ingatan, dan seni adalah cara kita berbicara dengannya."</p>
+            <p class="hero-author">— Komunitas JAF</p>
+            <div class="mt-3">
+              <a href="/donasi" style="background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:10px 26px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;display:inline-block;">
+                <i class="bi bi-heart-fill me-2"></i>Donasi Sekarang
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center">
+            <div style="text-align:center;opacity:.18;">
+              <i class="bi bi-hospital-fill" style="font-size:180px;color:#fff;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom mt-4">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="bank-logos">
+            <span style="color:rgba(255,255,255,.5);font-size:11px;margin-right:4px;">Rekening Donasi:</span>
+            <span class="bank-logo-badge">Bank BJB 0118751892100</span>
+            <span class="bank-logo-badge">a.n. Jatiwangi art Factory</span>
+          </div>
+          <a href="https://wa.me/6281573213592" class="wa-btn"><i class="bi bi-whatsapp"></i> +62 815-7321-3592</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="hero-slide hero-slide-3">
+    <div class="hero-body">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="hero-campaign-tag" style="background:#FFD700;color:#333;" data-i18n="hero.slide3.tag">Terracotta Triennale — Pameran Seni Dunia</div>
+            <div class="hero-title-1" data-i18n="hero.slide3.t1">BERKARYA DARI</div>
+            <div class="hero-title-2" data-i18n="hero.slide3.t2">BUMI KITA</div>
+            <p class="hero-desc">Terracotta Triennale menghadirkan seniman lokal dan internasional yang berkolaborasi mengeksplorasi material tanah liat sebagai medium seni kontemporer.</p>
+            <p class="hero-quote">"Dari tanah kita lahir, dari tanah kita berkarya, untuk tanah kita kembali."</p>
+            <p class="hero-author">— Jatiwangi Art Factory, sejak 2005</p>
+            <div class="mt-3">
+              <a href="/donasi" style="background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:10px 26px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;display:inline-block;">
+                <i class="bi bi-heart-fill me-2"></i>Donasi Sekarang
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center">
+            <div style="text-align:center;opacity:.18;">
+              <i class="bi bi-mortarboard-fill" style="font-size:180px;color:#fff;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom mt-4">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="bank-logos">
+            <span style="color:rgba(255,255,255,.5);font-size:11px;margin-right:4px;">Rekening Donasi:</span>
+            <span class="bank-logo-badge">Bank BJB 0118751892100</span>
+            <span class="bank-logo-badge">a.n. Jatiwangi art Factory</span>
+          </div>
+          <a href="https://wa.me/6281573213592" class="wa-btn"><i class="bi bi-whatsapp"></i> +62 815-7321-3592</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="hero-slide hero-slide-4">
+    <div class="hero-body">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="hero-campaign-tag" data-i18n="hero.slide4.tag">Magister Reka Budaya — Program Akademik</div>
+            <div class="hero-title-1" data-i18n="hero.slide4.t1">BANGUN</div>
+            <div class="hero-title-2" data-i18n="hero.slide4.t2">BUDAYA LOKAL</div>
+            <p class="hero-desc">Program Magister Reka Budaya bersama Universitas Padjadjaran mengajak generasi muda merencanakan dan membangun ekosistem budaya daerah yang berkelanjutan.</p>
+            <p class="hero-quote">"Komunitas yang kuat tumbuh dari akar budayanya sendiri."</p>
+            <p class="hero-author">— Program Reka Budaya, JAF</p>
+            <div class="mt-3">
+              <a href="/donasi" style="background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:10px 26px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;display:inline-block;">
+                <i class="bi bi-heart-fill me-2"></i>Donasi Sekarang
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center">
+            <div style="text-align:center;opacity:.18;">
+              <i class="bi bi-shield-fill-check" style="font-size:180px;color:#fff;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-bottom mt-4">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="bank-logos">
+            <span style="color:rgba(255,255,255,.5);font-size:11px;margin-right:4px;">Rekening Donasi:</span>
+            <span class="bank-logo-badge">Bank BJB 0118751892100</span>
+            <span class="bank-logo-badge">a.n. Jatiwangi art Factory</span>
+          </div>
+          <a href="https://wa.me/6281573213592" class="wa-btn"><i class="bi bi-whatsapp"></i> +62 815-7321-3592</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="hero-prev" id="heroPrev"><i class="bi bi-chevron-left"></i></button>
+  <button class="hero-next" id="heroNext"><i class="bi bi-chevron-right"></i></button>
+  <div class="hero-indicators" id="heroIndicators">
+    <button class="active" data-slide="0"></button>
+    <button data-slide="1"></button>
+    <button data-slide="2"></button>
+    <button data-slide="3"></button>
+  </div>
+</div>
+
+
+<!-- ===== MISI / DENGAN CINTA KASIH ===== -->
+<section class="mission-section">
+  <div class="container-fluid px-0">
+    <div class="row g-0 align-items-stretch">
+      <div class="col-md-6">
+        <div class="mission-left">
+          <div class="ph-inner">
+            <i class="bi bi-emoji-smile-fill" style="font-size:90px;color:rgba(255,255,255,.25);"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mission-right">
+          <h3 class="mission-title">Seni Memiliki Vitalitas<br>untuk Mengubah Daerah</h3>
+          <p>
+            Jatiwangi Art Factory (JAF) adalah komunitas seni kontemporer yang berbasis
+            di Jatiwangi, Kabupaten Majalengka, Jawa Barat — berdiri sejak tahun 2005
+            di bawah naungan Yayasan Daun Salambar.
+          </p>
+          <p>
+            JAF berkomitmen membangun kapasitas masyarakat lokal melalui praktik seni
+            berbasis bumi (earth-based art), residensi seniman, pameran internasional,
+            dan program budaya komunal yang telah berjalan hampir dua dekade.
+          </p>
+          <p>
+            Dukungan Anda akan membantu JAF terus menggerakkan program Tahun Tanah,
+            Rampak Genteng, Terracotta Triennale, dan Dana Hibah Budaya Daerah.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BANTUAN AMAL ===== -->
+<section class="bantuan-section">
+  <div class="container">
+    <h2 class="sec-title" data-i18n="programs.title">Program JAF</h2>
+    <div class="sec-divider"></div>
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-6 col-md-3">
+        <div class="bantuan-item">
+          <div class="circle-photo cp-1">
+            <i class="bi bi-globe2"></i>
+          </div>
+          <h5>Tahun Tanah</h5>
+          <p>Triennale seni berbasis bumi yang dirayakan setiap tiga tahun sejak 2012</p>
+          <a href="/donasi" class="btn-orange-sm">Dukung</a>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="bantuan-item">
+          <div class="circle-photo cp-2">
+            <i class="bi bi-music-note-beamed"></i>
+          </div>
+          <h5>Rampak Genteng</h5>
+          <p>Ritual kolektif memainkan genteng atap sebagai instrumen musik komunal warga</p>
+          <a href="/donasi" class="btn-orange-sm">Dukung</a>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="bantuan-item">
+          <div class="circle-photo cp-3">
+            <i class="bi bi-brush-fill"></i>
+          </div>
+          <h5>Terracotta Triennale</h5>
+          <p>Pameran seni internasional mengeksplorasi material tanah liat sebagai medium ekspresi</p>
+          <a href="/donasi" class="btn-orange-sm">Dukung</a>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="bantuan-item">
+          <div class="circle-photo cp-4">
+            <i class="bi bi-award-fill"></i>
+          </div>
+          <h5>Hibah Budaya Daerah</h5>
+          <p>Dana hibah untuk mendukung inisiatif budaya dan seni komunitas lokal</p>
+          <a href="/donasi" class="btn-orange-sm">Dukung</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAMPAIGN FEATURE ===== -->
+<section class="campaign-section">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <div class="campaign-label">Residensi Seniman</div>
+        <h3 class="campaign-title">Ruang Berkarya<br>untuk Seniman Dunia</h3>
+        <div class="campaign-quote">
+          <p>"Jatiwangi adalah laboratorium hidup di mana seni dan kehidupan sehari-hari tidak bisa dipisahkan."</p>
+        </div>
+        <p class="campaign-text">
+          Program residensi JAF mengundang seniman lokal dan internasional untuk tinggal,
+          belajar, dan berkarya bersama warga Jatiwangi — mengeksplorasi tradisi gerabah,
+          pertanian, dan budaya Sunda dalam praktik seni kontemporer.
+        </p>
+        <br>
+        <p class="campaign-text">
+          Dukungan Anda membantu JAF menyediakan fasilitas studio, penginapan, dan program
+          residensi agar ekosistem seni Jatiwangi terus berkembang dan dikenal dunia.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="campaign-right">
+          <div class="campaign-big-num">20+</div>
+          <div class="campaign-right-title">Tahun Membangun<br>Ekosistem Seni Lokal</div>
+          <div class="campaign-thumb">
+            <i class="bi bi-palette-fill"></i>
+          </div>
+          <a href="/donasi" class="btn-campaign">
+            <i class="bi bi-heart-fill me-2"></i>Dukung Residensi Seniman
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BERITA & KISAH ===== -->
+<section class="news-section">
+  <div class="container">
+    <h2 class="news-section-title" data-i18n="news.title">Berita dan Kisah Inspiratif</h2>
+    <div class="sec-divider" style="margin:6px 0 0;"></div>
+
+    <div class="news-tabs-wrap mt-3">
+      <ul class="nav" id="newsTabs">
+        <li class="nav-item"><a class="nav-link active" href="#tab-berita" data-bs-toggle="tab" data-i18n="tab.berita">Berita</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-foto" data-bs-toggle="tab" data-i18n="tab.foto">Berita Foto</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-video" data-bs-toggle="tab" data-i18n="tab.video">Video</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-pub" data-bs-toggle="tab" data-i18n="tab.pub">Publikasi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-buletin" data-bs-toggle="tab" data-i18n="tab.buletin">Buletin</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-humanis" data-bs-toggle="tab" data-i18n="tab.humanis">Kisah Humanis</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-sehat" data-bs-toggle="tab" data-i18n="tab.sehat">Info Sehat</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tab-resep" data-bs-toggle="tab" data-i18n="tab.resep">Resep Vegetarian</a></li>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <!-- Berita Tab -->
+      <div class="tab-pane fade show active" id="tab-berita">
+        <div class="row g-3 mb-3">
+          <div class="col-md-4">
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-1"><i class="bi bi-globe2"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>18 April 2025</div>
+                  <h6>Tahun Tanah 2025: Merayakan Dua Dekade Seni Berbasis Bumi di Jatiwangi</h6>
+                  <p>JAF kembali menggelar Tahun Tanah sebagai puncak triennale seni yang mengundang warga, seniman lokal, dan tamu internasional...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-2"><i class="bi bi-music-note-beamed"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>12 April 2025</div>
+                  <h6>Rampak Genteng Malam: 500 Warga Bergabung dalam Ritual Musik Genteng Massal</h6>
+                  <p>Malam Rampak Genteng kembali digelar di halaman pabrik genteng Jatiwangi, menyatukan warga dalam irama kolektif...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4">
+            <a href="/berita" style="text-decoration:none;color:inherit;display:block;height:100%;">
+              <div class="news-card" style="cursor:pointer;">
+                <div class="news-thumb nt-3"><i class="bi bi-brush-fill"></i></div>
+                <div class="news-body">
+                  <div class="news-date"><i class="bi bi-calendar3 me-1"></i>5 April 2025</div>
+                  <h6>Seniman dari 12 Negara Ikuti Residensi Terracotta Jatiwangi 2025</h6>
+                  <p>Program residensi tahunan JAF kembali menyambut seniman dari berbagai penjuru dunia untuk berkarya dengan tanah liat Jatiwangi...</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="text-end">
+          <a href="/berita" class="news-more">Selengkapnya <i class="bi bi-chevron-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Berita Foto -->
+      <div class="tab-pane fade" id="tab-foto">
+        <div class="row g-3 mb-3"></div>
+        <div class="text-end"><a href="/galeri" class="news-more">Selengkapnya <i class="bi bi-chevron-right"></i></a></div>
+      </div>
+
+      <!-- Video -->
+      <div class="tab-pane fade" id="tab-video">
+        <div class="row g-3 mb-3"></div>
+        <div class="text-end"><a href="/galeri" class="news-more">Selengkapnya <i class="bi bi-chevron-right"></i></a></div>
+      </div>
+
+      <!-- Other tabs (placeholder) -->
+      <div class="tab-pane fade" id="tab-pub"><div class="py-5 text-center text-muted"><i class="bi bi-journal-text fs-1 d-block mb-2"></i>Belum ada publikasi terbaru.</div></div>
+      <div class="tab-pane fade" id="tab-buletin"><div class="py-5 text-center text-muted"><i class="bi bi-newspaper fs-1 d-block mb-2"></i>Belum ada buletin terbaru.</div></div>
+      <div class="tab-pane fade" id="tab-humanis"><div class="py-5 text-center text-muted"><i class="bi bi-book-fill fs-1 d-block mb-2"></i>Belum ada kisah humanis.</div></div>
+      <div class="tab-pane fade" id="tab-sehat"><div class="py-5 text-center text-muted"><i class="bi bi-heart-pulse-fill fs-1 d-block mb-2"></i>Belum ada info sehat.</div></div>
+      <div class="tab-pane fade" id="tab-resep"><div class="py-5 text-center text-muted"><i class="bi bi-egg-fried fs-1 d-block mb-2"></i>Belum ada resep vegetarian.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<section class="video-section">
+  <div class="container">
+    <h2 class="sec-title" data-i18n="video.title">Video</h2>
+    <div class="sec-divider"></div>
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <a href="/galeri">
+          <div class="video-thumb vt-1">
+            <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
+          </div>
+        </a>
+        <div class="video-info">
+          <div class="video-date">2025-04-08 02:01:30</div>
+          <div class="video-title">Sang Pemari yang Tak Pernah Menyerah</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/galeri">
+          <div class="video-thumb vt-2">
+            <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
+          </div>
+        </a>
+        <div class="video-info">
+          <div class="video-date">2025-03-27 08:34:08</div>
+          <div class="video-title">Setia Itu Nyata — Kisah Pak Edy</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <a href="/galeri">
+          <div class="video-thumb vt-3">
+            <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+            <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
+          </div>
+        </a>
+        <div class="video-info">
+          <div class="video-date">2025-03-01 00:20:23</div>
+          <div class="video-title">Saling Mengungkapkan Keberhargaan</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-end mt-3">
+      <a href="/galeri" class="news-more"><span data-i18n="video.more">Video Lainnya</span> <i class="bi bi-chevron-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<div class="quote-section">
+  <div class="container">
+    <blockquote>
+      <span data-i18n="quote.text">"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."</span>
+      <br><small style="font-style:normal;color:#888;font-size:12px;">— Jatiwangi Art Factory</small>
+    </blockquote>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#1a1a1a;">
+  <div style="padding:16px 20px;text-align:center;">
+    <a href="https://github.com/babanmisbahudin" target="_blank" rel="noopener" style="font-size:clamp(9px,2.5vw,12px);color:#999;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Copyright &copy; 2025 Yayasan Daun Salambar &mdash; Jatiwangi Art Factory</a>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="bi bi-chevron-up"></i>
+</button>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+
+function homeNavSearch(e) {
+  e.preventDefault();
+  const q = (e.target.querySelector('input') || document.querySelector('.home-nav-q')).value.trim();
+  if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
+  return false;
+}
+
+/* ── HOMEPAGE DATA LOADER ── */
+async function loadHomepage() {
+  try {
+    const res  = await fetch(window.API_BASE + '/homepage');
+    if (!res.ok) throw new Error('API not available');
+    const data = await res.json();
+    renderHeroSlides(data.hero_slides || []);
+    renderSettings(data.settings || {});
+    renderPrograms(data.programs || []);
+    renderArticles(data.latest_articles || []);
+    renderPhotos(data.latest_photos || []);
+    renderNewsVideos(data.settings || {});
+    renderVideos(data.latest_videos || []);
+  } catch (e) {
+    // API belum aktif — gunakan konten statis yang sudah ada di HTML
+    console.info('Menggunakan konten statis (API offline)');
+  } finally {
+    initSlider();
+  }
+}
+
+/* ── HERO SLIDES ── */
+function renderHeroSlides(slides) {
+  if (!slides.length) return;
+  const container   = document.getElementById('heroSlider');
+  const indicators  = document.getElementById('heroIndicators');
+  // Hapus semua slide yang ada kecuali tombol prev/next/indicators
+  container.querySelectorAll('.hero-slide').forEach(el => el.remove());
+  indicators.innerHTML = '';
+
+  slides.forEach((s, i) => {
+    const bgStyle = s.image_url
+      ? `background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('${s.image_url}') center/cover no-repeat`
+      : `background:${s.bg_color}`;
+
+    const slideEl = document.createElement('div');
+    slideEl.className = 'hero-slide' + (i === 0 ? ' active-slide' : '');
+    slideEl.style.cssText = bgStyle;
+    slideEl.innerHTML = `
+      <div class="hero-body">
+        <div class="container">
+          <div class="row align-items-center g-4">
+            <div class="${i === 0 ? 'col-lg-7' : 'col-lg-8'}">
+              ${s.tag ? `<div class="hero-campaign-tag" style="background:${s.tag_color}">${s.tag}</div>` : ''}
+              <div class="hero-title-1">${s.title_1}</div>
+              <div class="hero-title-2">${s.title_2}</div>
+              ${s.description ? `<p class="hero-desc">${s.description}</p>` : ''}
+              ${s.quote ? `<p class="hero-quote">${s.quote}</p>` : ''}
+              ${s.author ? `<p class="hero-author">${s.author}</p>` : ''}
+              ${i > 0 ? `<div class="mt-3"><a href="${s.cta_url}" style="background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:10px 26px;border-radius:3px;text-transform:uppercase;letter-spacing:.04em;display:inline-block;"><i class="bi bi-heart-fill me-2"></i>${s.cta_text}</a></div>` : ''}
+            </div>
+            ${i === 0 ? donateCardHTML() : ''}
+          </div>
+        </div>
+      </div>
+      ${heroBankBarHTML()}`;
+
+    // Insert before the prev button
+    container.querySelector('.hero-prev').before(slideEl);
+
+    // Dot
+    const dot = document.createElement('button');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.slide = i;
+    indicators.appendChild(dot);
+  });
+}
+
+function donateCardHTML() {
+  return `<div class="col-lg-5" id="donateCardCol"></div>`;
+}
+
+function heroBankBarHTML() {
+  return `<div class="hero-bottom mt-4">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div class="bank-logos" id="bankLogosBar"></div>
+        <a href="#" class="wa-btn" id="waBtn"><i class="bi bi-whatsapp"></i> Loading...</a>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── SETTINGS ── */
+function renderSettings(s) {
+  // Site name
+  if (s.site_name) {
+    document.querySelectorAll('.nav-logo-text .main').forEach(el => el.textContent = s.site_name);
+    document.title = s.site_name + ' - ' + (s.site_tagline || '');
+  }
+  if (s.site_tagline) document.querySelectorAll('.nav-logo-text .sub').forEach(el => el.textContent = s.site_tagline);
+
+  // About
+  const aboutTitle = document.querySelector('.about-title');
+  if (aboutTitle && s.about_title) aboutTitle.textContent = s.about_title;
+  const aboutDesc = document.querySelector('.about-desc');
+  if (aboutDesc && s.about_desc) aboutDesc.innerHTML = s.about_desc;
+
+  // About photos
+  ['about_photo_1', 'about_photo_2'].forEach((key, i) => {
+    if (!s[key]) return;
+    const boxes = document.querySelectorAll('.about-photo-box .ph-inner');
+    if (boxes[i]) {
+      boxes[i].style.background = `url('${s[key]}') center/cover no-repeat`;
+      boxes[i].innerHTML = '';
+    }
+  });
+
+  // About buttons
+  if (s.about_btn1_text) { const el = document.querySelector('.btn-green-outline'); if (el) { el.innerHTML = `<i class="bi bi-heart-fill me-2"></i>${s.about_btn1_text}`; el.href = s.about_btn1_url || '#'; } }
+  if (s.about_btn2_text) { const el = document.querySelector('.btn-dark-fill'); if (el) { el.innerHTML = `<i class="bi bi-person-check-fill me-2"></i>${s.about_btn2_text}`; el.href = s.about_btn2_url || '#'; } }
+
+  // Mission
+  const mTitle = document.querySelector('.mission-title');
+  if (mTitle && s.mission_title) mTitle.innerHTML = s.mission_title.replace(' untuk ', '<br>');
+  const mParas = document.querySelectorAll('.mission-right p');
+  ['mission_text_1','mission_text_2','mission_text_3'].forEach((key, i) => { if (s[key] && mParas[i]) mParas[i].textContent = s[key]; });
+  if (s.mission_photo) { const el = document.querySelector('.mission-left .ph-inner'); if (el) { el.style.background = `url('${s.mission_photo}') center/cover no-repeat`; el.innerHTML = ''; } }
+
+  // Campaign
+  const cLabel = document.querySelector('.campaign-label');  if (cLabel && s.campaign_label) cLabel.textContent = s.campaign_label;
+  const cTitle = document.querySelector('.campaign-title');  if (cTitle && s.campaign_title) cTitle.innerHTML = s.campaign_title;
+  const cQuote = document.querySelector('.campaign-quote p');if (cQuote && s.campaign_quote) cQuote.textContent = s.campaign_quote;
+  const cParas = document.querySelectorAll('.campaign-text');
+  if (s.campaign_text_1 && cParas[0]) cParas[0].textContent = s.campaign_text_1;
+  if (s.campaign_text_2 && cParas[1]) cParas[1].textContent = s.campaign_text_2;
+  const cNum   = document.querySelector('.campaign-big-num');   if (cNum && s.campaign_big_number) cNum.textContent = s.campaign_big_number;
+  const cNLbl  = document.querySelector('.campaign-right-title'); if (cNLbl && s.campaign_number_label) cNLbl.innerHTML = s.campaign_number_label;
+  const cBtn   = document.querySelector('.btn-campaign');       if (cBtn && s.campaign_btn_text) { cBtn.innerHTML = `<i class="bi bi-heart-fill me-2"></i>${s.campaign_btn_text}`; cBtn.href = s.campaign_btn_url || '#'; }
+
+  // Donate card
+  const donateCol = document.getElementById('donateCardCol');
+  if (donateCol) {
+    donateCol.innerHTML = `<div class="donate-card">
+      <div class="donate-card-header"><i class="bi bi-palette-fill me-2"></i>${s.site_name || 'JAF'} — Donasi</div>
+      ${s.donate_qr_image ? `<img src="${s.donate_qr_image}" style="width:120px;height:120px;object-fit:cover;display:block;margin:0 auto 12px;border-radius:4px;" />` : '<div class="qr-placeholder"><i class="bi bi-qr-code"></i></div>'}
+      <div class="amount">${s.donate_bank_name || 'Bank BJB'} — ${s.donate_account_number || ''}</div>
+      <div class="amount-sub">a.n. ${s.donate_account_name || ''}</div>
+      <div class="pay-logos"><span class="pay-logo-item">${s.donate_bank_name || 'Bank BJB'}</span>${s.donate_swift ? `<span class="pay-logo-item">SWIFT: ${s.donate_swift}</span>` : ''}</div>
+      <a href="/donasi" class="btn-donate-now"><i class="bi bi-heart-fill me-2"></i><span data-i18n="hero.donate">Donasi Sekarang</span></a>
+    </div>`;
+  }
+
+  // Bank bar & WA (update semua yang ada di slides)
+  document.querySelectorAll('#bankLogosBar').forEach(el => {
+    el.innerHTML = `<span style="color:rgba(255,255,255,.5);font-size:11px;margin-right:4px;">Rekening Donasi:</span>
+      <span class="bank-logo-badge">${s.donate_bank_name || 'Bank BJB'} ${s.donate_account_number || ''}</span>
+      <span class="bank-logo-badge">a.n. ${s.donate_account_name || ''}</span>`;
+  });
+  document.querySelectorAll('#waBtn').forEach(el => {
+    el.href = 'https://wa.me/' + (s.footer_wa_number || '');
+    el.innerHTML = `<i class="bi bi-whatsapp"></i> ${s.footer_phone || ''}`;
+  });
+
+  // Quote
+  const quote = document.querySelector('.quote-section blockquote');
+  if (quote && s.homepage_quote) quote.innerHTML = s.homepage_quote;
+
+
+  // Video YouTube dari settings
+  renderVideoSettings(s);
+}
+
+/* ── PROGRAMS ── */
+function renderPrograms(programs) {
+  if (!programs.length) return;
+  const sec = document.querySelector('.bantuan-section .row');
+  if (!sec) return;
+  const icons = ['bi-globe2','bi-music-note-beamed','bi-brush-fill','bi-award-fill'];
+  const colors= ['cp-1','cp-2','cp-3','cp-4'];
+  sec.innerHTML = programs.map((p, i) => `
+    <div class="col-6 col-md-3">
+      <div class="bantuan-item">
+        <div class="circle-photo ${colors[i] || 'cp-1'}">
+          ${p.thumbnail_url ? `<img src="${p.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" />` : `<i class="bi ${icons[i] || 'bi-star-fill'}"></i>`}
+        </div>
+        <h5>${p.name}</h5>
+        <p>${p.description || ''}</p>
+        <a href="${p.cta_url || '/donasi'}" class="btn-orange-sm">${p.cta_text || 'Dukung'}</a>
+      </div>
+    </div>`).join('');
+}
+
+/* ── ARTICLES ── */
+function renderArticles(articles) {
+  if (!articles.length) return;
+  const tabPane = document.querySelector('#tab-berita .row');
+  if (!tabPane) return;
+  const colors = ['nt-1','nt-2','nt-3'];
+  tabPane.innerHTML = articles.map((a, i) => `
+    <div class="col-md-4">
+      <a href="/artikel?slug=${a.slug}" style="text-decoration:none;color:inherit;display:block;height:100%;">
+        <div class="news-card" style="cursor:pointer;">
+          <div class="news-thumb ${colors[i]}">
+            ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" style="width:100%;height:100%;object-fit:cover;" />` : '<i class="bi bi-newspaper"></i>'}
+          </div>
+          <div class="news-body">
+            <div class="news-date"><i class="bi bi-calendar3 me-1"></i>${a.published_at}</div>
+            <h6>${a.title}</h6>
+            <p>${a.excerpt}</p>
+          </div>
+        </div>
+      </a>
+    </div>`).join('');
+}
+
+/* ── PHOTOS (tab berita foto) ── */
+function renderPhotos(photos) {
+  if (!photos.length) return;
+  const tabPane = document.querySelector('#tab-foto .row');
+  if (!tabPane) return;
+  const colors = ['nt-1','nt-2','nt-3'];
+  tabPane.innerHTML = photos.map((p, i) => `
+    <div class="col-md-4">
+      <div class="news-card">
+        <div class="news-thumb ${colors[i]}">
+          <img src="${p.file_url}" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="news-body">
+          <div class="news-date">${p.created_at}</div>
+          <h6>${p.title}</h6>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── NEWS VIDEOS (tab video di section berita) ── */
+function renderNewsVideos(s) {
+  const tabPane = document.querySelector('#tab-video .row');
+  if (!tabPane) return;
+  const videos = [
+    { url: s.video_1_url, title: s.video_1_title },
+    { url: s.video_2_url, title: s.video_2_title },
+    { url: s.video_3_url, title: s.video_3_title },
+  ].filter(v => v.url && v.title);
+  if (!videos.length) return;
+  const colors = ['nt-1','nt-2','nt-3'];
+  tabPane.innerHTML = videos.map((v, i) => `
+    <div class="col-md-4">
+      <a href="${v.url}" target="_blank" style="text-decoration:none;">
+        <div class="news-card">
+          <div class="news-thumb ${colors[i]}">
+            <i class="bi bi-play-circle-fill" style="font-size:52px;color:rgba(255,255,255,.6);"></i>
+          </div>
+          <div class="news-body">
+            <div class="news-date"><i class="bi bi-youtube me-1 text-danger"></i>YouTube</div>
+            <h6>${v.title}</h6>
+          </div>
+        </div>
+      </a>
+    </div>`).join('');
+}
+
+/* ── VIDEOS ── */
+function renderVideos(videos) {
+  const sec = document.querySelector('.video-section .row');
+  if (!sec) return;
+  const colors = ['vt-1','vt-2','vt-3'];
+  if (!videos.length) return;
+  sec.innerHTML = videos.map((v, i) => `
+    <div class="col-md-4">
+      <a href="${v.file_path}" target="_blank">
+        <div class="video-thumb ${colors[i]}">
+          <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+          <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
+        </div>
+      </a>
+      <div class="video-info">
+        <div class="video-date">${v.created_at}</div>
+        <div class="video-title">${v.title}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderVideoSettings(s) {
+  const sec = document.querySelector('.video-section .row');
+  if (!sec) return;
+  const videos = [
+    { url: s.video_1_url, title: s.video_1_title },
+    { url: s.video_2_url, title: s.video_2_title },
+    { url: s.video_3_url, title: s.video_3_title },
+  ].filter(v => v.url && v.title);
+  if (!videos.length) return;
+  const colors = ['vt-1','vt-2','vt-3'];
+  sec.innerHTML = videos.map((v, i) => `
+    <div class="col-md-4">
+      <a href="${v.url}" target="_blank">
+        <div class="video-thumb ${colors[i]}">
+          <div class="yt-overlay"><div class="yt-play"><i class="bi bi-play-fill"></i></div></div>
+          <span class="yt-label"><i class="bi bi-youtube me-1"></i><span data-i18n="video.watch">Tonton di YouTube</span></span>
+        </div>
+      </a>
+      <div class="video-info">
+        <div class="video-title">${v.title}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── SLIDER INIT ── */
+function initSlider() {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('#heroIndicators button');
+  let current  = 0, timer;
+
+  if (!slides.length) return;
+
+  function goTo(n) {
+    slides[current].classList.remove('active-slide');
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active-slide');
+    if (dots[current]) dots[current].classList.add('active');
+  }
+  function startAuto() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5000); }
+
+  document.getElementById('heroNext')?.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+  document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+  dots.forEach(btn => btn.addEventListener('click', () => { goTo(+btn.dataset.slide); startAuto(); }));
+  startAuto();
+}
+
+/* ── BACK TO TOP ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('btt').classList.toggle('show', window.scrollY > 300);
+});
+
+/* ── INIT ── */
+loadHomepage();
+initLang();
+</script>
+</body>
+</html>

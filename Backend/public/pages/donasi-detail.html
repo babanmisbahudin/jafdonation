@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Detail Kampanye - Jaf Donation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    :root { --blue:#005BAA; --orange:#E55A00; }
+    body { font-family:'Noto Sans',sans-serif; background:#f8fafc; }
+    .top-hero { background:linear-gradient(135deg,var(--blue) 0%,#003d7a 100%); color:#fff; padding:48px 0 40px; }
+    .campaign-img { width:100%; max-height:420px; object-fit:cover; border-radius:16px; }
+    .progress-section { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,.07); padding:24px; }
+    .progress { height:12px; border-radius:6px; }
+    .progress-bar { border-radius:6px; background:var(--blue); }
+    .form-card { background:#fff; border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,.07); padding:28px; }
+    .nominal-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+    .nominal-btn { border:2px solid #e2e8f0; border-radius:10px; padding:12px; background:#fff; cursor:pointer; font-weight:600; font-size:.875rem; text-align:center; transition:all .15s; }
+    .nominal-btn:hover, .nominal-btn.active { border-color:var(--blue); background:#e8f2ff; color:var(--blue); }
+    .btn-pay { background:var(--blue); color:#fff; border:none; border-radius:12px; padding:15px; font-weight:700; font-size:1rem; width:100%; transition:background .2s; }
+    .btn-pay:hover { background:#003d7a; color:#fff; }
+    .btn-pay:disabled { background:#94a3b8; cursor:not-allowed; }
+    .donor-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f1f5f9; }
+    .donor-item:last-child { border-bottom:none; }
+    #paySuccess { display:none; }
+    .lang-btn.active { border-color: #1A5276 !important; opacity: 1 !important; }
+    .lang-btn:hover { opacity: 1 !important; }
+  </style>
+</head>
+<body>    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="/">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:48px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/berita" data-i18n="nav.berita">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi" class="active">Donasi</a>
+      <a href="/benah-kampung" data-i18n="nav.benah">Benah Kampung</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
+    </div>
+    <div class="nav-actions">
+      <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+        <input type="text" class="nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <button type="submit" style="background:#005BAA;color:#fff;border:1.5px solid #005BAA;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+          <i class="bi bi-search" style="font-size:.75rem;"></i>
+        </button>
+      </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Bahasa:</span>
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
+    </div>
+    <a href="/berita" class=""><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri" class=""><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi" class="active"><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/benah-kampung" class=""><i class="bi bi-house me-2"></i><span data-i18n="nav.benah">Benah Kampung</span></a>
+    <a href="/kontak" class=""><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+  </div>
+</nav>
+
+  <!-- Loading overlay -->
+  <div id="loadingScreen" style="min-height:80vh;display:flex;align-items:center;justify-content:center;">
+    <div class="text-center">
+      <div class="spinner-border text-primary mb-3"></div>
+      <p class="text-muted">Memuat kampanye...</p>
+    </div>
+  </div>
+
+  <!-- Not found -->
+  <div id="notFound" style="display:none;min-height:60vh;padding:80px 0;" class="text-center">
+    <i class="bi bi-emoji-frown fs-1 d-block mb-3 text-muted"></i>
+    <h4 class="text-muted">Kampanye tidak ditemukan</h4>
+    <a href="/donasi" class="btn mt-3" style="background:var(--blue);color:#fff;border-radius:10px;">← Kembali ke Daftar Kampanye</a>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent" style="display:none;">
+
+    <!-- Hero -->
+    <div class="top-hero">
+      <div class="container">
+        <nav aria-label="breadcrumb" class="mb-3">
+          <ol class="breadcrumb" style="--bs-breadcrumb-divider-color:rgba(255,255,255,.5);">
+            <li class="breadcrumb-item"><a href="/" style="color:rgba(255,255,255,.7);text-decoration:none;">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="/donasi" style="color:rgba(255,255,255,.7);text-decoration:none;">Donasi</a></li>
+            <li class="breadcrumb-item active" id="breadcrumbTitle" style="color:#fff;">Kampanye</li>
+          </ol>
+        </nav>
+        <h1 id="heroTitle" style="font-family:'Noto Serif',serif;font-size:2rem;font-weight:700;max-width:700px;line-height:1.35;"></h1>
+        <div id="heroBadges" class="d-flex gap-2 mt-3 flex-wrap"></div>
+        <!-- Share buttons -->
+        <div class="d-flex gap-2 mt-4 flex-wrap align-items-center">
+          <span style="font-size:.8rem;color:rgba(255,255,255,.75);font-weight:600;">Bagikan:</span>
+          <a id="shareWa" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;color:#fff;border-radius:20px;padding:6px 14px;font-size:.78rem;font-weight:700;text-decoration:none;">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a id="shareFb" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#1877F2;color:#fff;border-radius:20px;padding:6px 14px;font-size:.78rem;font-weight:700;text-decoration:none;">
+            <i class="bi bi-facebook"></i> Facebook
+          </a>
+          <button onclick="copyDonasiLink()" style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:6px 14px;font-size:.78rem;font-weight:700;cursor:pointer;" id="copyLinkBtn">
+            <i class="bi bi-link-45deg"></i> Salin Link
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <section style="padding:48px 0;">
+      <div class="container">
+        <div class="row g-4">
+
+          <!-- Left: image + description + donors -->
+          <div class="col-lg-7">
+            <div id="campaignImageWrap" class="mb-4"></div>
+
+            <!-- Progress (for mobile, shown here) -->
+            <div class="d-lg-none mb-4" id="progressMobile"></div>
+
+            <!-- Description -->
+            <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+              <h5 class="fw-bold mb-3">Tentang Kampanye</h5>
+              <div id="campaignContent" style="font-size:.9rem;line-height:1.8;color:#374151;"></div>
+            </div>
+
+            <!-- Recent donors -->
+            <div class="bg-white rounded-4 shadow-sm p-4" id="recentDonorsBox" style="display:none;">
+              <h5 class="fw-bold mb-3">Donatur Terbaru</h5>
+              <div id="recentDonorsList"></div>
+            </div>
+          </div>
+
+          <!-- Right: progress + form -->
+          <div class="col-lg-5">
+
+            <!-- Progress (desktop) -->
+            <div class="progress-section mb-4 d-none d-lg-block" id="progressDesktop"></div>
+
+            <!-- Donation Form -->
+            <div class="form-card" id="donationFormWrap">
+              <h5 class="fw-bold mb-4">Isi Form Donasi</h5>
+
+              <!-- Payment success -->
+              <div id="paySuccess" class="text-center">
+                <div class="d-flex align-items-center justify-content-center mx-auto rounded-circle mb-3"
+                     style="width:72px;height:72px;background:#e8f5e9;">
+                  <i class="bi bi-check-circle-fill fs-2" style="color:#16a34a;"></i>
+                </div>
+                <h5 class="fw-bold mb-2">Terima Kasih!</h5>
+                <p class="text-muted" style="font-size:.875rem;">Donasi Anda sedang diproses. Konfirmasi akan dikirim ke email Anda.</p>
+                <button class="btn w-100 mt-2" style="background:var(--blue);color:#fff;border-radius:10px;" onclick="resetForm()">
+                  Donasi Lagi
+                </button>
+              </div>
+
+              <!-- Form -->
+              <form id="donationForm" novalidate>
+                <div id="alertBox" class="alert alert-danger d-none mb-3" style="font-size:.85rem;border-radius:8px;"></div>
+
+                <!-- Nominal -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" style="font-size:.85rem;">Pilih Nominal</label>
+                  <div class="nominal-grid mb-2">
+                    <button type="button" class="nominal-btn" data-amount="25000">Rp 25.000</button>
+                    <button type="button" class="nominal-btn" data-amount="50000">Rp 50.000</button>
+                    <button type="button" class="nominal-btn active" data-amount="100000">Rp 100.000</button>
+                    <button type="button" class="nominal-btn" data-amount="250000">Rp 250.000</button>
+                    <button type="button" class="nominal-btn" data-amount="500000">Rp 500.000</button>
+                    <button type="button" class="nominal-btn" data-amount="1000000">Rp 1.000.000</button>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text" style="border-radius:8px 0 0 8px;background:#f8fafc;font-size:.85rem;">Rp</span>
+                    <input type="number" id="nominalInput" class="form-control" min="10000"
+                           style="border-radius:0 8px 8px 0;font-size:.9rem;"
+                           placeholder="Atau masukkan nominal lain" value="100000" />
+                  </div>
+                  <div class="form-text">Minimal Rp 10.000</div>
+                </div>
+
+                <!-- Name + Phone -->
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:.85rem;">Nama <span class="text-danger">*</span></label>
+                    <input type="text" id="donorName" class="form-control" placeholder="Nama Anda" required style="border-radius:8px;" />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold" style="font-size:.85rem;">No. HP</label>
+                    <input type="tel" id="donorPhone" class="form-control" placeholder="08xxxxxxxxxx" style="border-radius:8px;" />
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" style="font-size:.85rem;">Email <span class="text-danger">*</span></label>
+                  <input type="email" id="donorEmail" class="form-control" placeholder="email@contoh.com" required style="border-radius:8px;" />
+                  <div class="form-text">Bukti donasi dikirim ke email ini</div>
+                </div>
+
+                <!-- Note -->
+                <div class="mb-3">
+                  <label class="form-label fw-semibold" style="font-size:.85rem;">Pesan (opsional)</label>
+                  <textarea id="donorNote" class="form-control" rows="2" placeholder="Tulis pesan untuk kampanye ini..." style="border-radius:8px;font-size:.85rem;"></textarea>
+                </div>
+
+                <!-- Anonymous -->
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="isAnonymous" />
+                  <label class="form-check-label" for="isAnonymous" style="font-size:.85rem;">
+                    Donasi sebagai anonim
+                  </label>
+                </div>
+
+                <button type="submit" class="btn-pay" id="payBtn">
+                  <span id="payBtnText"><i class="bi bi-credit-card-fill me-2"></i>Bayar Sekarang</span>
+                  <span id="payBtnLoad" class="d-none">
+                    <span class="spinner-border spinner-border-sm me-2"></span>Memproses...
+                  </span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Security badges -->
+            <div class="bg-white rounded-4 shadow-sm p-4 mt-4">
+              <div class="d-flex flex-column gap-2" style="font-size:.82rem;color:#374151;">
+                <div class="d-flex gap-2 align-items-center"><i class="bi bi-shield-check-fill text-success"></i>Pembayaran aman via Midtrans</div>
+                <div class="d-flex gap-2 align-items-center"><i class="bi bi-receipt-cutoff text-primary"></i>Bukti donasi dikirim otomatis</div>
+                <div class="d-flex gap-2 align-items-center"><i class="bi bi-hand-thumbs-up-fill text-warning"></i>Dana 100% tersalurkan</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /mainContent -->
+
+  <!-- Footer -->
+  <!-- ===== FOOTER ===== -->
+<footer style="background:#1a1a1a;">
+  <div style="padding:16px 20px;text-align:center;">
+    <a href="https://github.com/babanmisbahudin" target="_blank" rel="noopener" style="font-size:clamp(9px,2.5vw,12px);color:#999;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Copyright &copy; 2025 Yayasan Daun Salambar &mdash; Jatiwangi Art Factory</a>
+  </div>
+</footer>
+
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+    let currentProgramId = null;
+    let snapJs = null;
+
+    function formatRp(n) {
+      return 'Rp ' + Number(n).toLocaleString('id-ID');
+    }
+
+    function copyDonasiLink() {
+      const url = location.href;
+      if (navigator.share) {
+        const title = document.getElementById('heroTitle').textContent;
+        navigator.share({ title, url });
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          const btn = document.getElementById('copyLinkBtn');
+          btn.innerHTML = '<i class="bi bi-check-lg"></i> Tersalin!';
+          setTimeout(() => { btn.innerHTML = '<i class="bi bi-link-45deg"></i> Salin Link'; }, 2000);
+        });
+      }
+    }
+
+    function progressHtml(c) {
+      if (!c.has_target) {
+        return `
+          <div class="d-flex align-items-center gap-3 mb-2">
+            <div>
+              <div class="fw-bold" style="font-size:1.5rem;color:#16a34a;">${formatRp(c.collected_amount)}</div>
+              <div class="text-muted" style="font-size:.8rem;">terkumpul</div>
+            </div>
+            <div class="vr mx-2" style="height:40px;"></div>
+            <div>
+              <div class="fw-bold" style="font-size:1.3rem;color:var(--blue);">${c.donor_count}</div>
+              <div class="text-muted" style="font-size:.8rem;">donatur</div>
+            </div>
+          </div>
+          <div class="badge bg-secondary-subtle text-secondary" style="font-size:.75rem;">Donasi Terbuka — Tanpa Target</div>`;
+      }
+      return `
+        <div class="row g-2 mb-3">
+          <div class="col-6 text-center">
+            <div class="fw-bold" style="font-size:1.2rem;color:#16a34a;">${formatRp(c.collected_amount)}</div>
+            <div class="text-muted" style="font-size:.72rem;">terkumpul</div>
+          </div>
+          <div class="col-6 text-center">
+            <div class="fw-bold" style="font-size:1.2rem;color:var(--blue);">${c.progress_percentage}%</div>
+            <div class="text-muted" style="font-size:.72rem;">dari target</div>
+          </div>
+        </div>
+        <div class="progress mb-2"><div class="progress-bar" style="width:${c.progress_percentage}%;"></div></div>
+        <div class="d-flex justify-content-between" style="font-size:.75rem;color:#64748b;">
+          <span>Target: ${formatRp(c.target_amount)}</span>
+          <span>${c.donor_count} donatur</span>
+        </div>
+        ${c.end_date ? `<div class="mt-2" style="font-size:.75rem;color:#64748b;"><i class="bi bi-calendar3 me-1"></i>Berakhir ${c.end_date}</div>` : ''}`;
+    }
+
+    async function loadCampaign() {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      if (!slug) {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('notFound').style.display = '';
+        return;
+      }
+
+      try {
+        const res  = await fetch(`${window.window.API_BASE}/campaigns/${slug}`);
+        if (!res.ok) throw new Error('not found');
+        const json = await res.json();
+        const c    = json.data;
+
+        currentProgramId = c.id;
+        document.getElementById('pageTitle').textContent = c.name + ' — Jaf Donation';
+        document.getElementById('breadcrumbTitle').textContent = c.name;
+        document.getElementById('heroTitle').textContent = c.name;
+
+        // Share buttons
+        const shareUrl = location.origin + location.pathname + '?slug=' + slug;
+        const shareText = encodeURIComponent(c.name + ' — Dukung kampanye ini: ' + shareUrl);
+        document.getElementById('shareWa').href = 'https://wa.me/?text=' + shareText;
+        document.getElementById('shareFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl);
+
+        // Badges
+        const badges = [];
+        if (c.is_featured) badges.push('<span class="badge bg-warning text-dark" style="font-size:.75rem;">⭐ Unggulan</span>');
+        badges.push(c.has_target
+          ? '<span class="badge bg-info-subtle text-info" style="font-size:.75rem;">Ada Target Dana</span>'
+          : '<span class="badge bg-secondary-subtle text-secondary" style="font-size:.75rem;">Donasi Terbuka</span>');
+        if (c.start_date) badges.push(`<span class="badge bg-light text-dark" style="font-size:.75rem;"><i class="bi bi-calendar3 me-1"></i>${c.start_date}</span>`);
+        document.getElementById('heroBadges').innerHTML = badges.join('');
+
+        // Thumbnail
+        if (c.thumbnail_url) {
+          document.getElementById('campaignImageWrap').innerHTML = `<img src="${c.thumbnail_url}" class="campaign-img" alt="${c.name}" />`;
+        }
+
+        // Description / content
+        const contentEl = document.getElementById('campaignContent');
+        contentEl.innerHTML = c.content
+          ? c.content.replace(/\n/g, '<br/>')
+          : (c.description || '<span class="text-muted">Tidak ada deskripsi.</span>');
+
+        // Progress
+        const pgHtml = progressHtml(c);
+        document.getElementById('progressDesktop').innerHTML = pgHtml;
+        document.getElementById('progressMobile').innerHTML = `<div class="progress-section">${pgHtml}</div>`;
+
+        // Recent donors
+        if (c.recent_donors && c.recent_donors.length > 0) {
+          const list = c.recent_donors.map(d => `
+            <div class="donor-item">
+              <div>
+                <div class="fw-semibold" style="font-size:.85rem;">${d.name}</div>
+                ${d.note ? `<div class="text-muted" style="font-size:.75rem;">"${d.note}"</div>` : ''}
+              </div>
+              <div class="text-end">
+                <div class="fw-semibold" style="font-size:.85rem;color:#16a34a;">${formatRp(d.amount)}</div>
+                <div class="text-muted" style="font-size:.72rem;">${d.time}</div>
+              </div>
+            </div>`).join('');
+          document.getElementById('recentDonorsList').innerHTML = list;
+          document.getElementById('recentDonorsBox').style.display = '';
+        }
+
+        // Load Midtrans Snap JS
+        const cfg = await fetch(`${window.window.API_BASE}/config`).then(r => r.json()).catch(() => null);
+        if (cfg && cfg.midtrans_client_key) {
+          const s = document.createElement('script');
+          s.src = cfg.snap_js_url;
+          s.setAttribute('data-client-key', cfg.midtrans_client_key);
+          document.head.appendChild(s);
+          snapJs = cfg;
+        }
+
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = '';
+
+      } catch (e) {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('notFound').style.display = '';
+      }
+    }
+
+    // Nominal picker
+    document.querySelectorAll('.nominal-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('nominalInput').value = this.dataset.amount;
+      });
+    });
+    document.getElementById('nominalInput').addEventListener('input', function () {
+      document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('active'));
+    });
+
+    // Form submit
+    document.getElementById('donationForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const alertBox = document.getElementById('alertBox');
+      alertBox.classList.add('d-none');
+
+      const amount = parseInt(document.getElementById('nominalInput').value);
+      const name   = document.getElementById('donorName').value.trim();
+      const email  = document.getElementById('donorEmail').value.trim();
+      const phone  = document.getElementById('donorPhone').value.trim();
+      const note   = document.getElementById('donorNote').value.trim();
+      const anon   = document.getElementById('isAnonymous').checked;
+
+      if (!name) { alertBox.textContent = 'Nama wajib diisi.'; alertBox.classList.remove('d-none'); return; }
+      if (!email) { alertBox.textContent = 'Email wajib diisi.'; alertBox.classList.remove('d-none'); return; }
+      if (!amount || amount < 10000) { alertBox.textContent = 'Nominal minimal Rp 10.000.'; alertBox.classList.remove('d-none'); return; }
+
+      const btn     = document.getElementById('payBtn');
+      const btnText = document.getElementById('payBtnText');
+      const btnLoad = document.getElementById('payBtnLoad');
+      btn.disabled = true;
+      btnText.classList.add('d-none');
+      btnLoad.classList.remove('d-none');
+
+      try {
+        const res  = await fetch(`${window.window.API_BASE}/donations`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            donor_name:   name,
+            donor_email:  email,
+            donor_phone:  phone || null,
+            program_id:   currentProgramId,
+            amount:       amount,
+            note:         note || null,
+            is_anonymous: anon,
+          }),
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          const msg = data.errors
+            ? Object.values(data.errors).flat().join(' ')
+            : (data.message || 'Terjadi kesalahan.');
+          alertBox.textContent = msg;
+          alertBox.classList.remove('d-none');
+          return;
+        }
+
+        if (data.is_dummy || !snapJs) {
+          // No Midtrans config yet — show success directly (sandbox/dev mode)
+          showSuccess();
+          return;
+        }
+
+        // Open Midtrans Snap popup
+        window.snap.pay(data.snap_token, {
+          onSuccess:    () => { showSuccess(); },
+          onPending:    () => { showSuccess(); },
+          onError:      () => {
+            alertBox.textContent = 'Pembayaran gagal. Silakan coba lagi.';
+            alertBox.classList.remove('d-none');
+          },
+          onClose:      () => { /* user closed popup */ },
+        });
+
+      } catch (err) {
+        alertBox.textContent = 'Tidak dapat terhubung ke server. Pastikan backend aktif.';
+        alertBox.classList.remove('d-none');
+      } finally {
+        btn.disabled = false;
+        btnText.classList.remove('d-none');
+        btnLoad.classList.add('d-none');
+      }
+    });
+
+    function showSuccess() {
+      document.getElementById('donationForm').style.display = 'none';
+      document.getElementById('paySuccess').style.display = '';
+      window.scrollTo({ top: document.getElementById('donationFormWrap').offsetTop - 100, behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById('donationForm').reset();
+      document.getElementById('nominalInput').value = '100000';
+      document.querySelectorAll('.nominal-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nominal-btn')[2].classList.add('active');
+      document.getElementById('paySuccess').style.display = 'none';
+      document.getElementById('donationForm').style.display = '';
+    }
+
+    loadCampaign();
+  </script>
+
+  <script>
+  // Load social links from API settings
+  (async()=>{
+    try{
+      const s=(await(await fetch(window.API_BASE + '/homepage')).json()).settings||{};
+      const map={
+        'nav-fb':s.footer_facebook,'nav-ig':s.footer_instagram,
+        'nav-yt':s.footer_youtube,'nav-tt':s.footer_tiktok,'nav-wa':'https://wa.me/'+(s.footer_wa_number||'')
+      };
+      Object.entries(map).forEach(([id,url])=>{ if(url){ const el=document.getElementById(id); if(el) el.href=url; } });
+    }catch(e){}
+  })();
+  </script>
+
+  <script>
+  function navSearch(e) {
+    e.preventDefault();
+    const input = e.target.querySelector('.nav-q, .nav-q-mob');
+    const q = input ? input.value.trim() : '';
+    if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
+    return false;
+  }
+  initLang();
+</script>
+</body>
+</html>
