@@ -1306,6 +1306,11 @@ function renderSettings(s) {
   const cNum   = document.querySelector('.campaign-big-num');   if (cNum && s.campaign_big_number) cNum.textContent = s.campaign_big_number;
   const cNLbl  = document.querySelector('.campaign-right-title'); if (cNLbl && s.campaign_number_label) cNLbl.innerHTML = s.campaign_number_label;
   const cBtn   = document.querySelector('.btn-campaign');       if (cBtn && s.campaign_btn_text) { cBtn.innerHTML = `<i class="bi bi-heart-fill me-2"></i>${s.campaign_btn_text}`; cBtn.href = s.campaign_btn_url || '#'; }
+  const cThumb = document.querySelector('.campaign-thumb');
+  if (cThumb && s.campaign_photo) {
+    cThumb.style.background = 'none';
+    cThumb.innerHTML = `<img src="${s.campaign_photo}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" />`;
+  }
 
   // Donate card
   const donateCol = document.getElementById('donateCardCol');
