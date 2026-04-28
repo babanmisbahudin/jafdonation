@@ -256,6 +256,25 @@
     }
     .mission-right p { font-size: 13.5px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
 
+    /* ── VISI ── */
+    .visi-section { background: #f0f5ff; padding: 0; }
+    .visi-right {
+      position: relative; padding-top: 75%; overflow: hidden;
+      background: linear-gradient(135deg, #005A2B 0%, #2d8a5e 100%);
+    }
+    .visi-right .ph-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .visi-right .ph-inner i { font-size: 80px; color: rgba(255,255,255,.3); }
+    .visi-left { padding: 40px 40px 40px 48px; display: flex; flex-direction: column; justify-content: center; }
+    .visi-title {
+      font-size: 20px; font-weight: 800; color: var(--blue);
+      text-transform: uppercase; letter-spacing: .03em;
+      line-height: 1.35; margin-bottom: 20px;
+    }
+    .visi-left p { font-size: 13.5px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+
     /* ── BANTUAN AMAL ── */
     .bantuan-section { background: var(--gray-bg); padding: 54px 0; }
     .sec-title {
@@ -532,6 +551,11 @@
       .mission-right .mission-title { font-size: 16px; margin-bottom: 14px; }
       .mission-right p { font-size: 12.5px; }
 
+      /* Visi */
+      .visi-left { padding: 24px 20px; }
+      .visi-title { font-size: 16px; margin-bottom: 14px; }
+      .visi-left p { font-size: 12.5px; }
+
       /* Bantuan / Programs */
       .bantuan-section { padding: 36px 0; }
       .sec-title { font-size: 18px; }
@@ -605,6 +629,10 @@
       /* Mission */
       .mission-right { padding: 20px 16px; }
       .mission-right .mission-title { font-size: 15px; }
+
+      /* Visi */
+      .visi-left { padding: 20px 16px; }
+      .visi-title { font-size: 15px; }
 
       /* Programs */
       .bantuan-section { padding: 28px 0; }
@@ -905,6 +933,29 @@
             Dukungan Anda akan membantu JAF terus menggerakkan program Tahun Tanah,
             Rampak Genteng, Terracotta Triennale, dan Dana Hibah Budaya Daerah.
           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISI ===== -->
+<section class="visi-section">
+  <div class="container-fluid px-0">
+    <div class="row g-0 align-items-stretch">
+      <div class="col-md-6">
+        <div class="visi-left">
+          <h3 class="visi-title">Visi Jatiwangi Art Factory</h3>
+          <p class="visi-text">Menjadi pusat seni dan budaya komunal yang berdaya guna bagi masyarakat Jatiwangi dan Indonesia.</p>
+          <p class="visi-text">Membangun ekosistem seni yang berkelanjutan dengan mengakar pada tradisi lokal dan membuka diri terhadap dialog global.</p>
+          <p class="visi-text"></p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="visi-right">
+          <div class="ph-inner">
+            <i class="bi bi-eye-fill"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -1293,6 +1344,13 @@ function renderSettings(s) {
   const mParas = document.querySelectorAll('.mission-right p');
   ['mission_text_1','mission_text_2','mission_text_3'].forEach((key, i) => { if (s[key] && mParas[i]) mParas[i].textContent = s[key]; });
   if (s.mission_photo) { const el = document.querySelector('.mission-left .ph-inner'); if (el) { el.style.background = `url('${s.mission_photo}') center/cover no-repeat`; el.innerHTML = ''; } }
+
+  // Visi
+  const vTitle = document.querySelector('.visi-title');
+  if (vTitle && s.visi_title) vTitle.innerHTML = s.visi_title;
+  const vParas = document.querySelectorAll('.visi-text');
+  ['visi_text_1','visi_text_2','visi_text_3'].forEach((key, i) => { if (s[key] && vParas[i]) vParas[i].textContent = s[key]; });
+  if (s.visi_photo) { const el = document.querySelector('.visi-right .ph-inner'); if (el) { el.style.background = `url('${s.visi_photo}') center/cover no-repeat`; el.innerHTML = ''; } }
 
   // Campaign
   const cLabel = document.querySelector('.campaign-label');  if (cLabel && s.campaign_label) cLabel.textContent = s.campaign_label;

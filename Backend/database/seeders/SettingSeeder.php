@@ -25,6 +25,13 @@ class SettingSeeder extends Seeder
             ['key' => 'mission_text_3',   'label' => 'Paragraf 3',            'type' => 'textarea', 'group' => 'mission', 'value' => 'Dukungan Anda akan membantu JAF terus menggerakkan program Tahun Tanah, Rampak Genteng, Terracotta Triennale, dan Dana Hibah Budaya Daerah.'],
             ['key' => 'mission_photo',    'label' => 'Foto Section Misi',     'type' => 'image',    'group' => 'mission', 'value' => null],
 
+            // Visi
+            ['key' => 'visi_title',   'label' => 'Judul Section Visi', 'type' => 'text',     'group' => 'visi', 'value' => 'Visi Jatiwangi Art Factory'],
+            ['key' => 'visi_text_1',  'label' => 'Paragraf 1',         'type' => 'textarea', 'group' => 'visi', 'value' => 'Menjadi pusat seni dan budaya komunal yang berdaya guna bagi masyarakat Jatiwangi dan Indonesia.'],
+            ['key' => 'visi_text_2',  'label' => 'Paragraf 2',         'type' => 'textarea', 'group' => 'visi', 'value' => 'Membangun ekosistem seni yang berkelanjutan dengan mengakar pada tradisi lokal dan membuka diri terhadap dialog global.'],
+            ['key' => 'visi_text_3',  'label' => 'Paragraf 3',         'type' => 'textarea', 'group' => 'visi', 'value' => null],
+            ['key' => 'visi_photo',   'label' => 'Foto Section Visi',  'type' => 'image',    'group' => 'visi', 'value' => null],
+
             // Campaign
             ['key' => 'campaign_label',       'label' => 'Label Kampanye',         'type' => 'text',     'group' => 'campaign', 'value' => 'Residensi Seniman'],
             ['key' => 'campaign_title',       'label' => 'Judul Kampanye',         'type' => 'text',     'group' => 'campaign', 'value' => 'Ruang Berkarya untuk Seniman Dunia'],

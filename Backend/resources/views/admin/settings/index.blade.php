@@ -27,6 +27,7 @@
 <ul class="nav nav-tabs mb-4" id="settingTabs">
   <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-general">Umum</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-mission">Misi</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-visi">Visi</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-campaign">Kampanye</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-donate">Donasi</a></li>
   <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-video">Video YouTube</a></li>
@@ -57,6 +58,21 @@
       <div class="card-body p-4">
         <div class="row g-3">
           @foreach($settings['mission'] ?? [] as $key => $setting)
+            <div class="{{ in_array($setting->type, ['textarea','image']) ? 'col-12' : 'col-md-6' }}">
+              @include('admin.settings._field', ['setting' => $setting])
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{-- VISI --}}
+  <div class="tab-pane fade" id="tab-visi">
+    <div class="card shadow-sm" style="border:none;border-radius:14px;">
+      <div class="card-body p-4">
+        <div class="row g-3">
+          @foreach($settings['visi'] ?? [] as $key => $setting)
             <div class="{{ in_array($setting->type, ['textarea','image']) ? 'col-12' : 'col-md-6' }}">
               @include('admin.settings._field', ['setting' => $setting])
             </div>
