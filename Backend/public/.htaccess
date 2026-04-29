@@ -22,7 +22,7 @@
     RewriteRule ^ /%1 [R=301,L]
 
     # Clean URL: /nama → /pages/nama.html
-    RewriteRule ^(berita|galeri|donasi|benah-kampung|kontak|artikel|donasi-detail)$ pages/$1.html [QSA,L]
+    RewriteRule ^(berita|galeri|donasi|tentang|benah-kampung|kontak|artikel|donasi-detail)$ pages/$1.html [QSA,L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

@@ -6,7 +6,7 @@
       'nav.berita'  : 'Berita',
       'nav.galeri'  : 'Galeri',
       'nav.donasi'  : 'Donasi',
-      'nav.benah'   : 'Benah Kampung',
+      'nav.tentang' : 'Tentang',
       'nav.kontak'  : 'Kontak',
       'nav.search'  : 'Cari artikel...',
 
@@ -136,7 +136,7 @@
       'nav.berita'  : 'News',
       'nav.galeri'  : 'Gallery',
       'nav.donasi'  : 'Donation',
-      'nav.benah'   : 'Village Restoration',
+      'nav.tentang' : 'About',
       'nav.kontak'  : 'Contact',
       'nav.search'  : 'Search articles...',
 

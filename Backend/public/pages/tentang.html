@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="../assets/img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tentang Jatiwangi Art Factory — komunitas seni kontemporer berbasis bumi di Jatiwangi, Majalengka, berdiri sejak 2005 di bawah Yayasan Daun Salambar." />
+  <title>Tentang - Jatiwangi Art Factory</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { prefix: 'tw-', corePlugins: { preflight: false },
+      theme: { extend: { colors: { primary: '#1A5276', secondary: '#2980B9', accent: '#E8F4FD', gold: '#C8A44A' } } } }
+  </script>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="tw-font-sans">
+
+<nav class="site-nav">
+  <div class="container">
+    <a class="nav-logo" href="/">
+      <img src="../assets/img/logo.png" alt="Jatiwangi Art Factory" style="height:48px;width:auto;object-fit:contain;mix-blend-mode:multiply;" />
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/berita" data-i18n="nav.berita">Berita</a>
+      <a href="/galeri" data-i18n="nav.galeri">Galeri</a>
+      <a href="/donasi" data-i18n="nav.donasi">Donasi</a>
+      <a href="/tentang" data-i18n="nav.tentang" class="active">Tentang</a>
+      <a href="/kontak" data-i18n="nav.kontak">Kontak</a>
+    </div>
+    <div class="nav-actions">
+      <form class="d-flex" onsubmit="return navSearch(event)" style="margin:0;">
+        <input type="text" class="nav-q" data-i18n-ph="nav.search" placeholder="Cari artikel..." style="border:1.5px solid #cbd5e1;border-right:none;border-radius:20px 0 0 20px;font-size:.78rem;padding:5px 12px;min-width:130px;outline:none;" />
+        <button type="submit" style="background:#005BAA;color:#fff;border:1.5px solid #005BAA;border-radius:0 20px 20px 0;padding:5px 11px;cursor:pointer;line-height:1;">
+          <i class="bi bi-search" style="font-size:.75rem;"></i>
+        </button>
+      </form>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+          <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+          <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+        </button>
+      </div>
+    </div>
+    <button class="nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #f0f0f0;">
+      <span style="font-size:11px;color:#888;margin-right:4px;">Bahasa:</span>
+      <button class="lang-btn active" data-lang="id" onclick="setLang('id')" title="Bahasa Indonesia">
+        <img src="https://flagcdn.com/20x15/id.png" alt="ID" />
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <img src="https://flagcdn.com/20x15/gb.png" alt="EN" />
+      </button>
+    </div>
+    <a href="/berita" class=""><i class="bi bi-newspaper me-2"></i><span data-i18n="nav.berita">Berita</span></a>
+    <a href="/galeri" class=""><i class="bi bi-images me-2"></i><span data-i18n="nav.galeri">Galeri</span></a>
+    <a href="/donasi" class=""><i class="bi bi-heart me-2"></i><span data-i18n="nav.donasi">Donasi</span></a>
+    <a href="/tentang" class="active"><i class="bi bi-info-circle me-2"></i><span data-i18n="nav.tentang">Tentang</span></a>
+    <a href="/kontak" class=""><i class="bi bi-envelope me-2"></i><span data-i18n="nav.kontak">Kontak</span></a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="tw-bg-gradient-to-r tw-from-primary tw-to-secondary tw-py-20 tw-text-white">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="tw-mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/" class="tw-text-white/70 tw-no-underline">Beranda</a></li>
+        <li class="breadcrumb-item tw-text-white/90 active">Tentang</li>
+      </ol>
+    </nav>
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="tw-bg-gold tw-text-white tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full d-inline-block tw-mb-4">Berdiri sejak 27 September 2005</span>
+        <h1 class="tw-font-serif tw-font-bold tw-text-5xl tw-mb-4 tw-leading-tight">Tentang Jatiwangi<br>Art Factory</h1>
+        <p class="tw-text-white/85 tw-text-lg tw-leading-relaxed tw-mb-6">Komunitas seni kontemporer berbasis bumi yang berkomitmen mengubah daerah melalui praktik seni, residensi seniman, dan program budaya komunal selama hampir dua dekade.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="/donasi" class="btn tw-bg-white tw-text-primary tw-font-bold tw-px-7 tw-py-3 tw-rounded-full hover:tw-bg-accent tw-transition-all">
+            <i class="bi bi-heart-fill me-2 tw-text-red-500"></i>Dukung JAF
+          </a>
+          <a href="#program" class="btn tw-border-2 tw-border-white tw-text-white tw-font-bold tw-px-7 tw-py-3 tw-rounded-full hover:tw-bg-white hover:tw-text-primary tw-transition-all">
+            Lihat Program
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+              <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">2005</div>
+              <div class="tw-text-white/80 tw-text-sm">Tahun Berdiri</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+              <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">20+</div>
+              <div class="tw-text-white/80 tw-text-sm">Tahun Berkarya</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+              <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">100+</div>
+              <div class="tw-text-white/80 tw-text-sm">Seniman Residensi</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tw-bg-white/15 tw-rounded-2xl tw-p-5 text-center">
+              <div class="tw-text-gold tw-font-bold tw-text-3xl tw-font-serif">30+</div>
+              <div class="tw-text-white/80 tw-text-sm">Negara Kolaborasi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SEJARAH ===== -->
+<section class="tw-py-16 tw-bg-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="tw-text-gold tw-font-semibold tw-text-sm tw-tracking-wider tw-uppercase">Sejarah Kami</span>
+        <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif tw-mt-2 tw-mb-5">Dari Jatiwangi,<br>untuk Dunia</h2>
+        <p class="tw-text-gray-600 tw-leading-relaxed tw-mb-4">Jatiwangi Art Factory (JAF) didirikan pada <strong>27 September 2005</strong> oleh <strong>Arief Yudi Rahman</strong> dan <strong>Loranitha Theo</strong> di Jatiwangi, Kabupaten Majalengka, Jawa Barat — sebuah kota kecil yang terkenal sebagai pusat industri genteng tanah liat di Indonesia.</p>
+        <p class="tw-text-gray-600 tw-leading-relaxed tw-mb-4">Bernaung di bawah <strong>Yayasan Daun Salambar</strong>, JAF hadir sebagai ruang bagi seniman lokal dan internasional untuk tinggal, belajar, dan berkarya bersama masyarakat. JAF meyakini bahwa seni berbasis bumi (<em>earth-based art</em>) memiliki kekuatan untuk mengubah daerah, membangun kapasitas masyarakat, dan menghubungkan komunitas lokal ke panggung seni global.</p>
+        <p class="tw-text-gray-600 tw-leading-relaxed">Selama hampir dua dekade, JAF telah menjalankan puluhan program seni dan budaya komunal, merangkul warga, seniman, akademisi, dan institusi dari seluruh dunia untuk bersama-sama membangun ekosistem seni yang berakar pada tradisi lokal Jatiwangi.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="tw-bg-primary/5 tw-rounded-3xl tw-p-8">
+          <blockquote class="tw-mb-0">
+            <i class="bi bi-quote tw-text-gold tw-text-4xl d-block tw-mb-3" style="opacity:.6;"></i>
+            <p class="tw-text-primary tw-font-serif tw-text-xl tw-leading-relaxed tw-italic tw-mb-4">"Seni memiliki vitalitas untuk mengubah suatu daerah, membangun kapasitas masyarakat, dan membawa denyut nadi komunitas lokal untuk beresonansi di panggung global."</p>
+            <footer class="tw-text-gold tw-font-semibold">— Jatiwangi Art Factory</footer>
+          </blockquote>
+          <hr class="tw-my-6" style="border-color:rgba(26,82,118,.1);" />
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-geo-alt-fill tw-text-primary tw-text-lg tw-mt-1 flex-shrink-0"></i>
+                <div>
+                  <div class="tw-text-xs tw-text-gray-500 tw-font-medium">Lokasi</div>
+                  <div class="tw-text-sm tw-text-gray-700 tw-font-semibold">Jatiwangi, Majalengka, Jawa Barat</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-building tw-text-primary tw-text-lg tw-mt-1 flex-shrink-0"></i>
+                <div>
+                  <div class="tw-text-xs tw-text-gray-500 tw-font-medium">Naungan</div>
+                  <div class="tw-text-sm tw-text-gray-700 tw-font-semibold">Yayasan Daun Salambar</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-calendar-check-fill tw-text-primary tw-text-lg tw-mt-1 flex-shrink-0"></i>
+                <div>
+                  <div class="tw-text-xs tw-text-gray-500 tw-font-medium">Berdiri</div>
+                  <div class="tw-text-sm tw-text-gray-700 tw-font-semibold">27 September 2005</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-people-fill tw-text-primary tw-text-lg tw-mt-1 flex-shrink-0"></i>
+                <div>
+                  <div class="tw-text-xs tw-text-gray-500 tw-font-medium">Pendiri</div>
+                  <div class="tw-text-sm tw-text-gray-700 tw-font-semibold">Arief Yudi Rahman &amp; Loranitha Theo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROGRAM UNGGULAN ===== -->
+<section id="program" class="tw-py-16 tw-bg-gray-50">
+  <div class="container">
+    <div class="text-center tw-mb-12">
+      <span class="tw-text-gold tw-font-semibold tw-text-sm tw-tracking-wider tw-uppercase">Apa yang Kami Lakukan</span>
+      <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif tw-mt-2">Program Unggulan JAF</h2>
+      <div class="section-divider"></div>
+      <p class="tw-text-gray-500 tw-mt-4 tw-max-w-xl tw-mx-auto">Program inti yang menyatukan seni, budaya, dan kehidupan masyarakat Jatiwangi selama hampir dua dekade</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #1A5276;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#e8f0fb;">
+            <i class="bi bi-layers-fill tw-text-2xl" style="color:#1A5276;"></i>
+          </div>
+          <h5 class="tw-text-primary tw-font-bold tw-mb-2">Tahun Tanah</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Program tahunan berbasis material tanah liat dan budaya agraris Jatiwangi. Warga dan seniman merayakan tanah sebagai sumber kehidupan sekaligus medium ekspresi seni yang kaya makna.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #005A2B;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#e6f4ec;">
+            <i class="bi bi-music-note-beamed tw-text-2xl" style="color:#005A2B;"></i>
+          </div>
+          <h5 class="tw-font-bold tw-mb-2" style="color:#005A2B;">Rampak Genteng</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Ritual kolektif memainkan genteng atap sebagai instrumen musik, digelar setiap <strong>11 November</strong>. Sebuah perayaan warisan budaya tanah liat Jatiwangi yang menyatukan seluruh lapisan warga dalam orkestra komunal.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #4a007a;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#f3e8ff;">
+            <i class="bi bi-globe2 tw-text-2xl" style="color:#4a007a;"></i>
+          </div>
+          <h5 class="tw-font-bold tw-mb-2" style="color:#4a007a;">Terracotta Triennale</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Pameran seni internasional tiga tahunan yang menghadirkan seniman lokal dan global untuk bersama-sama mengeksplorasi tanah liat sebagai medium seni kontemporer. Menghubungkan Jatiwangi ke panggung seni dunia.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #2980B9;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#e8f4fd;">
+            <i class="bi bi-house-heart-fill tw-text-2xl" style="color:#2980B9;"></i>
+          </div>
+          <h5 class="tw-text-primary tw-font-bold tw-mb-2">Residensi Seniman</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Program residensi yang mengundang seniman dari dalam dan luar negeri untuk tinggal dan berkarya di Jatiwangi, berinteraksi langsung dengan masyarakat lokal dan meresapi budaya tanah liat setempat.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #E55A00;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#fff3ed;">
+            <i class="bi bi-mortarboard-fill tw-text-2xl" style="color:#E55A00;"></i>
+          </div>
+          <h5 class="tw-font-bold tw-mb-2" style="color:#E55A00;">Magister Reka Budaya</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Program akademik Magister bersama <strong>Universitas Padjadjaran</strong>, mengajak generasi muda untuk merencanakan dan membangun ekosistem budaya daerah yang berkelanjutan dan berakar pada kearifan lokal.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="tw-bg-white tw-rounded-2xl tw-p-6 hover:tw-shadow-lg tw-transition-all tw-h-full" style="border-top:4px solid #C8A44A;">
+          <div class="tw-w-14 tw-h-14 tw-rounded-full d-flex align-items-center justify-content-center tw-mb-4" style="background:#fdf8ec;">
+            <i class="bi bi-gift-fill tw-text-2xl" style="color:#C8A44A;"></i>
+          </div>
+          <h5 class="tw-font-bold tw-mb-2" style="color:#C8A44A;">Dana Hibah Budaya Daerah</h5>
+          <p class="tw-text-gray-500 tw-text-sm tw-leading-relaxed">Hibah untuk mendukung komunitas budaya lokal di seluruh Indonesia dalam mengembangkan praktik seni dan budaya daerah mereka, memperkuat ekosistem seni dari bawah ke atas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center tw-mt-10">
+      <a href="/donasi" class="btn tw-text-white tw-font-bold tw-px-8 tw-py-3 tw-rounded-full tw-text-base" style="background:#1A5276;">
+        <i class="bi bi-heart-fill me-2" style="color:#f87171;"></i>Dukung Program JAF
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PENCAPAIAN ===== -->
+<section class="tw-py-16 tw-bg-white">
+  <div class="container">
+    <div class="text-center tw-mb-12">
+      <span class="tw-text-gold tw-font-semibold tw-text-sm tw-tracking-wider tw-uppercase">Rekam Jejak</span>
+      <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif tw-mt-2">Pencapaian &amp; Penghargaan</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-3 col-md-6">
+        <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 text-center hover:tw-shadow-lg tw-transition-all">
+          <i class="bi bi-award-fill tw-text-4xl tw-text-gold d-block tw-mb-3"></i>
+          <h6 class="tw-text-primary tw-font-bold tw-mb-2">Documenta Fifteen</h6>
+          <p class="tw-text-gray-500 tw-text-sm">Berpartisipasi dalam Documenta Fifteen 2022 di Kassel, Jerman — salah satu pameran seni paling bergengsi di dunia.</p>
+          <span class="badge tw-bg-primary tw-text-white tw-mt-2" style="background:#1A5276 !important;">2022</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 text-center hover:tw-shadow-lg tw-transition-all">
+          <i class="bi bi-trophy-fill tw-text-4xl tw-text-gold d-block tw-mb-3"></i>
+          <h6 class="tw-text-primary tw-font-bold tw-mb-2">Bhinneka Award</h6>
+          <p class="tw-text-gray-500 tw-text-sm">Meraih Bhinneka Award dari Art Stage Jakarta atas kontribusi luar biasa dalam memajukan seni dan budaya Indonesia.</p>
+          <span class="badge tw-mt-2" style="background:#C8A44A !important;">2017</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 text-center hover:tw-shadow-lg tw-transition-all">
+          <i class="bi bi-calendar2-check-fill tw-text-4xl d-block tw-mb-3" style="color:#005A2B;"></i>
+          <h6 class="tw-text-primary tw-font-bold tw-mb-2">Hampir 20 Tahun</h6>
+          <p class="tw-text-gray-500 tw-text-sm">Konsisten menjalankan program seni dan budaya komunal selama hampir dua dekade, membangun ekosistem seni yang berkelanjutan di Jatiwangi.</p>
+          <span class="badge tw-mt-2" style="background:#005A2B !important;">2005–kini</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="tw-bg-gray-50 tw-rounded-2xl tw-p-6 text-center hover:tw-shadow-lg tw-transition-all">
+          <i class="bi bi-globe2 tw-text-4xl tw-text-secondary d-block tw-mb-3"></i>
+          <h6 class="tw-text-primary tw-font-bold tw-mb-2">Jaringan Global</h6>
+          <p class="tw-text-gray-500 tw-text-sm">Berkolaborasi dengan seniman dan institusi dari lebih dari 30 negara, membawa nama Jatiwangi ke panggung seni internasional.</p>
+          <span class="badge tw-mt-2" style="background:#2980B9 !important;">30+ Negara</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISI & MISI ===== -->
+<section class="tw-py-16" style="background:#0a1f5e;">
+  <div class="container">
+    <div class="row g-5 justify-content-center">
+      <div class="col-lg-5">
+        <div class="tw-bg-white/10 tw-rounded-3xl tw-p-8 tw-h-full">
+          <i class="bi bi-eye-fill tw-text-gold tw-text-3xl d-block tw-mb-4"></i>
+          <h3 class="tw-text-white tw-font-serif tw-font-bold tw-text-2xl tw-mb-4">Visi</h3>
+          <p class="tw-text-white/80 tw-leading-relaxed tw-mb-3">Menjadi pusat seni dan budaya komunal yang berdaya guna bagi masyarakat Jatiwangi dan Indonesia.</p>
+          <p class="tw-text-white/80 tw-leading-relaxed">Membangun ekosistem seni yang berkelanjutan dengan mengakar pada tradisi lokal dan membuka diri terhadap dialog global.</p>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="tw-bg-white/10 tw-rounded-3xl tw-p-8 tw-h-full">
+          <i class="bi bi-bullseye tw-text-gold tw-text-3xl d-block tw-mb-4"></i>
+          <h3 class="tw-text-white tw-font-serif tw-font-bold tw-text-2xl tw-mb-4">Misi</h3>
+          <ul class="tw-text-white/80 tw-leading-relaxed tw-space-y-2" style="padding-left:1.2rem;">
+            <li class="tw-mb-2">Mengembangkan praktik seni berbasis bumi yang berakar pada tradisi lokal Jatiwangi.</li>
+            <li class="tw-mb-2">Memberdayakan masyarakat melalui program seni, residensi, dan pendidikan budaya.</li>
+            <li class="tw-mb-2">Membangun jembatan antara seniman lokal dan jaringan seni internasional.</li>
+            <li>Mendukung ekosistem seni daerah melalui hibah, kolaborasi, dan advokasi budaya.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KONTAK ===== -->
+<section class="tw-py-16 tw-bg-accent">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <span class="tw-text-gold tw-font-semibold tw-text-sm tw-tracking-wider tw-uppercase">Hubungi Kami</span>
+        <h2 class="tw-text-primary tw-font-bold tw-text-3xl tw-font-serif tw-mt-2 tw-mb-5">Temukan Kami di<br>Jatiwangi</h2>
+        <div class="d-flex flex-column gap-4">
+          <div class="d-flex align-items-start gap-4">
+            <div class="tw-w-12 tw-h-12 tw-bg-white tw-rounded-xl d-flex align-items-center justify-content-center flex-shrink-0" style="box-shadow:0 2px 8px rgba(0,0,0,.06);">
+              <i class="bi bi-geo-alt-fill tw-text-primary tw-text-xl"></i>
+            </div>
+            <div>
+              <div class="tw-font-bold tw-text-primary tw-mb-1">Alamat</div>
+              <div class="tw-text-gray-600 tw-text-sm tw-leading-relaxed">Jl. Makmur 604, Jatisura, Kecamatan Jatiwangi,<br>Kabupaten Majalengka, Jawa Barat 45454</div>
+            </div>
+          </div>
+          <div class="d-flex align-items-start gap-4">
+            <div class="tw-w-12 tw-h-12 tw-bg-white tw-rounded-xl d-flex align-items-center justify-content-center flex-shrink-0" style="box-shadow:0 2px 8px rgba(0,0,0,.06);">
+              <i class="bi bi-envelope-fill tw-text-primary tw-text-xl"></i>
+            </div>
+            <div>
+              <div class="tw-font-bold tw-text-primary tw-mb-1">Email</div>
+              <a href="mailto:jatiwangiartfactory@gmail.com" class="tw-text-secondary tw-text-sm tw-no-underline hover:tw-underline">jatiwangiartfactory@gmail.com</a>
+            </div>
+          </div>
+          <div class="d-flex align-items-start gap-4">
+            <div class="tw-w-12 tw-h-12 tw-bg-white tw-rounded-xl d-flex align-items-center justify-content-center flex-shrink-0" style="box-shadow:0 2px 8px rgba(0,0,0,.06);">
+              <i class="bi bi-telephone-fill tw-text-primary tw-text-xl"></i>
+            </div>
+            <div>
+              <div class="tw-font-bold tw-text-primary tw-mb-1">Telepon / WhatsApp</div>
+              <a href="tel:+6282117253392" class="tw-text-secondary tw-text-sm tw-no-underline hover:tw-underline">+62-821-1725-3392</a>
+            </div>
+          </div>
+        </div>
+        <div class="tw-mt-8">
+          <a href="/kontak" class="btn tw-text-white tw-font-bold tw-px-7 tw-py-3 tw-rounded-full" style="background:#1A5276;">
+            <i class="bi bi-envelope me-2"></i>Kirim Pesan
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="tw-rounded-3xl tw-overflow-hidden" style="box-shadow:0 8px 30px rgba(0,0,0,.1);">
+          <iframe
+            src="https://maps.google.com/maps?q=Jatiwangi+Art+Factory,+Jl+Makmur+604,+Jatisura,+Jatiwangi,+Majalengka&output=embed"
+            width="100%" height="380" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Lokasi Jatiwangi Art Factory">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:#1a1a1a;">
+  <div style="padding:16px 20px;text-align:center;">
+    <a href="https://github.com/babanmisbahudin" target="_blank" rel="noopener" style="font-size:clamp(9px,2.5vw,12px);color:#999;text-decoration:none;white-space:nowrap;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#999'">Copyright &copy; 2025 Yayasan Daun Salambar &mdash; Jatiwangi Art Factory</a>
+  </div>
+</footer>
+
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function navSearch(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('.nav-q, .nav-q-mob');
+  const q = input ? input.value.trim() : '';
+  if (q) window.location.href = '/berita?search=' + encodeURIComponent(q);
+  return false;
+}
+initLang();
+</script>
+</body>
+</html>
